@@ -1,0 +1,20 @@
+{
+	"projectType": "vivogame",
+	"version": "0.2.5",
+	"args": [
+		{
+			"name": "name",
+			"default": "vivogame",
+			"files": [
+				"src/manifest.json"
+			]
+		},
+		{
+			"name": "package",
+			"default": "com.application.demo",
+			"files": [
+				"src/manifest.json"
+			]
+		}
+	]
+}
