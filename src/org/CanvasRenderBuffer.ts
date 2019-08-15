@@ -72,17 +72,17 @@ namespace egret.vivogame {
         public constructor(width?: number, height?: number, root?: boolean) {
             this.surface = egret.sys.createCanvasRenderBufferSurface(__createCanvas__, width, height, root);
             this.context = this.surface.getContext("2d");
-            this.context.setTransform = this.context['_setTransform']
+            // this.context.setTransform = this.context['_setTransform']
 
-            this.context.rotate = (angle: number) => {
-                this.context['_setTransform'](Math.cos(angle * Math.PI / 180), Math.sin(angle * Math.PI / 180), -Math.sin(angle * Math.PI / 180), Math.cos(angle * Math.PI / 180), 0, 0)
-            }
-            this.context.scale = (x: number, y: number) => {
-                this.context['_setTransform'](x, 0, 0, y, 0, 0)
-            }
-            this.context.translate = (x: number, y: number) => {
-                this.context['_setTransform'](1, 0, 0, 1, x, y)
-            }
+            // this.context.rotate = (angle: number) => {
+            //     this.context['_setTransform'](Math.cos(angle * Math.PI / 180), Math.sin(angle * Math.PI / 180), -Math.sin(angle * Math.PI / 180), Math.cos(angle * Math.PI / 180), 0, 0)
+            // }
+            // this.context.scale = (x: number, y: number) => {
+            //     this.context['_setTransform'](x, 0, 0, y, 0, 0)
+            // }
+            // this.context.translate = (x: number, y: number) => {
+            //     this.context['_setTransform'](1, 0, 0, 1, x, y)
+            // }
 
             if (this.context) {
                 this.context.$offsetX = 0;
