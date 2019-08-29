@@ -11,7 +11,7 @@
 		},
 		{
 			"name": "package",
-			"default": "com.application.demo",
+			"default": "com.application.vivominigame",
 			"files": [
 				"src/manifest.json"
 			]
