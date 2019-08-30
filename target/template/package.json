@@ -1,32 +1,22 @@
 {
-  "name": "vivo_game",
+  "name": "demo",
   "version": "1.0.0",
-  "subversion": {
-    "toolkit": "1.2.0"
-  },
   "description": "",
   "scripts": {
-    "server": "qgame server",
-    "debug": "qgame debug",
-    "build": "qgame build",
-    "release": "qgame release",
-    "watch": "qgame watch"
+    "server": "mg-service server",
+    "build": "mg-service build",
+    "release": "mg-service release",
+    "watch": "mg-service watch"
   },
   "devDependencies": {
-    "qgame-toolkit": "1.2.0",
-    "babel-cli": "^6.10.1",
-    "babel-core": "^6.26.0",
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "babel-loader": "^8.0.6",
     "babel-eslint": "^8.2.1",
-    "babel-loader": "^7.1.4",
-    "babel-plugin-syntax-jsx": "^6.18.0",
-    "babel-plugin-transform-remove-strict-mode": "0.0.2",
-    "css-what": "^2.1.0",
-    "koa": "^2.3.0",
-    "koa-body": "^2.5.0",
-    "koa-router": "^7.2.1",
-    "koa-send": "^4.1.1",
-    "koa-static": "^4.0.1",
-    "socket.io": "^2.1.0",
-    "webpack": "^3.11.0"
+    "@vivo-minigame/cli-service": "1.0.1"
+  },
+  "dependencies": {
+    "@babel/runtime-corejs2": "^7.5.5"
   }
 }
