@@ -19,7 +19,7 @@ fs.writeFileSync(targetJsonPath, JSON.stringify(targetJson, undefined, "\t"));
 
 var encoding = "utf8";
 var exe = cp.exec("egret build", function () {
-    var jsPath = "./target/template/src/egret.vivogame.js";
+    var jsPath = "./target/template/engine/egret.vivogame.js";
     var content = fs.readFileSync(jsPath, { encoding });
     content = content.replace(/var egret;/gi, "");
     var key = "vivogame.version = \"";

@@ -109,37 +109,19 @@ namespace egret.vivogame {
                 egret.$warn(3002);
             }
             let audio: qg.InnerAudioContext = qg.createInnerAudioContext();
-
+            audio.onCanplay(onAudioLoaded);
             this.originAudio = audio;
+            audio.src = url
             
-            if (this.isNetUrl(url)) {
-                qg.download({
-                    url: this.url,
-                    success:(e)=>{
-                        audio.src = e.tempFilePath;
-                        onAudioLoaded();
-                    }
-                })
-
-            } else {
-                audio.src = url
-                audio.volume = 0;
-                audio.play();
-                let idx = setInterval(() => {
-                    if (audio.duration > 0) {
-                        audio.pause();
-                        audio.seek(0);
-                        audio.volume = 1;
-                        clearInterval(idx)
-                        onAudioLoaded();
-                    }
-                }, 100)
-            }
-
             function onAudioLoaded(): void {
+                removeListeners();
                 self.loaded = true;
                 self.dispatchEventWith(egret.Event.COMPLETE);
             }
+            function removeListeners():void {
+                audio.offCanplay(onAudioLoaded);
+            }
+
         }
 
         /**

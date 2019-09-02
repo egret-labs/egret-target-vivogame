@@ -343,33 +343,16 @@ r.prototype = e.prototype, t.prototype = new r();
                     egret.$warn(3002);
                 }
                 var audio = qg.createInnerAudioContext();
+                audio.onCanplay(onAudioLoaded);
                 this.originAudio = audio;
-                if (this.isNetUrl(url)) {
-                    qg.download({
-                        url: this.url,
-                        success: function (e) {
-                            audio.src = e.tempFilePath;
-                            onAudioLoaded();
-                        }
-                    });
-                }
-                else {
-                    audio.src = url;
-                    audio.volume = 0;
-                    audio.play();
-                    var idx_1 = setInterval(function () {
-                        if (audio.duration > 0) {
-                            audio.pause();
-                            audio.seek(0);
-                            audio.volume = 1;
-                            clearInterval(idx_1);
-                            onAudioLoaded();
-                        }
-                    }, 100);
-                }
+                audio.src = url;
                 function onAudioLoaded() {
+                    removeListeners();
                     self.loaded = true;
                     self.dispatchEventWith(egret.Event.COMPLETE);
+                }
+                function removeListeners() {
+                    audio.offCanplay(onAudioLoaded);
                 }
             };
             /**
@@ -537,6 +520,7 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
                 this.isStopped = true;
                 var audio = this.audio;
+                this.audio = null;
                 audio.offEnded(this.onPlayEnd.bind(this));
                 audio.stop();
             };

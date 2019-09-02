@@ -114,6 +114,7 @@ namespace egret.vivogame {
             this.isStopped = true;
 
             let audio = this.audio;
+            this.audio = null
             
             audio.offEnded(this.onPlayEnd.bind(this))
             audio.stop();
