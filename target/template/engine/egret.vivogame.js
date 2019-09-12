@@ -2066,7 +2066,7 @@ r.prototype = e.prototype, t.prototype = new r();
         /**
          * 支持库版本号
          */
-        vivogame.version = "0.2.8";
+        vivogame.version = "0.2.9";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
