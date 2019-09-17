@@ -150,8 +150,10 @@ namespace egret.vivogame {
          * @inheritDoc
          */
         public close() {
-            if (this.originAudio)
+            if (this.originAudio){
                 this.originAudio = null;
+            }
+            this.loaded = false;
         } 
         /**
          * 是否是网络地址
