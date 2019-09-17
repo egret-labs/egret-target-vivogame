@@ -2712,7 +2712,7 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 }
                 //从RenderTexture中读取像素数据，填入canvas
                 var pixels = renderTexture.$renderBuffer.getPixels(rect.x, rect.y, iWidth, iHeight);
-                var imageData = new ImageData(iWidth, iHeight);
+                var imageData = sharedContext.createImageData(iWidth, iHeight);
                 for (var i = 0; i < pixels.length; i++) {
                     imageData.data[i] = pixels[i];
                 }

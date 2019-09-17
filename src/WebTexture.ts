@@ -77,7 +77,7 @@ namespace egret.vivogame {
             }
             //从RenderTexture中读取像素数据，填入canvas
             let pixels = renderTexture.$renderBuffer.getPixels(rect.x, rect.y, iWidth, iHeight);
-            let imageData = new ImageData(iWidth, iHeight);
+            let imageData = sharedContext.createImageData(iWidth,iHeight)
             for (let i = 0; i < pixels.length; i++) {
                 imageData.data[i] = pixels[i];
             }
