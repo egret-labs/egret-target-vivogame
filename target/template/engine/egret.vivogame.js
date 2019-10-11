@@ -12,19 +12,10 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebGeolocation = (function (_super) {
             __extends(WebGeolocation, _super);
-            /**
-             * @private
-             */
             function WebGeolocation(option) {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.onUpdate = function (position) {
                     var event = new egret.GeolocationEvent(egret.Event.CHANGE);
                     var coords = position.coords;
@@ -37,9 +28,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     event.altitudeAccuracy = coords.altitudeAccuracy;
                     _this.dispatchEvent(event);
                 };
-                /**
-                 * @private
-                 */
                 _this.onError = function (error) {
                     var errorType = egret.GeolocationEvent.UNAVAILABLE;
                     if (error.code == error.PERMISSION_DENIED)
@@ -52,10 +40,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 _this.geolocation = navigator.geolocation;
                 return _this;
             }
-            /**
-             * @private
-             *
-             */
             WebGeolocation.prototype.start = function () {
                 var geo = this.geolocation;
                 if (geo)
@@ -68,10 +52,6 @@ r.prototype = e.prototype, t.prototype = new r();
                         POSITION_UNAVAILABLE: 2
                     });
             };
-            /**
-             * @private
-             *
-             */
             WebGeolocation.prototype.stop = function () {
                 var geo = this.geolocation;
                 geo.clearWatch(this.watchId);
@@ -86,16 +66,10 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebMotion = (function (_super) {
             __extends(WebMotion, _super);
             function WebMotion() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                /**
-                 * @private
-                 */
                 _this.onChange = function (e) {
                     var event = new egret.MotionEvent(egret.Event.CHANGE);
                     var acceleration = {
@@ -120,17 +94,9 @@ r.prototype = e.prototype, t.prototype = new r();
                 };
                 return _this;
             }
-            /**
-             * @private
-             *
-             */
             WebMotion.prototype.start = function () {
                 window.addEventListener("devicemotion", this.onChange);
             };
-            /**
-             * @private
-             *
-             */
             WebMotion.prototype.stop = function () {
                 window.removeEventListener("devicemotion", this.onChange);
             };
@@ -140,39 +106,8 @@ r.prototype = e.prototype, t.prototype = new r();
         __reflect(WebMotion.prototype, "egret.vivogame.WebMotion", ["egret.Motion"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
-    /**
-     * @private
-     */
     var WebGLUtils = (function () {
         function WebGLUtils() {
         }
@@ -199,7 +134,6 @@ r.prototype = e.prototype, t.prototype = new r();
             gl.shaderSource(shader, shaderSrc);
             gl.compileShader(shader);
             if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-                //egret.info(gl.getShaderInfoLog(shader));
                 return null;
             }
             return shader;
@@ -223,7 +157,6 @@ r.prototype = e.prototype, t.prototype = new r();
             }
             if (webglTexture[egret.engine_default_empty_texture]) {
                 if (true) {
-                    //引擎默认的空白纹理，不允许删除
                     console.warn('deleteWebGLTexture:' + egret.engine_default_empty_texture);
                 }
                 return;
@@ -237,21 +170,7 @@ r.prototype = e.prototype, t.prototype = new r();
                     console.error('deleteWebGLTexture gl = ' + gl);
                 }
             }
-            /*old
-            if (webglTexture && !webglTexture['engine_default_empty_texture']) {
-                const gl = webglTexture['glContext'] as WebGLRenderingContext;//bitmapData.glContext;
-                if (gl) {
-                    gl.deleteTexture(webglTexture);
-                }
-                else {
-                    console.error('deleteWebGLTexture gl = ' + gl);
-                }
-            }
-            */
         };
-        /**
-         * inspired by pixi.js
-         */
         WebGLUtils.premultiplyTint = function (tint, alpha) {
             if (alpha === 1.0) {
                 return (alpha * 255 << 24) + tint;
@@ -272,53 +191,14 @@ r.prototype = e.prototype, t.prototype = new r();
     egret.WebGLUtils = WebGLUtils;
     __reflect(WebGLUtils.prototype, "egret.WebGLUtils");
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * @inheritDoc
-         */
         var HtmlSound = (function (_super) {
             __extends(HtmlSound, _super);
-            /**
-             * @private
-             * @inheritDoc
-             */
             function HtmlSound() {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.loaded = false;
                 return _this;
             }
@@ -328,14 +208,10 @@ r.prototype = e.prototype, t.prototype = new r();
                         return this.originAudio.duration;
                     }
                     throw new Error("sound not loaded!");
-                    //return 0;
                 },
                 enumerable: true,
                 configurable: true
             });
-            /**
-             * @inheritDoc
-             */
             HtmlSound.prototype.load = function (url) {
                 var self = this;
                 this.url = url;
@@ -355,9 +231,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     audio.offCanplay(onAudioLoaded);
                 }
             };
-            /**
-             * @inheritDoc
-             */
             HtmlSound.prototype.play = function (startTime, loops) {
                 startTime = +startTime || 0;
                 loops = +loops || 0;
@@ -372,48 +245,16 @@ r.prototype = e.prototype, t.prototype = new r();
                 egret.sys.$pushSoundChannel(channel);
                 return channel;
             };
-            /**
-             * @inheritDoc
-             */
             HtmlSound.prototype.close = function () {
                 if (this.originAudio) {
                     this.originAudio = null;
                 }
                 this.loaded = false;
             };
-            /**
-             * 是否是网络地址
-             * @param url
-             * @returns {boolean}
-             */
             HtmlSound.prototype.isNetUrl = function (url) {
                 return url.indexOf("http://") != -1 || url.indexOf("HTTP://") != -1 || url.indexOf("https://") != -1 || url.indexOf("HTTPS://") != -1;
             };
-            /**
-             * Background music
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 背景音乐
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language zh_CN
-             */
             HtmlSound.MUSIC = "music";
-            /**
-             * EFFECT
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language en_US
-             */
-            /**
-             * 音效
-             * @version Egret 2.4
-             * @platform Web,Native
-             * @language zh_CN
-             */
             HtmlSound.EFFECT = "effect";
             return HtmlSound;
         }(egret.EventDispatcher));
@@ -421,62 +262,17 @@ r.prototype = e.prototype, t.prototype = new r();
         __reflect(HtmlSound.prototype, "egret.vivogame.HtmlSound", ["egret.Sound"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * @inheritDoc
-         */
         var HtmlSoundChannel = (function (_super) {
             __extends(HtmlSoundChannel, _super);
-            /**
-             * @private
-             */
             function HtmlSoundChannel(audio) {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.$startTime = 0;
-                /**
-                 * @private
-                 */
                 _this.audio = null;
-                //声音是否已经播放完成
                 _this.isStopped = false;
-                /**
-                 * @private
-                 */
                 _this.onPlayEnd = function () {
                     if (_this.$loops == 1) {
                         _this.stop();
@@ -486,15 +282,10 @@ r.prototype = e.prototype, t.prototype = new r();
                     if (_this.$loops > 0) {
                         _this.$loops--;
                     }
-                    /////////////
-                    //this.audio.load();
                     _this.audio.offEnded(_this.onPlayEnd.bind(_this));
                     _this.audio.stop();
                     _this.$play();
                 };
-                /**
-                 * @private
-                 */
                 _this._volume = 1;
                 _this.audio = audio;
                 return _this;
@@ -510,10 +301,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 audio.volume = this._volume;
                 audio.seek(this.$startTime);
             };
-            /**
-             * @private
-             * @inheritDoc
-             */
             HtmlSoundChannel.prototype.stop = function () {
                 if (!this.audio)
                     return;
@@ -527,16 +314,9 @@ r.prototype = e.prototype, t.prototype = new r();
                 audio.stop();
             };
             Object.defineProperty(HtmlSoundChannel.prototype, "volume", {
-                /**
-                 * @private
-                 * @inheritDoc
-                 */
                 get: function () {
                     return this._volume;
                 },
-                /**
-                 * @inheritDoc
-                 */
                 set: function (value) {
                     if (this.isStopped) {
                         egret.$error(1036);
@@ -551,10 +331,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(HtmlSoundChannel.prototype, "position", {
-                /**
-                 * @private
-                 * @inheritDoc
-                 */
                 get: function () {
                     if (!this.audio)
                         return 0;
@@ -569,80 +345,21 @@ r.prototype = e.prototype, t.prototype = new r();
         __reflect(HtmlSoundChannel.prototype, "egret.vivogame.HtmlSoundChannel", ["egret.SoundChannel", "egret.IEventDispatcher"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * @inheritDoc
-         */
         var WebVideo = (function (_super) {
             __extends(WebVideo, _super);
-            /**
-             * @inheritDoc
-             */
             function WebVideo(url, cache) {
                 if (cache === void 0) { cache = true; }
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.loaded = false;
-                /**
-                 * @private
-                 */
                 _this.closed = false;
-                /**
-                 * @private
-                 */
                 _this.heightSet = NaN;
-                /**
-                 * @private
-                 */
                 _this.widthSet = NaN;
-                /**
-                 * @private
-                 * pc上视频卡住的时候不能暂停
-                 */
                 _this.waiting = false;
-                /**
-                 * @private
-                 * 用户是否设置了 pause
-                 */
                 _this.userPause = false;
-                /**
-                 * @private
-                 * 用户是否设置了 play
-                 */
                 _this.userPlay = false;
                 _this.isPlayed = false;
                 _this.screenChanged = function (e) {
@@ -655,15 +372,10 @@ r.prototype = e.prototype, t.prototype = new r();
                     }
                 };
                 _this._fullscreen = true;
-                /**
-                 * @private
-                 *
-                 */
                 _this.onVideoLoaded = function () {
                     _this.video.removeEventListener("canplay", _this.onVideoLoaded);
                     var video = _this.video;
                     _this.loaded = true;
-                    //video.pause();
                     if (_this.posterData) {
                         _this.posterData.width = _this.getPlayWidth();
                         _this.posterData.height = _this.getPlayHeight();
@@ -682,9 +394,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
                 return _this;
             }
-            /**
-             * @inheritDoc
-             */
             WebVideo.prototype.load = function (url, cache) {
                 var _this = this;
                 if (cache === void 0) { cache = true; }
@@ -739,9 +448,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 video.height = 1;
                 video.width = 1;
             };
-            /**
-             * @inheritDoc
-             */
             WebVideo.prototype.play = function (startTime, loop) {
                 var _this = this;
                 if (loop === void 0) { loop = false; }
@@ -756,7 +462,7 @@ r.prototype = e.prototype, t.prototype = new r();
                     video.currentTime = +startTime || 0;
                 video.loop = !!loop;
                 if (egret.Capabilities.isMobile) {
-                    video.style.zIndex = "-88888"; //移动端，就算设置成最小，只要全屏，都会在最上层，而且在自动退出去后，不担心挡住canvas
+                    video.style.zIndex = "-88888";
                 }
                 else {
                     video.style.zIndex = "9999";
@@ -841,7 +547,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 egret.$error(3014);
             };
             WebVideo.prototype.exitFullscreen = function () {
-                //退出全屏
                 if (document['exitFullscreen']) {
                     document['exitFullscreen']();
                 }
@@ -860,25 +565,14 @@ r.prototype = e.prototype, t.prototype = new r();
                 else {
                 }
             };
-            /**
-             * @private
-             *
-             */
             WebVideo.prototype.onVideoEnded = function () {
                 this.pause();
                 this.isPlayed = false;
                 this.dispatchEventWith(egret.Event.ENDED);
             };
-            /**
-             * @private
-             *
-             */
             WebVideo.prototype.onVideoError = function () {
                 this.dispatchEventWith(egret.IOErrorEvent.IO_ERROR);
             };
-            /**
-             * @inheritDoc
-             */
             WebVideo.prototype.close = function () {
                 var _this = this;
                 this.closed = true;
@@ -894,9 +588,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
                 this.loaded = false;
             };
-            /**
-             * @inheritDoc
-             */
             WebVideo.prototype.pause = function () {
                 this.userPlay = false;
                 if (this.waiting) {
@@ -907,17 +598,11 @@ r.prototype = e.prototype, t.prototype = new r();
                 egret.stopTick(this.markDirty, this);
             };
             Object.defineProperty(WebVideo.prototype, "volume", {
-                /**
-                 * @inheritDoc
-                 */
                 get: function () {
                     if (!this.video)
                         return 1;
                     return this.video.volume;
                 },
-                /**
-                 * @inheritDoc
-                 */
                 set: function (value) {
                     if (!this.video)
                         return;
@@ -927,17 +612,11 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(WebVideo.prototype, "position", {
-                /**
-                 * @inheritDoc
-                 */
                 get: function () {
                     if (!this.video)
                         return 0;
                     return this.video.currentTime;
                 },
-                /**
-                 * @inheritDoc
-                 */
                 set: function (value) {
                     if (!this.video)
                         return;
@@ -947,15 +626,9 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(WebVideo.prototype, "fullscreen", {
-                /**
-                 * @inheritDoc
-                 */
                 get: function () {
                     return this._fullscreen;
                 },
-                /**
-                 * @inheritDoc
-                 */
                 set: function (value) {
                     if (egret.Capabilities.isMobile) {
                         return;
@@ -969,9 +642,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(WebVideo.prototype, "bitmapData", {
-                /**
-                 * @inheritDoc
-                 */
                 get: function () {
                     if (!this.video || !this.loaded)
                         return null;
@@ -1000,9 +670,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }, this);
                 imageLoader.load(poster);
             };
-            /**
-             * @private
-             */
             WebVideo.prototype.$measureContentBounds = function (bounds) {
                 var bitmapData = this.bitmapData;
                 var posterData = this.posterData;
@@ -1040,9 +707,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
                 return NaN;
             };
-            /**
-             * @private
-             */
             WebVideo.prototype.$updateRenderNode = function () {
                 var node = this.$renderNode;
                 var bitmapData = this.bitmapData;
@@ -1068,18 +732,10 @@ r.prototype = e.prototype, t.prototype = new r();
                 this.$renderDirty = true;
                 return true;
             };
-            /**
-             * @private
-             * 设置显示高度
-             */
             WebVideo.prototype.$setHeight = function (value) {
                 this.heightSet = +value || 0;
                 _super.prototype.$setHeight.call(this, value);
             };
-            /**
-             * @private
-             * 设置显示宽度
-             */
             WebVideo.prototype.$setWidth = function (value) {
                 this.widthSet = +value || 0;
                 _super.prototype.$setWidth.call(this, value);
@@ -1095,9 +751,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(WebVideo.prototype, "length", {
-                /**
-                 * @inheritDoc
-                 */
                 get: function () {
                     if (this.video) {
                         return this.video.duration;
@@ -1114,61 +767,20 @@ r.prototype = e.prototype, t.prototype = new r();
         egret.Video = WebVideo;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebHttpRequest = (function (_super) {
             __extends(WebHttpRequest, _super);
-            /**
-             * @private
-             */
             function WebHttpRequest() {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.timeout = 5000;
                 _this._url = "";
                 _this._method = "";
                 return _this;
             }
             Object.defineProperty(WebHttpRequest.prototype, "response", {
-                /**
-                 * @private
-                 * 本次请求返回的数据
-                 */
                 get: function () {
                     if (!this.isNetUrl(this._url)) {
                         return this._response;
@@ -1197,10 +809,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             Object.defineProperty(WebHttpRequest.prototype, "responseType", {
-                /**
-                 * @private
-                 * 设置返回的数据格式，请使用 HttpResponseType 里定义的枚举值。设置非法的值或不设置，都将使用HttpResponseType.TEXT。
-                 */
                 get: function () {
                     return this._responseType;
                 },
@@ -1210,11 +818,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 enumerable: true,
                 configurable: true
             });
-            /**
-             * @private
-             * @param url 该请求所要访问的URL该请求所要访问的URL
-             * @param method 请求所使用的HTTP方法， 请使用 HttpMethod 定义的枚举值.
-             */
             WebHttpRequest.prototype.open = function (url, method) {
                 if (method === void 0) { method = "GET"; }
                 this._url = url;
@@ -1231,11 +834,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     this._xhr.open(this._method, this._url, true);
                 }
             };
-            /**
-             * @private
-             * 发送请求.
-             * @param data 需要发送的数据
-             */
             WebHttpRequest.prototype.send = function (data) {
                 if (!this.isNetUrl(this._url)) {
                     this.readFileAsync();
@@ -1256,17 +854,11 @@ r.prototype = e.prototype, t.prototype = new r();
                     this._xhr.send(data);
                 }
             };
-            /**
-             * @private
-             */
             WebHttpRequest.prototype.onTimeout = function () {
                 var message = egret.sys.tr(1052, this._url);
                 egret.warn(message);
                 this.dispatchEventWith(egret.IOErrorEvent.IO_ERROR);
             };
-            /**
-             * @private
-             */
             WebHttpRequest.prototype.onReadyStateChange = function () {
                 var _this = this;
                 var xhr = this._xhr;
@@ -1290,10 +882,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     egret.ProgressEvent.dispatchProgressEvent(this, egret.ProgressEvent.PROGRESS, event.loaded, event.total);
                 }
             };
-            /**
-             * @private
-             * 返回所有响应头信息(响应头名和值), 如果响应头还没接受,则返回"".
-             */
             WebHttpRequest.prototype.getAllResponseHeaders = function () {
                 if (!this._responsHeaders) {
                     return null;
@@ -1302,34 +890,18 @@ r.prototype = e.prototype, t.prototype = new r();
                     return header + ': ' + this.responseHeader[header];
                 }).join('\n');
             };
-            /**
-             * @private
-             * 给指定的HTTP请求头赋值.在这之前,您必须确认已经调用 open() 方法打开了一个url.
-             * @param header 将要被赋值的请求头名称.
-             * @param value 给指定的请求头赋的值.
-             */
             WebHttpRequest.prototype.setRequestHeader = function (header, value) {
                 if (!this.headerObj) {
                     this.headerObj = {};
                 }
                 this.headerObj[header] = value;
             };
-            /**
-             * @private
-             * 返回指定的响应头的值, 如果响应头还没被接受,或该响应头不存在,则返回"".
-             * @param header 要返回的响应头名称
-             */
             WebHttpRequest.prototype.getResponseHeader = function (header) {
                 if (!this._responsHeaders) {
                     return null;
                 }
                 return this._responsHeaders[header];
             };
-            /**
-             * 是否是网络地址
-             * @param url
-             * @returns {boolean}
-             */
             WebHttpRequest.prototype.isNetUrl = function (url) {
                 return url.indexOf("http://") != -1 || url.indexOf("HTTP://") != -1 || url.indexOf("https://") != -1 || url.indexOf("HTTPS://") != -1;
             };
@@ -1373,10 +945,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
             };
             Object.defineProperty(WebHttpRequest.prototype, "withCredentials", {
-                /**
-                 * @private
-                 * 表明在进行跨站(cross-site)的访问控制(Access-Control)请求时，是否使用认证信息(例如cookie或授权的header)。 默认为 false。(这个标志不会影响同站的请求)
-                 */
                 get: function () {
                     return this._withCredentials;
                 },
@@ -1394,70 +962,19 @@ r.prototype = e.prototype, t.prototype = new r();
         egret.HttpRequest = WebHttpRequest;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
         var winURL = window["URL"] || window["webkitURL"];
-        /**
-         * @private
-         * ImageLoader 类可用于加载图像（JPG、PNG 或 GIF）文件。使用 load() 方法来启动加载。被加载的图像对象数据将存储在 ImageLoader.data 属性上 。
-         */
         var WebImageLoader = (function (_super) {
             __extends(WebImageLoader, _super);
             function WebImageLoader() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                /**
-                 * @private
-                 * 使用 load() 方法加载成功的 BitmapData 图像数据。
-                 */
                 _this.data = null;
-                /**
-                 * @private
-                 * 当从其他站点加载一个图片时，指定是否启用跨域资源共享(CORS)，默认值为null。
-                 * 可以设置为"anonymous","use-credentials"或null,设置为其他值将等同于"anonymous"。
-                 */
                 _this._crossOrigin = null;
-                /**
-                 * @private
-                 * 标记crossOrigin有没有被设置过,设置过之后使用设置的属性
-                 */
                 _this._hasCrossOriginSet = false;
-                /**
-                 * @private
-                 */
                 _this.currentImage = null;
-                /**
-                 * @private
-                 */
                 _this.request = null;
                 return _this;
             }
@@ -1472,17 +989,9 @@ r.prototype = e.prototype, t.prototype = new r();
                 enumerable: true,
                 configurable: true
             });
-            /**
-             * @private
-             * 启动一次图像加载。注意：若之前已经调用过加载请求，重新调用 load() 将终止先前的请求，并开始新的加载。
-             * @param url 要加载的图像文件的地址。
-             */
             WebImageLoader.prototype.load = function (url) {
                 this.loadImage(url);
             };
-            /**
-             * @private
-             */
             WebImageLoader.prototype.loadImage = function (src) {
                 var image = new Image();
                 this.data = null;
@@ -1497,18 +1006,10 @@ r.prototype = e.prototype, t.prototype = new r();
                         image.crossOrigin = WebImageLoader.crossOrigin;
                     }
                 }
-                /*else {
-                    if (image.hasAttribute("crossOrigin")) {//兼容猎豹
-                        image.removeAttribute("crossOrigin");
-                    }
-                }*/
                 image.onload = this.onImageComplete.bind(this);
                 image.onerror = this.onLoadError.bind(this);
                 image.src = src;
             };
-            /**
-             * @private
-             */
             WebImageLoader.prototype.onImageComplete = function (event) {
                 var _this = this;
                 var image = this.getImage(event);
@@ -1520,9 +1021,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     _this.dispatchEventWith(egret.Event.COMPLETE);
                 }, 0);
             };
-            /**
-             * @private
-             */
             WebImageLoader.prototype.onLoadError = function (event) {
                 var image = this.getImage(event);
                 if (!image) {
@@ -1539,9 +1037,6 @@ r.prototype = e.prototype, t.prototype = new r();
                     _this.dispatchEventWith(egret.IOErrorEvent.IO_ERROR);
                 }, 0);
             };
-            /**
-             * @private
-             */
             WebImageLoader.prototype.getImage = function (event) {
                 var image = event.target;
                 var url = image.src;
@@ -1553,10 +1048,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 this.currentImage = null;
                 return image;
             };
-            /**
-             * @private
-             * 指定是否启用跨域资源共享,如果ImageLoader实例有设置过crossOrigin属性将使用设置的属性
-             */
             WebImageLoader.crossOrigin = null;
             return WebImageLoader;
         }(egret.EventDispatcher));
@@ -1565,77 +1056,25 @@ r.prototype = e.prototype, t.prototype = new r();
         egret.ImageLoader = WebImageLoader;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @classdesc
-         * @extends egret.StageText
-         * @private
-         */
         var HTML5StageText = (function (_super) {
             __extends(HTML5StageText, _super);
-            /**
-             * @private
-             */
             function HTML5StageText() {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.textValue = "";
                 _this.onKeyboardComplete = _this.onKeyboardComplete.bind(_this);
                 _this.onKeyboardInput = _this.onKeyboardInput.bind(_this);
                 return _this;
             }
-            /**
-             * @private
-             *
-             * @param textfield
-             */
             HTML5StageText.prototype.$setTextField = function (textfield) {
                 this.$textfield = textfield;
                 return true;
             };
-            /**
-             * @private
-             *
-             */
             HTML5StageText.prototype.$addToStage = function () {
             };
-            /**
-             * @private
-             *
-             */
             HTML5StageText.prototype.$show = function () {
                 var info = {
                     defaultValue: this.$textfield.text,
@@ -1660,9 +1099,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 this.$textfield.text = res.value;
                 this.$hide();
             };
-            /**
-             * @private
-             */
             HTML5StageText.prototype.$hide = function () {
                 qg.offKeyboardComplete();
                 qg.offKeyboardConfirm();
@@ -1670,45 +1106,23 @@ r.prototype = e.prototype, t.prototype = new r();
                 qg.hideKeyboard({});
                 this.dispatchEvent(new egret.Event("blur"));
             };
-            /**
-             * @private
-             *
-             * @returns
-             */
             HTML5StageText.prototype.$getText = function () {
                 if (!this.textValue) {
                     this.textValue = "";
                 }
                 return this.textValue;
             };
-            /**
-             * @private
-             *
-             * @param value
-             */
             HTML5StageText.prototype.$setText = function (value) {
                 this.textValue = value;
-                // this.resetText();
                 return true;
             };
-            /**
-             * @private
-             */
             HTML5StageText.prototype.$setColor = function (value) {
                 return true;
             };
             HTML5StageText.prototype.$onBlur = function () {
             };
-            /**
-             * @private
-             *
-             */
             HTML5StageText.prototype.$removeFromStage = function () {
             };
-            /**
-             * 修改位置
-             * @private
-             */
             HTML5StageText.prototype.$resetStageText = function () {
             };
             return HTML5StageText;
@@ -1718,89 +1132,33 @@ r.prototype = e.prototype, t.prototype = new r();
         egret.StageText = HTML5StageText;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided this the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebTouchHandler = (function (_super) {
             __extends(WebTouchHandler, _super);
-            /**
-             * @private
-             */
             function WebTouchHandler(stage, canvas) {
                 var _this = _super.call(this) || this;
-                /**
-                 * @private
-                 */
                 _this.onTouchBegin = function (event) {
                     var location = _this.getLocation(event);
                     _this.touch.onTouchBegin(location.x, location.y, event.identifier);
                 };
-                /**
-                 * @private
-                 */
                 _this.onTouchMove = function (event) {
                     var location = _this.getLocation(event);
                     _this.touch.onTouchMove(location.x, location.y, event.identifier);
                 };
-                /**
-                 * @private
-                 */
                 _this.onTouchEnd = function (event) {
                     var location = _this.getLocation(event);
                     _this.touch.onTouchEnd(location.x, location.y, event.identifier);
                 };
-                /**
-                 * @private
-                 */
                 _this.scaleX = 1;
-                /**
-                 * @private
-                 */
                 _this.scaleY = 1;
-                /**
-                 * @private
-                 */
                 _this.rotation = 0;
                 _this.touch = new egret.sys.TouchHandler(stage);
                 _this.addTouchListener();
                 return _this;
             }
-            /**
-             * @private
-             *
-             */
             WebTouchHandler.prototype.addTouchListener = function () {
                 var self = this;
                 qg.onTouchStart(function (event) {
@@ -1828,18 +1186,9 @@ r.prototype = e.prototype, t.prototype = new r();
                     }
                 });
             };
-            /**
-             * @private
-             */
             WebTouchHandler.prototype.prevent = function (event) {
                 event.stopPropagation();
-                // if (event["isScroll"] != true && !this.canvas['userTyping']) {
-                //     event.preventDefault();
-                // }
             };
-            /**
-             * @private
-             */
             WebTouchHandler.prototype.getLocation = function (event) {
                 var x = event.pageX, newx = x;
                 var y = event.pageY, newy = y;
@@ -1847,21 +1196,11 @@ r.prototype = e.prototype, t.prototype = new r();
                 newy = newy / this.scaleY;
                 return egret.$TempPoint.setTo(Math.round(newx), Math.round(newy));
             };
-            /**
-             * @private
-             * 更新屏幕当前的缩放比例，用于计算准确的点击位置。
-             * @param scaleX 水平方向的缩放比例。
-             * @param scaleY 垂直方向的缩放比例。
-             */
             WebTouchHandler.prototype.updateScaleMode = function (scaleX, scaleY, rotation) {
                 this.scaleX = scaleX;
                 this.scaleY = scaleY;
                 this.rotation = rotation;
             };
-            /**
-             * @private
-             * 更新同时触摸点的数量
-             */
             WebTouchHandler.prototype.$updateMaxTouches = function () {
                 if (this.touch.$initMaxTouches) {
                     this.touch.$initMaxTouches();
@@ -1876,42 +1215,11 @@ r.prototype = e.prototype, t.prototype = new r();
         __reflect(WebTouchHandler.prototype, "egret.vivogame.WebTouchHandler");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
         var isShow = true;
-        /**
-         * @private
-         */
         vivogame.WebLifeCycleHandler = function (context) {
             if (qg.onShow) {
                 qg.onShow(function () {
@@ -1932,69 +1240,23 @@ r.prototype = e.prototype, t.prototype = new r();
         };
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * html5兼容性配置
-         * @private
-         */
         var Html5Capatibility = (function (_super) {
             __extends(Html5Capatibility, _super);
-            /**
-             * @private
-             */
             function Html5Capatibility() {
                 return _super.call(this) || this;
             }
-            /**
-             * @private
-             *
-             */
             Html5Capatibility.$init = function () {
-                // Html5Capatibility._AudioClass = HtmlSound;
                 egret.Sound = vivogame.HtmlSound;
             };
             return Html5Capatibility;
         }(egret.HashObject));
         vivogame.Html5Capatibility = Html5Capatibility;
         __reflect(Html5Capatibility.prototype, "egret.vivogame.Html5Capatibility");
-        /**
-         * @private
-         */
         var currentPrefix = null;
-        /**
-         * @private
-         */
         function getPrefixStyleName(name, element) {
             var header = "";
             if (element != null) {
@@ -2013,9 +1275,6 @@ r.prototype = e.prototype, t.prototype = new r();
             return header + name.charAt(0).toUpperCase() + name.substring(1, name.length);
         }
         vivogame.getPrefixStyleName = getPrefixStyleName;
-        /**
-         * @private
-         */
         function getPrefix(name, element) {
             if (name in element) {
                 return "";
@@ -2033,69 +1292,23 @@ r.prototype = e.prototype, t.prototype = new r();
         vivogame.getPrefix = getPrefix;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * 支持库版本号
-         */
-        vivogame.version = "0.2.11";
+        vivogame.version = "0.2.12";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * 刷新所有Egret播放器的显示区域尺寸。仅当使用外部JavaScript代码动态修改了Egret容器大小时，需要手动调用此方法刷新显示区域。
-         * 当网页尺寸发生改变时此方法会自动被调用。
-         */
         function updateAllScreens() {
             if (!isRunning) {
                 return;
             }
-            // let containerList = document.querySelectorAll(".egret-player");
-            // let length = containerList.length;
-            // for (let i = 0; i < length; i++) {
-            //     let container = containerList[i];
-            //     let player = <WebPlayer>container["egret-player"];
             window['player'].updateScreenSize();
-            // }
         }
         var isRunning = false;
-        /**
-         * @private
-         * 网页加载完成，实例化页面中定义的Egret标签
-         */
         function runEgret(options) {
             if (isRunning) {
                 return;
@@ -2105,12 +1318,9 @@ r.prototype = e.prototype, t.prototype = new r();
                 options = {};
             }
             vivogame.Html5Capatibility.$init();
-            // WebGL上下文参数自定义
             if (options.renderMode == "webgl") {
-                // WebGL抗锯齿默认关闭，提升PC及某些平台性能
                 var antialias = options.antialias;
                 vivogame.WebGLRenderContext.antialias = !!antialias;
-                // WebGLRenderContext.antialias = (typeof antialias == undefined) ? true : antialias;
             }
             egret.sys.CanvasRenderBuffer = vivogame.CanvasRenderBuffer;
             setRenderMode(options.renderMode);
@@ -2122,7 +1332,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 canvasScaleFactor = options.calculateCanvasScaleFactor(egret.sys.canvasHitTestBuffer.context);
             }
             else {
-                //based on : https://github.com/jondavidjohn/hidpi-canvas-polyfill
                 var context = egret.sys.canvasHitTestBuffer.context;
                 var backingStore = context.backingStorePixelRatio ||
                     context.webkitBackingStorePixelRatio ||
@@ -2141,13 +1350,6 @@ r.prototype = e.prototype, t.prototype = new r();
             else if (!egret.sys.screenAdapter) {
                 egret.sys.screenAdapter = new egret.sys.DefaultScreenAdapter();
             }
-            // let list = document.querySelectorAll(".egret-player");
-            // let length = list.length;
-            // for (let i = 0; i < length; i++) {
-            //     let container = <HTMLDivElement>list[i];
-            //     let player = new WebPlayer(container, options);
-            //     container["egret-player"] = player;
-            // }
             var container = {};
             var player = new vivogame.WebPlayer(container, options);
             window['player'] = player;
@@ -2157,10 +1359,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 }
             });
         }
-        /**
-         * 设置渲染模式。"auto","webgl","canvas"
-         * @param renderMode
-         */
         function setRenderMode(renderMode) {
             if (renderMode === "webgl") {
                 egret.Capabilities["renderMode" + ""] = "webgl";
@@ -2179,10 +1377,6 @@ r.prototype = e.prototype, t.prototype = new r();
                 egret.sys.canvasHitTestBuffer = egret.sys.customHitTestBuffer;
             }
         }
-        /**
-         * @private
-         * 启动心跳计时器。
-         */
         function startTicker(ticker) {
             var requestAnimationFrame = window["requestAnimationFrame"] ||
                 window["webkitRequestAnimationFrame"] ||
@@ -2223,48 +1417,13 @@ if (true) {
     }
 }
 egret.Capabilities["runtimeType" + ""] = "vivogame";
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebCapability = (function () {
             function WebCapability() {
             }
-            /**
-             * @private
-             * 检测系统属性
-             */
             WebCapability.detect = function () {
                 var capabilities = egret.Capabilities;
                 capabilities["isMobile" + ""] = true;
@@ -2286,49 +1445,12 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         WebCapability.detect();
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var fpsText = new egret.TextField();
-        /**
-         * @private
-         */
         var logText = new egret.TextField();
-        /**
-         * @private
-         */
         var WebFps = (function (_super) {
             __extends(WebFps, _super);
             function WebFps(stage, showFPS, showLog, logFilter, styles) {
@@ -2472,41 +1594,10 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         egret.FPSDisplay = WebFps;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         function getOption(key) {
             return "";
         }
@@ -2514,41 +1605,10 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         egret.getOption = getOption;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebPlayer = (function (_super) {
             __extends(WebPlayer, _super);
             function WebPlayer(container, options) {
@@ -2596,9 +1656,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                     }, 350);
                 });
             };
-            /**
-             * 读取初始化参数
-             */
             WebPlayer.prototype.readOption = function (container, options) {
                 var option = {};
                 option.entryClassName = options.entryClassName || "Main";
@@ -2627,27 +1684,8 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 option.logFilter = "";
                 return option;
             };
-            /**
-             * @private
-             * 添加canvas到container。
-             */
             WebPlayer.prototype.attachCanvas = function (container, canvas) {
-                // let style = canvas.style;
-                // style.cursor = "inherit";
-                // style.position = "absolute";
-                // style.top = "0";
-                // style.bottom = "0";
-                // style.left = "0";
-                // style.right = "0";
-                // container.appendChild(canvas);
-                // style = container.style;
-                // style.overflow = "hidden";
-                // style.position = "absolute";
             };
-            /**
-             * @private
-             * 更新播放器视口尺寸
-             */
             WebPlayer.prototype.updateScreenSize = function () {
                 var canvas = this.canvas;
                 if (canvas['userTyping'])
@@ -2670,7 +1708,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 var stageHeight = stageSize.stageHeight;
                 var displayWidth = stageSize.displayWidth;
                 var displayHeight = stageSize.displayHeight;
-                // canvas.style[getPrefixStyleName("transformOrigin")] = "0% 0% 0px";
                 if (canvas.width != stageWidth) {
                     canvas.width = stageWidth;
                 }
@@ -2681,14 +1718,9 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 var scalex = displayWidth / stageWidth, scaley = displayHeight / stageHeight;
                 var canvasScaleX = scalex * egret.sys.DisplayList.$canvasScaleFactor;
                 var canvasScaleY = scaley * egret.sys.DisplayList.$canvasScaleFactor;
-                var m = new egret.Matrix();
-                m.scale(scalex / canvasScaleX, scaley / canvasScaleY);
-                m.rotate(rotation * Math.PI / 180);
-                var transform = "matrix(" + m.a + "," + m.b + "," + m.c + "," + m.d + "," + m.tx + "," + m.ty + ")";
-                // canvas.style[getPrefixStyleName("transform")] = transform;
                 egret.sys.DisplayList.$setCanvasScale(canvasScaleX, canvasScaleY);
                 this.webTouchHandler.updateScaleMode(scalex, scaley, rotation);
-                this.player.updateStageSize(stageWidth, stageHeight); //不要在这个方法后面修改属性
+                this.player.updateStageSize(stageWidth, stageHeight);
             };
             WebPlayer.prototype.setContentSize = function (width, height) {
                 var option = this.playerOption;
@@ -2696,10 +1728,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 option.contentHeight = height;
                 this.updateScreenSize();
             };
-            /**
-             * @private
-             * 更新触摸数量
-             */
             WebPlayer.prototype.updateMaxTouches = function () {
                 this.webTouchHandler.$updateMaxTouches();
             };
@@ -2709,43 +1737,12 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         __reflect(WebPlayer.prototype, "egret.vivogame.WebPlayer", ["egret.sys.Screen"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
         var sharedCanvas;
         var sharedContext;
-        /**
-         * @private
-         */
         function convertImageToCanvas(texture, rect) {
             if (!sharedCanvas) {
                 sharedCanvas = document.createElement("canvas");
@@ -2773,7 +1770,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
             sharedCanvas.height = iHeight;
             if (egret.Capabilities.renderMode == "webgl") {
                 var renderTexture = void 0;
-                //webgl下非RenderTexture纹理先画到RenderTexture
                 if (!texture.$renderBuffer) {
                     renderTexture = new egret.RenderTexture();
                     renderTexture.drawToTexture(new egret.Bitmap(texture));
@@ -2781,7 +1777,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 else {
                     renderTexture = texture;
                 }
-                //从RenderTexture中读取像素数据，填入canvas
                 var pixels = renderTexture.$renderBuffer.getPixels(rect.x, rect.y, iWidth, iHeight);
                 var imageData = sharedContext.createImageData(iWidth, iHeight);
                 for (var i = 0; i < pixels.length; i++) {
@@ -2803,9 +1798,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 return surface;
             }
         }
-        /**
-         * @private
-         */
         function toDataURL(type, rect, encoderOptions) {
             try {
                 var surface = convertImageToCanvas(this, rect);
@@ -2817,9 +1809,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
             }
             return null;
         }
-        /**
-         * 有些杀毒软件认为 saveToFile 可能是一个病毒文件
-         */
         function eliFoTevas(type, filePath, rect, encoderOptions) {
         }
         function getPixel32(x, y) {
@@ -2829,10 +1818,8 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         function getPixels(x, y, width, height) {
             if (width === void 0) { width = 1; }
             if (height === void 0) { height = 1; }
-            //webgl环境下不需要转换成canvas获取像素信息
             if (egret.Capabilities.renderMode == "webgl") {
                 var renderTexture = void 0;
-                //webgl下非RenderTexture纹理先画到RenderTexture
                 if (!this.$renderBuffer) {
                     renderTexture = new egret.RenderTexture();
                     renderTexture.drawToTexture(new egret.Bitmap(this));
@@ -2840,7 +1827,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 else {
                     renderTexture = this;
                 }
-                //从RenderTexture中读取像素数据
                 var pixels = renderTexture.$renderBuffer.getPixels(x, y, width, height);
                 return pixels;
             }
@@ -2859,46 +1845,11 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         egret.Texture.prototype.getPixels = getPixels;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * XML节点基类
-         */
         var XMLNode = (function () {
-            /**
-             * @private
-             */
             function XMLNode(nodeType, parent) {
                 this.nodeType = nodeType;
                 this.parent = parent;
@@ -2907,26 +1858,11 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         }());
         vivogame.XMLNode = XMLNode;
         __reflect(XMLNode.prototype, "egret.vivogame.XMLNode");
-        /**
-         * @private
-         * XML节点对象
-         */
         var XML = (function (_super) {
             __extends(XML, _super);
-            /**
-             * @private
-             */
             function XML(localName, parent, prefix, namespace, name) {
                 var _this = _super.call(this, 1, parent) || this;
-                /**
-                 * @private
-                 * 当前节点上的属性列表
-                 */
                 _this.attributes = {};
-                /**
-                 * @private
-                 * 当前节点的子节点列表
-                 */
                 _this.children = [];
                 _this.localName = localName;
                 _this.prefix = prefix;
@@ -2938,15 +1874,8 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         }(XMLNode));
         vivogame.XML = XML;
         __reflect(XML.prototype, "egret.vivogame.XML");
-        /**
-         * @private
-         * XML文本节点
-         */
         var XMLText = (function (_super) {
             __extends(XMLText, _super);
-            /**
-             * @private
-             */
             function XMLText(text, parent) {
                 var _this = _super.call(this, 3, parent) || this;
                 _this.text = text;
@@ -2957,11 +1886,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         vivogame.XMLText = XMLText;
         __reflect(XMLText.prototype, "egret.vivogame.XMLText");
         var parser;
-        /**
-         * @private
-         * 解析字符串为XML对象
-         * @param text 要解析的字符串
-         */
         function parse(text) {
             if (!parser) {
                 if (!window["DOMParser"]) {
@@ -2981,10 +1905,6 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
             }
             return null;
         }
-        /**
-         * @private
-         * 解析一个节点
-         */
         function parseNode(node, parent) {
             if (node.localName == "parsererror") {
                 throw new Error(node.textContent);
@@ -3031,16 +1951,10 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebDeviceOrientation = (function (_super) {
             __extends(WebDeviceOrientation, _super);
             function WebDeviceOrientation() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                /**
-                 * @private
-                 */
                 _this.onChange = function (e) {
                     var event = new egret.OrientationEvent(egret.Event.CHANGE);
                     event.beta = e.y;
@@ -3050,17 +1964,9 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
                 };
                 return _this;
             }
-            /**
-             * @private
-             *
-             */
             WebDeviceOrientation.prototype.start = function () {
                 qg.subscribeAccelerometer(this.onChange.bind(this));
             };
-            /**
-             * @private
-             *
-             */
             WebDeviceOrientation.prototype.stop = function () {
                 qg.unsubscribeAccelerometer();
             };
@@ -3071,56 +1977,15 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WebExternalInterface = (function () {
             function WebExternalInterface() {
             }
-            /**
-             * @private
-             * @param functionName
-             * @param value
-             */
             WebExternalInterface.call = function (functionName, value) {
             };
-            /**
-             * @private
-             * @param functionName
-             * @param listener
-             */
             WebExternalInterface.addCallback = function (functionName, listener) {
             };
             return WebExternalInterface;
@@ -3130,54 +1995,12 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
         egret.ExternalInterface = WebExternalInterface;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var context = null;
-        /**
-         * @private
-         */
         var fontCache = {};
-        /**
-         * 测量文本在指定样式下的宽度。
-         * @param text 要测量的文本内容。
-         * @param fontFamily 字体名称
-         * @param fontSize 字体大小
-         * @param bold 是否粗体
-         * @param italic 是否斜体
-         */
         function measureText(text, fontFamily, fontSize, bold, italic) {
             if (!context) {
                 createContext();
@@ -3192,9 +2015,6 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
             context.font = font;
             return egret.sys.measureTextWith(context, text);
         }
-        /**
-         * @private
-         */
         function createContext() {
             context = egret.sys.canvasHitTestBuffer.context;
             context.textAlign = "left";
@@ -3203,41 +2023,10 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
         egret.sys.measureText = measureText;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * 创建一个canvas。
-         */
         function __createCanvas__(width, height) {
             var canvas = egret.sys.createCanvas(width, height);
             var context = canvas.getContext("2d");
@@ -3267,24 +2056,10 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
             return canvas;
         }
         var sharedCanvas;
-        /**
-         * @private
-         * Canvas2D渲染缓冲
-         */
         var CanvasRenderBuffer = (function () {
             function CanvasRenderBuffer(width, height, root) {
                 this.surface = egret.sys.createCanvasRenderBufferSurface(__createCanvas__, width, height, root);
                 this.context = this.surface.getContext("2d");
-                // this.context.setTransform = this.context['_setTransform']
-                // this.context.rotate = (angle: number) => {
-                //     this.context['_setTransform'](Math.cos(angle * Math.PI / 180), Math.sin(angle * Math.PI / 180), -Math.sin(angle * Math.PI / 180), Math.cos(angle * Math.PI / 180), 0, 0)
-                // }
-                // this.context.scale = (x: number, y: number) => {
-                //     this.context['_setTransform'](x, 0, 0, y, 0, 0)
-                // }
-                // this.context.translate = (x: number, y: number) => {
-                //     this.context['_setTransform'](1, 0, 0, 1, x, y)
-                // }
                 if (this.context) {
                     this.context.$offsetX = 0;
                     this.context.$offsetY = 0;
@@ -3292,10 +2067,6 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
                 this.resize(width, height);
             }
             Object.defineProperty(CanvasRenderBuffer.prototype, "width", {
-                /**
-                 * 渲染缓冲的宽度，以像素为单位。
-                 * @readOnly
-                 */
                 get: function () {
                     return this.surface.width;
                 },
@@ -3303,50 +2074,27 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
                 configurable: true
             });
             Object.defineProperty(CanvasRenderBuffer.prototype, "height", {
-                /**
-                 * 渲染缓冲的高度，以像素为单位。
-                 * @readOnly
-                 */
                 get: function () {
                     return this.surface.height;
                 },
                 enumerable: true,
                 configurable: true
             });
-            /**
-             * 改变渲染缓冲的大小并清空缓冲区
-             * @param width 改变后的宽
-             * @param height 改变后的高
-             * @param useMaxSize 若传入true，则将改变后的尺寸与已有尺寸对比，保留较大的尺寸。
-             */
             CanvasRenderBuffer.prototype.resize = function (width, height, useMaxSize) {
                 egret.sys.resizeCanvasRenderBuffer(this, width, height, useMaxSize);
             };
-            /**
-             * 获取指定区域的像素
-             */
             CanvasRenderBuffer.prototype.getPixels = function (x, y, width, height) {
                 if (width === void 0) { width = 1; }
                 if (height === void 0) { height = 1; }
                 return this.context.getImageData(x, y, width, height).data;
             };
-            /**
-             * 转换成base64字符串，如果图片（或者包含的图片）跨域，则返回null
-             * @param type 转换的类型，如: "image/png","image/jpeg"
-             */
             CanvasRenderBuffer.prototype.toDataURL = function (type, encoderOptions) {
                 return this.surface.toDataURL(type, encoderOptions);
             };
-            /**
-             * 清空缓冲区数据
-             */
             CanvasRenderBuffer.prototype.clear = function () {
                 this.context.setTransform(1, 0, 0, 1, 0, 0);
                 this.context.clearRect(0, 0, this.surface.width, this.surface.height);
             };
-            /**
-             * 销毁绘制对象
-             */
             CanvasRenderBuffer.prototype.destroy = function () {
                 this.surface.width = this.surface.height = 0;
             };
@@ -3356,38 +2104,9 @@ egret.DeviceOrientation = egret.vivogame.WebDeviceOrientation;
         __reflect(CanvasRenderBuffer.prototype, "egret.vivogame.CanvasRenderBuffer", ["egret.sys.RenderBuffer"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 if (window['HTMLDivElement'] == undefined) {
     window['HTMLDivElement'] = HTMLElement;
 }
-// There is no HTMLDivElement in webkit for air
 if (window['HTMLVideoElement'] == undefined) {
     window['HTMLVideoElement'] = HTMLDivElement;
 }
@@ -3402,67 +2121,21 @@ if (window['HTMLVideoElement'] == undefined) {
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
-    /**
-     * 转换 Image，Canvas，Video 为 Egret 框架内使用的 BitmapData 对象。
-     * @param data 需要转换的对象，包括HTMLImageElement|HTMLCanvasElement|HTMLVideoElement
-     * @deprecated
-     */
     function $toBitmapData(data) {
         data["hashCode"] = data["$hashCode"] = egret.$hashCount++;
         return data;
     }
     egret.$toBitmapData = $toBitmapData;
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var localStorage;
     (function (localStorage) {
         var vivogame;
         (function (vivogame) {
-            /**
-             * @private
-             *
-             * @param key
-             * @returns
-             */
             function getItem(key) {
                 return window.localStorage.getItem(key);
             }
-            /**
-             * @private
-             *
-             * @param key
-             * @param value
-             * @returns
-             */
             function setItem(key, value) {
                 try {
                     window.localStorage.setItem(key, value);
@@ -3473,18 +2146,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     return false;
                 }
             }
-            /**
-             * @private
-             *
-             * @param key
-             */
             function removeItem(key) {
                 window.localStorage.removeItem(key);
             }
-            /**
-             * @private
-             *
-             */
             function clear() {
                 window.localStorage.clear();
             }
@@ -3495,34 +2159,6 @@ if (window['HTMLVideoElement'] == undefined) {
         })(vivogame = localStorage.vivogame || (localStorage.vivogame = {}));
     })(localStorage = egret.localStorage || (egret.localStorage = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
@@ -3580,73 +2216,30 @@ if (window['HTMLVideoElement'] == undefined) {
         }
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * 绘制指令管理器
-         * 用来维护drawData数组
-         */
         var WebGLDrawCmdManager = (function () {
             function WebGLDrawCmdManager() {
-                /**
-                 * 用于缓存绘制命令的数组
-                 */
                 this.drawData = [];
                 this.drawDataLen = 0;
             }
-            /**
-             * 压入绘制矩形指令
-             */
             WebGLDrawCmdManager.prototype.pushDrawRect = function () {
-                if (this.drawDataLen == 0 || this.drawData[this.drawDataLen - 1].type != 1 /* RECT */) {
+                if (this.drawDataLen == 0 || this.drawData[this.drawDataLen - 1].type != 1) {
                     var data = this.drawData[this.drawDataLen] || {};
-                    data.type = 1 /* RECT */;
+                    data.type = 1;
                     data.count = 0;
                     this.drawData[this.drawDataLen] = data;
                     this.drawDataLen++;
                 }
                 this.drawData[this.drawDataLen - 1].count += 2;
             };
-            /**
-             * 压入绘制texture指令
-             */
             WebGLDrawCmdManager.prototype.pushDrawTexture = function (texture, count, filter, textureWidth, textureHeight) {
                 if (count === void 0) { count = 2; }
                 if (filter) {
-                    // 目前有滤镜的情况下不会合并绘制
                     var data = this.drawData[this.drawDataLen] || {};
-                    data.type = 0 /* TEXTURE */;
+                    data.type = 0;
                     data.texture = texture;
                     data.filter = filter;
                     data.count = count;
@@ -3656,9 +2249,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.drawDataLen++;
                 }
                 else {
-                    if (this.drawDataLen == 0 || this.drawData[this.drawDataLen - 1].type != 0 /* TEXTURE */ || texture != this.drawData[this.drawDataLen - 1].texture || this.drawData[this.drawDataLen - 1].filter) {
+                    if (this.drawDataLen == 0 || this.drawData[this.drawDataLen - 1].type != 0 || texture != this.drawData[this.drawDataLen - 1].texture || this.drawData[this.drawDataLen - 1].filter) {
                         var data = this.drawData[this.drawDataLen] || {};
-                        data.type = 0 /* TEXTURE */;
+                        data.type = 0;
                         data.texture = texture;
                         data.count = 0;
                         this.drawData[this.drawDataLen] = data;
@@ -3670,55 +2263,43 @@ if (window['HTMLVideoElement'] == undefined) {
             WebGLDrawCmdManager.prototype.pushChangeSmoothing = function (texture, smoothing) {
                 texture["smoothing"] = smoothing;
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 10 /* SMOOTHING */;
+                data.type = 10;
                 data.texture = texture;
                 data.smoothing = smoothing;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /**
-             * 压入pushMask指令
-             */
             WebGLDrawCmdManager.prototype.pushPushMask = function (count) {
                 if (count === void 0) { count = 1; }
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 2 /* PUSH_MASK */;
+                data.type = 2;
                 data.count = count * 2;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /**
-             * 压入popMask指令
-             */
             WebGLDrawCmdManager.prototype.pushPopMask = function (count) {
                 if (count === void 0) { count = 1; }
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 3 /* POP_MASK */;
+                data.type = 3;
                 data.count = count * 2;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /**
-             * 压入混色指令
-             */
             WebGLDrawCmdManager.prototype.pushSetBlend = function (value) {
                 var len = this.drawDataLen;
-                // 有无遍历到有效绘图操作
                 var drawState = false;
                 for (var i = len - 1; i >= 0; i--) {
                     var data = this.drawData[i];
                     if (data) {
-                        if (data.type == 0 /* TEXTURE */ || data.type == 1 /* RECT */) {
+                        if (data.type == 0 || data.type == 1) {
                             drawState = true;
                         }
-                        // 如果与上一次blend操作之间无有效绘图，上一次操作无效
-                        if (!drawState && data.type == 4 /* BLEND */) {
+                        if (!drawState && data.type == 4) {
                             this.drawData.splice(i, 1);
                             this.drawDataLen--;
                             continue;
                         }
-                        // 如果与上一次blend操作重复，本次操作无效
-                        if (data.type == 4 /* BLEND */) {
+                        if (data.type == 4) {
                             if (data.value == value) {
                                 return;
                             }
@@ -3729,75 +2310,53 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                 }
                 var _data = this.drawData[this.drawDataLen] || {};
-                _data.type = 4 /* BLEND */;
+                _data.type = 4;
                 _data.value = value;
                 this.drawData[this.drawDataLen] = _data;
                 this.drawDataLen++;
             };
-            /*
-             * 压入resize render target命令
-             */
             WebGLDrawCmdManager.prototype.pushResize = function (buffer, width, height) {
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 5 /* RESIZE_TARGET */;
+                data.type = 5;
                 data.buffer = buffer;
                 data.width = width;
                 data.height = height;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /*
-             * 压入clear color命令
-             */
             WebGLDrawCmdManager.prototype.pushClearColor = function () {
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 6 /* CLEAR_COLOR */;
+                data.type = 6;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /**
-             * 压入激活buffer命令
-             */
             WebGLDrawCmdManager.prototype.pushActivateBuffer = function (buffer) {
                 var len = this.drawDataLen;
-                // 有无遍历到有效绘图操作
                 var drawState = false;
                 for (var i = len - 1; i >= 0; i--) {
                     var data = this.drawData[i];
                     if (data) {
-                        if (data.type != 4 /* BLEND */ && data.type != 7 /* ACT_BUFFER */) {
+                        if (data.type != 4 && data.type != 7) {
                             drawState = true;
                         }
-                        // 如果与上一次buffer操作之间无有效绘图，上一次操作无效
-                        if (!drawState && data.type == 7 /* ACT_BUFFER */) {
+                        if (!drawState && data.type == 7) {
                             this.drawData.splice(i, 1);
                             this.drawDataLen--;
                             continue;
                         }
-                        // 如果与上一次buffer操作重复，本次操作无效
-                        // if(data.type == DRAWABLE_TYPE.ACT_BUFFER) {
-                        //     if(data.buffer == buffer) {
-                        //         return;
-                        //     } else {
-                        //         break;
-                        //     }
-                        // }
                     }
                 }
                 var _data = this.drawData[this.drawDataLen] || {};
-                _data.type = 7 /* ACT_BUFFER */;
+                _data.type = 7;
                 _data.buffer = buffer;
                 _data.width = buffer.rootRenderTarget.width;
                 _data.height = buffer.rootRenderTarget.height;
                 this.drawData[this.drawDataLen] = _data;
                 this.drawDataLen++;
             };
-            /*
-             * 压入enabel scissor命令
-             */
             WebGLDrawCmdManager.prototype.pushEnableScissor = function (x, y, width, height) {
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 8 /* ENABLE_SCISSOR */;
+                data.type = 8;
                 data.x = x;
                 data.y = y;
                 data.width = width;
@@ -3805,18 +2364,12 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /*
-             * 压入disable scissor命令
-             */
             WebGLDrawCmdManager.prototype.pushDisableScissor = function () {
                 var data = this.drawData[this.drawDataLen] || {};
-                data.type = 9 /* DISABLE_SCISSOR */;
+                data.type = 9;
                 this.drawData[this.drawDataLen] = data;
                 this.drawDataLen++;
             };
-            /**
-             * 清空命令数组
-             */
             WebGLDrawCmdManager.prototype.clear = function () {
                 for (var i = 0; i < this.drawDataLen; i++) {
                     var data = this.drawData[i];
@@ -3824,7 +2377,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     data.count = 0;
                     data.texture = null;
                     data.filter = null;
-                    //data.uv = null;
                     data.value = "";
                     data.buffer = null;
                     data.width = 0;
@@ -3843,61 +2395,16 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(WebGLDrawCmdManager.prototype, "egret.vivogame.WebGLDrawCmdManager");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * 顶点数组管理对象
-         * 用来维护顶点数组
-         */
         var WebGLVertexArrayObject = (function () {
             function WebGLVertexArrayObject() {
-                /*定义顶点格式
-                * (x: 8 * 4 = 32) + (y: 8 * 4 = 32) + (u: 8 * 4 = 32) + (v: 8 * 4 = 32) + (tintcolor: 8 * 4 = 32) = (8 * 4 = 32) * (x + y + u + v + tintcolor: 5);
-                */
                 this.vertSize = 5;
                 this.vertByteSize = this.vertSize * 4;
-                /*
-                *最多单次提交maxQuadsCount这么多quad
-                */
                 this.maxQuadsCount = 2048;
-                /*
-                *quad = 4个Vertex
-                */
                 this.maxVertexCount = this.maxQuadsCount * 4;
-                /*
-                *配套的Indices = quad * 6.
-                */
                 this.maxIndicesCount = this.maxQuadsCount * 6;
                 this.vertices = null;
                 this.indices = null;
@@ -3905,30 +2412,15 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.vertexIndex = 0;
                 this.indexIndex = 0;
                 this.hasMesh = false;
-                /*
-                * refactor:
-                */
                 this._vertices = null;
                 this._verticesFloat32View = null;
                 this._verticesUint32View = null;
-                //old
                 var numVerts = this.maxVertexCount * this.vertSize;
                 this.vertices = new Float32Array(numVerts);
-                ///
                 this._vertices = new ArrayBuffer(this.maxVertexCount * this.vertByteSize);
                 this._verticesFloat32View = new Float32Array(this._vertices);
                 this._verticesUint32View = new Uint32Array(this._vertices);
                 this.vertices = this._verticesFloat32View;
-                //索引缓冲，最大索引数
-                /*
-                0-------1
-                |       |
-                |       |
-                3-------2
-                0->1->2
-                0->2->3
-                两个三角形
-                */
                 var maxIndicesCount = this.maxIndicesCount;
                 this.indices = new Uint16Array(maxIndicesCount);
                 this.indicesForMesh = new Uint16Array(maxIndicesCount);
@@ -3941,39 +2433,23 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.indices[i + 5] = j + 3;
                 }
             }
-            /**
-             * 是否达到最大缓存数量
-             */
             WebGLVertexArrayObject.prototype.reachMaxSize = function (vertexCount, indexCount) {
                 if (vertexCount === void 0) { vertexCount = 4; }
                 if (indexCount === void 0) { indexCount = 6; }
                 return this.vertexIndex > this.maxVertexCount - vertexCount || this.indexIndex > this.maxIndicesCount - indexCount;
             };
-            /**
-             * 获取缓存完成的顶点数组
-             */
             WebGLVertexArrayObject.prototype.getVertices = function () {
                 var view = this.vertices.subarray(0, this.vertexIndex * this.vertSize);
                 return view;
             };
-            /**
-             * 获取缓存完成的索引数组
-             */
             WebGLVertexArrayObject.prototype.getIndices = function () {
                 return this.indices;
             };
-            /**
-             * 获取缓存完成的mesh索引数组
-             */
             WebGLVertexArrayObject.prototype.getMeshIndices = function () {
                 return this.indicesForMesh;
             };
-            /**
-             * 切换成mesh索引缓存方式
-             */
             WebGLVertexArrayObject.prototype.changeToMeshIndices = function () {
                 if (!this.hasMesh) {
-                    // 拷贝默认index信息到for mesh中
                     for (var i = 0, l = this.indexIndex; i < l; ++i) {
                         this.indicesForMesh[i] = this.indices[i];
                     }
@@ -3983,35 +2459,14 @@ if (window['HTMLVideoElement'] == undefined) {
             WebGLVertexArrayObject.prototype.isMesh = function () {
                 return this.hasMesh;
             };
-            /**
-             * 默认构成矩形
-             */
-            // private defaultMeshVertices = [0, 0, 1, 0, 1, 1, 0, 1];
-            // private defaultMeshUvs = [
-            //     0, 0,
-            //     1, 0,
-            //     1, 1,
-            //     0, 1
-            // ];
-            // private defaultMeshIndices = [0, 1, 2, 0, 2, 3];
-            /**
-             * 缓存一组顶点
-             */
             WebGLVertexArrayObject.prototype.cacheArrays = function (buffer, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, textureSourceWidth, textureSourceHeight, meshUVs, meshVertices, meshIndices, rotated) {
                 var alpha = buffer.globalAlpha;
-                /*
-                * 混入tintcolor => alpha
-                */
                 alpha = Math.min(alpha, 1.0);
                 var globalTintColor = buffer.globalTintColor || 0xFFFFFF;
                 var currentTexture = buffer.currentTexture;
                 alpha = ((alpha < 1.0 && currentTexture && currentTexture[egret.UNPACK_PREMULTIPLY_ALPHA_WEBGL]) ?
                     egret.WebGLUtils.premultiplyTint(globalTintColor, alpha)
                     : globalTintColor + (alpha * 255 << 24));
-                /*
-                临时测试
-                */
-                //计算出绘制矩阵，之后把矩阵还原回之前的
                 var locWorldTransform = buffer.globalMatrix;
                 var a = locWorldTransform.a;
                 var b = locWorldTransform.b;
@@ -4042,11 +2497,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                 }
                 if (meshVertices) {
-                    // 计算索引位置与赋值
                     var vertices = this.vertices;
                     var verticesUint32View = this._verticesUint32View;
                     var index = this.vertexIndex * this.vertSize;
-                    // 缓存顶点数组
                     var i = 0, iD = 0, l = 0;
                     var u = 0, v = 0, x = 0, y = 0;
                     for (i = 0, l = meshUVs.length; i < l; i += 2) {
@@ -4055,10 +2508,8 @@ if (window['HTMLVideoElement'] == undefined) {
                         y = meshVertices[i + 1];
                         u = meshUVs[i];
                         v = meshUVs[i + 1];
-                        // xy
                         vertices[iD + 0] = a * x + c * y + tx;
                         vertices[iD + 1] = b * x + d * y + ty;
-                        // uv
                         if (rotated) {
                             vertices[iD + 2] = (sourceX + (1.0 - v) * sourceHeight) / textureSourceWidth;
                             vertices[iD + 3] = (sourceY + u * sourceWidth) / textureSourceHeight;
@@ -4067,10 +2518,8 @@ if (window['HTMLVideoElement'] == undefined) {
                             vertices[iD + 2] = (sourceX + u * sourceWidth) / textureSourceWidth;
                             vertices[iD + 3] = (sourceY + v * sourceHeight) / textureSourceHeight;
                         }
-                        // alpha
                         verticesUint32View[iD + 4] = alpha;
                     }
-                    // 缓存索引数组
                     if (this.hasMesh) {
                         for (var i_1 = 0, l_1 = meshIndices.length; i_1 < l_1; ++i_1) {
                             this.indicesForMesh[this.indexIndex + i_1] = meshIndices[i_1] + this.vertexIndex;
@@ -4093,76 +2542,51 @@ if (window['HTMLVideoElement'] == undefined) {
                         var temp = sourceWidth;
                         sourceWidth = sourceHeight / width;
                         sourceHeight = temp / height;
-                        // xy
                         vertices[index++] = tx;
                         vertices[index++] = ty;
-                        // uv
                         vertices[index++] = sourceWidth + sourceX;
                         vertices[index++] = sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = a * w + tx;
                         vertices[index++] = b * w + ty;
-                        // uv
                         vertices[index++] = sourceWidth + sourceX;
                         vertices[index++] = sourceHeight + sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = a * w + c * h + tx;
                         vertices[index++] = d * h + b * w + ty;
-                        // uv
                         vertices[index++] = sourceX;
                         vertices[index++] = sourceHeight + sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = c * h + tx;
                         vertices[index++] = d * h + ty;
-                        // uv
                         vertices[index++] = sourceX;
                         vertices[index++] = sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
                     }
                     else {
                         sourceWidth = sourceWidth / width;
                         sourceHeight = sourceHeight / height;
-                        // xy
                         vertices[index++] = tx;
                         vertices[index++] = ty;
-                        // uv
                         vertices[index++] = sourceX;
                         vertices[index++] = sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = a * w + tx;
                         vertices[index++] = b * w + ty;
-                        // uv
                         vertices[index++] = sourceWidth + sourceX;
                         vertices[index++] = sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = a * w + c * h + tx;
                         vertices[index++] = d * h + b * w + ty;
-                        // uv
                         vertices[index++] = sourceWidth + sourceX;
                         vertices[index++] = sourceHeight + sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
-                        // xy
                         vertices[index++] = c * h + tx;
                         vertices[index++] = d * h + ty;
-                        // uv
                         vertices[index++] = sourceX;
                         vertices[index++] = sourceHeight + sourceY;
-                        // alpha
                         verticesUint32View[index++] = alpha;
                     }
-                    // 缓存索引数组
                     if (this.hasMesh) {
                         var indicesForMesh = this.indicesForMesh;
                         indicesForMesh[this.indexIndex + 0] = 0 + this.vertexIndex;
@@ -4187,58 +2611,21 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(WebGLVertexArrayObject.prototype, "egret.vivogame.WebGLVertexArrayObject");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * WebGLRenderTarget
-         * A WebGL render target with a frame buffer and texture
-         */
         var WebGLRenderTarget = (function (_super) {
             __extends(WebGLRenderTarget, _super);
             function WebGLRenderTarget(gl, width, height) {
                 var _this = _super.call(this) || this;
                 _this.clearColor = [0, 0, 0, 0];
-                /**
-                 * If frame buffer is enabled, the default is true
-                 */
                 _this.useFrameBuffer = true;
                 _this.gl = gl;
                 _this._resize(width, height);
                 return _this;
             }
             WebGLRenderTarget.prototype._resize = function (width, height) {
-                // Chrome alerts if the size is 0
                 width = width || 1;
                 height = height || 1;
                 if (width < 1) {
@@ -4262,7 +2649,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (this.frameBuffer) {
                     gl.bindTexture(gl.TEXTURE_2D, this.texture);
                     gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-                    // gl.bindTexture(gl.TEXTURE_2D, null);
                 }
                 if (this.stencilBuffer) {
                     gl.deleteRenderbuffer(this.stencilBuffer);
@@ -4289,21 +2675,8 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
             };
             WebGLRenderTarget.prototype.createTexture = function () {
-                //就是创建空的纹理
                 var webglrendercontext = vivogame.WebGLRenderContext.getInstance(0, 0);
                 return egret.sys._createTexture(webglrendercontext, this.width, this.height, null);
-                /*
-                const gl = this.gl;
-                const texture: WebGLTexture = gl.createTexture();
-                texture[glContext] = gl;
-                gl.bindTexture(gl.TEXTURE_2D, texture);
-                gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, this.width, this.height, 0, gl.RGBA, gl.UNSIGNED_BYTE, null);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-                gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-                return texture;
-                */
             };
             WebGLRenderTarget.prototype.clear = function (bind) {
                 var gl = this.gl;
@@ -4324,8 +2697,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 gl.bindRenderbuffer(gl.RENDERBUFFER, this.stencilBuffer);
                 gl.renderbufferStorage(gl.RENDERBUFFER, gl.DEPTH_STENCIL, this.width, this.height);
                 gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.stencilBuffer);
-                // Is unbundling a bug here?
-                // gl.bindFramebuffer(gl.FRAMEBUFFER, null);
             };
             WebGLRenderTarget.prototype.dispose = function () {
                 egret.WebGLUtils.deleteWebGLTexture(this.texture);
@@ -4336,61 +2707,20 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(WebGLRenderTarget.prototype, "egret.vivogame.WebGLRenderTarget");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         * WebGL渲染缓存
-         */
         var WebGLRenderBuffer = (function (_super) {
             __extends(WebGLRenderBuffer, _super);
             function WebGLRenderBuffer(width, height, root) {
                 var _this = _super.call(this) || this;
-                //
                 _this.currentTexture = null;
                 _this.globalAlpha = 1;
                 _this.globalTintColor = 0xFFFFFF;
-                /**
-                 * stencil state
-                 * 模版开关状态
-                 */
                 _this.stencilState = false;
                 _this.$stencilList = [];
                 _this.stencilHandleCount = 0;
-                /**
-                 * scissor state
-                 * scissor 开关状态
-                 */
                 _this.$scissorState = false;
                 _this.scissorRect = new egret.Rectangle();
                 _this.$hasScissor = false;
@@ -4400,7 +2730,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 _this.savedGlobalMatrix = new egret.Matrix();
                 _this.$offsetX = 0;
                 _this.$offsetY = 0;
-                // 获取webglRenderContext
                 _this.context = vivogame.WebGLRenderContext.getInstance(width, height);
                 if (egret.nativeRender) {
                     if (root) {
@@ -4412,22 +2741,17 @@ if (window['HTMLVideoElement'] == undefined) {
                     _this.rootRenderTarget = null;
                     return _this;
                 }
-                // buffer 对应的 render target
                 _this.rootRenderTarget = new vivogame.WebGLRenderTarget(_this.context.context, 3, 3);
                 if (width && height) {
                     _this.resize(width, height);
                 }
-                // 如果是第一个加入的buffer，说明是舞台buffer
                 _this.root = root;
-                // 如果是用于舞台渲染的renderBuffer，则默认添加renderTarget到renderContext中，而且是第一个
                 if (_this.root) {
                     _this.context.pushBuffer(_this);
-                    // 画布
                     _this.surface = _this.context.surface;
                     _this.$computeDrawCall = true;
                 }
                 else {
-                    // 由于创建renderTarget造成的frameBuffer绑定，这里重置绑定
                     var lastBuffer = _this.context.activatedBuffer;
                     if (lastBuffer) {
                         lastBuffer.rootRenderTarget.activate();
@@ -4480,10 +2804,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
             };
             Object.defineProperty(WebGLRenderBuffer.prototype, "width", {
-                /**
-                 * 渲染缓冲的宽度，以像素为单位。
-                 * @readOnly
-                 */
                 get: function () {
                     if (egret.nativeRender) {
                         return this.surface.width;
@@ -4496,10 +2816,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 configurable: true
             });
             Object.defineProperty(WebGLRenderBuffer.prototype, "height", {
-                /**
-                 * 渲染缓冲的高度，以像素为单位。
-                 * @readOnly
-                 */
                 get: function () {
                     if (egret.nativeRender) {
                         return this.surface.height;
@@ -4511,12 +2827,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 enumerable: true,
                 configurable: true
             });
-            /**
-             * 改变渲染缓冲的大小并清空缓冲区
-             * @param width 改变后的宽
-             * @param height 改变后的高
-             * @param useMaxSize 若传入true，则将改变后的尺寸与已有尺寸对比，保留较大的尺寸。
-             */
             WebGLRenderBuffer.prototype.resize = function (width, height, useMaxSize) {
                 width = width || 1;
                 height = height || 1;
@@ -4525,23 +2835,17 @@ if (window['HTMLVideoElement'] == undefined) {
                     return;
                 }
                 this.context.pushBuffer(this);
-                // render target 尺寸重置
                 if (width != this.rootRenderTarget.width || height != this.rootRenderTarget.height) {
                     this.context.drawCmdManager.pushResize(this, width, height);
-                    // 同步更改宽高
                     this.rootRenderTarget.width = width;
                     this.rootRenderTarget.height = height;
                 }
-                // 如果是舞台的渲染缓冲，执行resize，否则surface大小不随之改变
                 if (this.root) {
                     this.context.resize(width, height, useMaxSize);
                 }
                 this.context.clear();
                 this.context.popBuffer();
             };
-            /**
-             * 获取指定区域的像素
-             */
             WebGLRenderBuffer.prototype.getPixels = function (x, y, width, height) {
                 if (width === void 0) { width = 1; }
                 if (height === void 0) { height = 1; }
@@ -4559,7 +2863,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.rootRenderTarget.useFrameBuffer = useFrameBuffer;
                     this.rootRenderTarget.activate();
                 }
-                //图像反转
                 var result = new Uint8Array(4 * width * height);
                 for (var i = 0; i < height; i++) {
                     for (var j = 0; j < width; j++) {
@@ -4574,32 +2877,20 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return result;
             };
-            /**
-             * 转换成base64字符串，如果图片（或者包含的图片）跨域，则返回null
-             * @param type 转换的类型，如: "image/png","image/jpeg"
-             */
             WebGLRenderBuffer.prototype.toDataURL = function (type, encoderOptions) {
                 return this.context.surface.toDataURL(type, encoderOptions);
             };
-            /**
-             * 销毁绘制对象
-             */
             WebGLRenderBuffer.prototype.destroy = function () {
                 this.context.destroy();
             };
             WebGLRenderBuffer.prototype.onRenderFinish = function () {
                 this.$drawCalls = 0;
             };
-            /**
-             * 交换frameBuffer中的图像到surface中
-             * @param width 宽度
-             * @param height 高度
-             */
             WebGLRenderBuffer.prototype.drawFrameBufferToSurface = function (sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, clear) {
                 if (clear === void 0) { clear = false; }
                 this.rootRenderTarget.useFrameBuffer = false;
                 this.rootRenderTarget.activate();
-                this.context.disableStencilTest(); // 切换frameBuffer注意要禁用STENCIL_TEST
+                this.context.disableStencilTest();
                 this.context.disableScissorTest();
                 this.setTransform(1, 0, 0, 1, 0, 0);
                 this.globalAlpha = 1;
@@ -4612,16 +2903,11 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.restoreStencil();
                 this.restoreScissor();
             };
-            /**
-             * 交换surface的图像到frameBuffer中
-             * @param width 宽度
-             * @param height 高度
-             */
             WebGLRenderBuffer.prototype.drawSurfaceToFrameBuffer = function (sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, clear) {
                 if (clear === void 0) { clear = false; }
                 this.rootRenderTarget.useFrameBuffer = true;
                 this.rootRenderTarget.activate();
-                this.context.disableStencilTest(); // 切换frameBuffer注意要禁用STENCIL_TEST
+                this.context.disableStencilTest();
                 this.context.disableScissorTest();
                 this.setTransform(1, 0, 0, 1, 0, 0);
                 this.globalAlpha = 1;
@@ -4634,16 +2920,12 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.restoreStencil();
                 this.restoreScissor();
             };
-            /**
-             * 清空缓冲区数据
-             */
             WebGLRenderBuffer.prototype.clear = function () {
                 this.context.pushBuffer(this);
                 this.context.clear();
                 this.context.popBuffer();
             };
             WebGLRenderBuffer.prototype.setTransform = function (a, b, c, d, tx, ty) {
-                // this.globalMatrix.setTo(a, b, c, d, tx, ty);
                 var matrix = this.globalMatrix;
                 matrix.a = a;
                 matrix.b = b;
@@ -4694,13 +2976,8 @@ if (window['HTMLVideoElement'] == undefined) {
                 matrix.tx = sMatrix.tx;
                 matrix.ty = sMatrix.ty;
             };
-            /**
-             * 创建一个buffer实例
-             */
             WebGLRenderBuffer.create = function (width, height) {
                 var buffer = renderBufferPool.pop();
-                // width = Math.min(width, 1024);
-                // height = Math.min(height, 1024);
                 if (buffer) {
                     buffer.resize(width, height);
                     var matrix = buffer.globalMatrix;
@@ -4720,9 +2997,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return buffer;
             };
-            /**
-             * 回收一个buffer实例
-             */
             WebGLRenderBuffer.release = function (buffer) {
                 renderBufferPool.push(buffer);
             };
@@ -4731,37 +3005,9 @@ if (window['HTMLVideoElement'] == undefined) {
         }(egret.HashObject));
         vivogame.WebGLRenderBuffer = WebGLRenderBuffer;
         __reflect(WebGLRenderBuffer.prototype, "egret.vivogame.WebGLRenderBuffer", ["egret.sys.RenderBuffer"]);
-        var renderBufferPool = []; //渲染缓冲区对象池
+        var renderBufferPool = [];
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
@@ -4770,35 +3016,18 @@ if (window['HTMLVideoElement'] == undefined) {
         var defaultCompositeOp = "source-over";
         var BLACK_COLOR = "#000000";
         var CAPS_STYLES = { none: 'butt', square: 'square', round: 'round' };
-        var renderBufferPool = []; //渲染缓冲区对象池
-        /**
-         * @private
-         * WebGL渲染器
-         */
+        var renderBufferPool = [];
         var WebGLRenderer = (function () {
             function WebGLRenderer() {
-                /**
-                 * Do special treatment on wechat ios10
-                 */
                 this.wxiOS10 = false;
-                this.nestLevel = 0; //渲染的嵌套层次，0表示在调用堆栈的最外层。
+                this.nestLevel = 0;
             }
-            /**
-             * 渲染一个显示对象
-             * @param displayObject 要渲染的显示对象
-             * @param buffer 渲染缓冲
-             * @param matrix 要对显示对象整体叠加的变换矩阵
-             * @param dirtyList 脏矩形列表
-             * @param forRenderTexture 绘制目标是RenderTexture的标志
-             * @returns drawCall触发绘制的次数
-             */
             WebGLRenderer.prototype.render = function (displayObject, buffer, matrix, forRenderTexture) {
                 this.nestLevel++;
                 var webglBuffer = buffer;
                 var webglBufferContext = webglBuffer.context;
                 var root = forRenderTexture ? displayObject : null;
                 webglBufferContext.pushBuffer(webglBuffer);
-                //绘制显示对象
                 webglBuffer.transform(matrix.a, matrix.b, matrix.c, matrix.d, 0, 0);
                 this.drawDisplayObject(displayObject, webglBuffer, matrix.tx, matrix.ty, true);
                 webglBufferContext.$drawWebGL();
@@ -4811,7 +3040,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 egret.Matrix.release(invert);
                 this.nestLevel--;
                 if (this.nestLevel === 0) {
-                    //最大缓存6个渲染缓冲
                     if (renderBufferPool.length > 6) {
                         renderBufferPool.length = 6;
                     }
@@ -4822,10 +3050,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return drawCall;
             };
-            /**
-             * @private
-             * 绘制一个显示对象
-             */
             WebGLRenderer.prototype.drawDisplayObject = function (displayObject, buffer, offsetX, offsetY, isStage) {
                 var drawCalls = 0;
                 var node;
@@ -4852,22 +3076,22 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.$offsetX = offsetX;
                     buffer.$offsetY = offsetY;
                     switch (node.type) {
-                        case 1 /* BitmapNode */:
+                        case 1:
                             this.renderBitmap(node, buffer);
                             break;
-                        case 2 /* TextNode */:
+                        case 2:
                             this.renderText(node, buffer);
                             break;
-                        case 3 /* GraphicsNode */:
+                        case 3:
                             this.renderGraphics(node, buffer);
                             break;
-                        case 4 /* GroupNode */:
+                        case 4:
                             this.renderGroup(node, buffer);
                             break;
-                        case 5 /* MeshNode */:
+                        case 5:
                             this.renderMesh(node, buffer);
                             break;
-                        case 6 /* NormalBitmapNode */:
+                        case 6:
                             this.renderNormalBitmap(node, buffer);
                             break;
                     }
@@ -4880,7 +3104,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 var children = displayObject.$children;
                 if (children) {
                     if (displayObject.sortableChildren && displayObject.$sortDirty) {
-                        //绘制排序
                         displayObject.sortChildren();
                     }
                     var length_2 = children.length;
@@ -4920,15 +3143,15 @@ if (window['HTMLVideoElement'] == undefined) {
                             offsetY2 = offsetY + child.$y - child.$anchorOffsetY;
                         }
                         switch (child.$renderMode) {
-                            case 1 /* NONE */:
+                            case 1:
                                 break;
-                            case 2 /* FILTER */:
+                            case 2:
                                 drawCalls += this.drawWithFilter(child, buffer, offsetX2, offsetY2);
                                 break;
-                            case 3 /* CLIP */:
+                            case 3:
                                 drawCalls += this.drawWithClip(child, buffer, offsetX2, offsetY2);
                                 break;
-                            case 4 /* SCROLLRECT */:
+                            case 4:
                                 drawCalls += this.drawWithScrollRect(child, buffer, offsetX2, offsetY2);
                                 break;
                             default:
@@ -4955,9 +3178,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return drawCalls;
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.drawWithFilter = function (displayObject, buffer, offsetX, offsetY) {
                 var drawCalls = 0;
                 if (displayObject.$children && displayObject.$children.length == 0 && (!displayObject.$renderNode || displayObject.$renderNode.$getRenderCount() == 0)) {
@@ -5003,10 +3223,8 @@ if (window['HTMLVideoElement'] == undefined) {
                         return drawCalls;
                     }
                 }
-                // 为显示对象创建一个新的buffer
                 var displayBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
                 displayBuffer.context.pushBuffer(displayBuffer);
-                //todo 可以优化减少draw次数
                 if (displayObject.$mask) {
                     drawCalls += this.drawWithClip(displayObject, displayBuffer, -displayBoundsX, -displayBoundsY);
                 }
@@ -5017,13 +3235,11 @@ if (window['HTMLVideoElement'] == undefined) {
                     drawCalls += this.drawDisplayObject(displayObject, displayBuffer, -displayBoundsX, -displayBoundsY);
                 }
                 displayBuffer.context.popBuffer();
-                //绘制结果到屏幕
                 if (drawCalls > 0) {
                     if (hasBlendMode) {
                         buffer.context.setGlobalCompositeOperation(compositeOp);
                     }
                     drawCalls++;
-                    // 绘制结果的时候，应用滤镜
                     buffer.$offsetX = offsetX + displayBoundsX;
                     buffer.$offsetY = offsetY + displayBoundsY;
                     var savedMatrix = egret.Matrix.create();
@@ -5060,7 +3276,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     for (var _i = 0, _a = displayObject.$children; _i < _a.length; _i++) {
                         var child = _a[_i];
                         var filters = child.$filters;
-                        // 特殊处理有滤镜的对象
                         if (filters && filters.length > 0) {
                             return 2;
                         }
@@ -5077,9 +3292,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return drawCount;
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.drawWithClip = function (displayObject, buffer, offsetX, offsetY) {
                 var drawCalls = 0;
                 var hasBlendMode = (displayObject.$blendMode !== 0);
@@ -5094,17 +3306,14 @@ if (window['HTMLVideoElement'] == undefined) {
                 var mask = displayObject.$mask;
                 if (mask) {
                     var maskRenderMatrix = mask.$getMatrix();
-                    //遮罩scaleX或scaleY为0，放弃绘制
                     if ((maskRenderMatrix.a == 0 && maskRenderMatrix.b == 0) || (maskRenderMatrix.c == 0 && maskRenderMatrix.d == 0)) {
                         return drawCalls;
                     }
                 }
-                //没有遮罩,同时显示对象没有子项
                 if (!mask && (!displayObject.$children || displayObject.$children.length == 0)) {
                     if (scrollRect) {
                         buffer.context.pushMask(scrollRect.x + offsetX, scrollRect.y + offsetY, scrollRect.width, scrollRect.height);
                     }
-                    //绘制显示对象
                     if (hasBlendMode) {
                         buffer.context.setGlobalCompositeOperation(compositeOp);
                     }
@@ -5126,11 +3335,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     if (displayBoundsWidth <= 0 || displayBoundsHeight <= 0) {
                         return drawCalls;
                     }
-                    //绘制显示对象自身，若有scrollRect，应用clip
                     var displayBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
                     displayBuffer.context.pushBuffer(displayBuffer);
                     drawCalls += this.drawDisplayObject(displayObject, displayBuffer, -displayBoundsX, -displayBoundsY);
-                    //绘制遮罩
                     if (mask) {
                         var maskBuffer = this.createRenderBuffer(displayBoundsWidth, displayBoundsHeight);
                         maskBuffer.context.pushBuffer(maskBuffer);
@@ -5154,7 +3361,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                     displayBuffer.context.setGlobalCompositeOperation(defaultCompositeOp);
                     displayBuffer.context.popBuffer();
-                    //绘制结果到屏幕
                     if (drawCalls > 0) {
                         drawCalls++;
                         if (hasBlendMode) {
@@ -5194,9 +3400,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     return drawCalls;
                 }
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.drawWithScrollRect = function (displayObject, buffer, offsetX, offsetY) {
                 var drawCalls = 0;
                 var scrollRect = displayObject.$scrollRect ? displayObject.$scrollRect : displayObject.$maskRect;
@@ -5223,7 +3426,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     var xMax = x + scrollRect.width;
                     var yMax = y + scrollRect.height;
                     var minX = void 0, minY = void 0, maxX = void 0, maxY = void 0;
-                    //优化，通常情况下不缩放的对象占多数，直接加上偏移量即可。
                     if (a == 1.0 && d == 1.0) {
                         minX = x + tx;
                         minY = y + ty;
@@ -5277,30 +3479,15 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return drawCalls;
             };
-            /**
-             * 将一个RenderNode对象绘制到渲染缓冲
-             * @param node 要绘制的节点
-             * @param buffer 渲染缓冲
-             * @param matrix 要叠加的矩阵
-             * @param forHitTest 绘制结果是用于碰撞检测。若为true，当渲染GraphicsNode时，会忽略透明度样式设置，全都绘制为不透明的。
-             */
             WebGLRenderer.prototype.drawNodeToBuffer = function (node, buffer, matrix, forHitTest) {
                 var webglBuffer = buffer;
-                //pushRenderTARGET
                 webglBuffer.context.pushBuffer(webglBuffer);
                 webglBuffer.setTransform(matrix.a, matrix.b, matrix.c, matrix.d, matrix.tx, matrix.ty);
                 this.renderNode(node, buffer, 0, 0, forHitTest);
                 webglBuffer.context.$drawWebGL();
                 webglBuffer.onRenderFinish();
-                //popRenderTARGET
                 webglBuffer.context.popBuffer();
             };
-            /**
-             * 将一个DisplayObject绘制到渲染缓冲，用于RenderTexture绘制
-             * @param displayObject 要绘制的显示对象
-             * @param buffer 渲染缓冲
-             * @param matrix 要叠加的矩阵
-             */
             WebGLRenderer.prototype.drawDisplayToBuffer = function (displayObject, buffer, matrix) {
                 buffer.context.pushBuffer(buffer);
                 if (matrix) {
@@ -5317,22 +3504,22 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (node) {
                     drawCalls++;
                     switch (node.type) {
-                        case 1 /* BitmapNode */:
+                        case 1:
                             this.renderBitmap(node, buffer);
                             break;
-                        case 2 /* TextNode */:
+                        case 2:
                             this.renderText(node, buffer);
                             break;
-                        case 3 /* GraphicsNode */:
+                        case 3:
                             this.renderGraphics(node, buffer);
                             break;
-                        case 4 /* GroupNode */:
+                        case 4:
                             this.renderGroup(node, buffer);
                             break;
-                        case 5 /* MeshNode */:
+                        case 5:
                             this.renderMesh(node, buffer);
                             break;
-                        case 6 /* NormalBitmapNode */:
+                        case 6:
                             this.renderNormalBitmap(node, buffer);
                             break;
                     }
@@ -5343,15 +3530,15 @@ if (window['HTMLVideoElement'] == undefined) {
                     for (var i = 0; i < length_3; i++) {
                         var child = children[i];
                         switch (child.$renderMode) {
-                            case 1 /* NONE */:
+                            case 1:
                                 break;
-                            case 2 /* FILTER */:
+                            case 2:
                                 drawCalls += this.drawWithFilter(child, buffer, 0, 0);
                                 break;
-                            case 3 /* CLIP */:
+                            case 3:
                                 drawCalls += this.drawWithClip(child, buffer, 0, 0);
                                 break;
-                            case 4 /* SCROLLRECT */:
+                            case 4:
                                 drawCalls += this.drawWithScrollRect(child, buffer, 0, 0);
                                 break;
                             default:
@@ -5365,36 +3552,30 @@ if (window['HTMLVideoElement'] == undefined) {
                 buffer.context.popBuffer();
                 return drawCalls;
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderNode = function (node, buffer, offsetX, offsetY, forHitTest) {
                 buffer.$offsetX = offsetX;
                 buffer.$offsetY = offsetY;
                 switch (node.type) {
-                    case 1 /* BitmapNode */:
+                    case 1:
                         this.renderBitmap(node, buffer);
                         break;
-                    case 2 /* TextNode */:
+                    case 2:
                         this.renderText(node, buffer);
                         break;
-                    case 3 /* GraphicsNode */:
+                    case 3:
                         this.renderGraphics(node, buffer, forHitTest);
                         break;
-                    case 4 /* GroupNode */:
+                    case 4:
                         this.renderGroup(node, buffer);
                         break;
-                    case 5 /* MeshNode */:
+                    case 5:
                         this.renderMesh(node, buffer);
                         break;
-                    case 6 /* NormalBitmapNode */:
+                    case 6:
                         this.renderNormalBitmap(node, buffer);
                         break;
                 }
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderNormalBitmap = function (node, buffer) {
                 var image = node.image;
                 if (!image) {
@@ -5402,15 +3583,11 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 buffer.context.drawImage(image, node.sourceX, node.sourceY, node.sourceW, node.sourceH, node.drawX, node.drawY, node.drawW, node.drawH, node.imageWidth, node.imageHeight, node.rotated, node.smoothing);
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderBitmap = function (node, buffer) {
                 var image = node.image;
                 if (!image) {
                     return;
                 }
-                //buffer.imageSmoothingEnabled = node.smoothing;
                 var data = node.drawData;
                 var length = data.length;
                 var pos = 0;
@@ -5434,7 +3611,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.useOffset();
                     buffer.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);
                 }
-                //这里不考虑嵌套
                 if (blendMode) {
                     buffer.context.setGlobalCompositeOperation(blendModes[blendMode]);
                 }
@@ -5474,12 +3650,8 @@ if (window['HTMLVideoElement'] == undefined) {
                     egret.Matrix.release(savedMatrix);
                 }
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderMesh = function (node, buffer) {
                 var image = node.image;
-                //buffer.imageSmoothingEnabled = node.smoothing;
                 var data = node.drawData;
                 var length = data.length;
                 var pos = 0;
@@ -5503,7 +3675,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.useOffset();
                     buffer.transform(m.a, m.b, m.c, m.d, m.tx, m.ty);
                 }
-                //这里不考虑嵌套
                 if (blendMode) {
                     buffer.context.setGlobalCompositeOperation(blendModes[blendMode]);
                 }
@@ -5543,9 +3714,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     egret.Matrix.release(savedMatrix);
                 }
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.___renderText____ = function (node, buffer) {
                 var width = node.width - node.x;
                 var height = node.height - node.y;
@@ -5578,10 +3746,8 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 var drawCommands = node[vivogame.property_drawLabel];
                 if (drawCommands && drawCommands.length > 0) {
-                    //存一下
                     var saveOffsetX = buffer.$offsetX;
                     var saveOffsetY = buffer.$offsetY;
-                    //开始画
                     var cmd = null;
                     var anchorX = 0;
                     var anchorY = 0;
@@ -5605,7 +3771,6 @@ if (window['HTMLVideoElement'] == undefined) {
                             buffer.$offsetX += (tb.contentWidth - tb.canvasWidthOffset);
                         }
                     }
-                    //还原回去
                     buffer.$offsetX = saveOffsetX;
                     buffer.$offsetY = saveOffsetY;
                 }
@@ -5614,12 +3779,8 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 node.dirtyRender = false;
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderText = function (node, buffer) {
                 if (vivogame.textAtlasRenderEnable) {
-                    //新的文字渲染机制
                     this.___renderText____(node, buffer);
                     return;
                 }
@@ -5686,18 +3847,15 @@ if (window['HTMLVideoElement'] == undefined) {
                         node.$texture = surface;
                     }
                     else {
-                        // 拷贝canvas到texture
                         var texture = node.$texture;
                         if (!texture) {
                             texture = buffer.context.createTexture(surface);
                             node.$texture = texture;
                         }
                         else {
-                            // 重新拷贝新的图像
                             buffer.context.updateTexture(texture, surface);
                         }
                     }
-                    // 保存材质尺寸
                     node.$textureWidth = surface.width;
                     node.$textureHeight = surface.height;
                 }
@@ -5712,9 +3870,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 node.dirtyRender = false;
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.renderGraphics = function (node, buffer, forHitTest) {
                 var width = node.width;
                 var height = node.height;
@@ -5731,7 +3886,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     node.$canvasScaleY = canvasScaleY;
                     node.dirtyRender = true;
                 }
-                //缩放叠加 width2 / width 填满整个区域
                 width = width * canvasScaleX;
                 height = height * canvasScaleY;
                 var width2 = Math.ceil(width);
@@ -5791,18 +3945,15 @@ if (window['HTMLVideoElement'] == undefined) {
                             node.$texture = surface;
                         }
                         else {
-                            // 拷贝canvas到texture
                             var texture = node.$texture;
                             if (!texture) {
                                 texture = buffer.context.createTexture(surface);
                                 node.$texture = texture;
                             }
                             else {
-                                // 重新拷贝新的图像
                                 buffer.context.updateTexture(texture, surface);
                             }
                         }
-                        // 保存材质尺寸
                         node.$textureWidth = surface.width;
                         node.$textureHeight = surface.height;
                     }
@@ -5858,9 +4009,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     egret.Matrix.release(savedMatrix);
                 }
             };
-            /**
-             * @private
-             */
             WebGLRenderer.prototype.createRenderBuffer = function (width, height) {
                 var buffer = renderBufferPool.pop();
                 if (buffer) {
@@ -5878,41 +4026,10 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(WebGLRenderer.prototype, "egret.vivogame.WebGLRenderer", ["egret.sys.SystemRenderer"]);
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var EgretWebGLAttribute = (function () {
             function EgretWebGLAttribute(gl, program, attributeData) {
                 this.gl = gl;
@@ -5971,34 +4088,6 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(EgretWebGLAttribute.prototype, "egret.vivogame.EgretWebGLAttribute");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
@@ -6043,9 +4132,6 @@ if (window['HTMLVideoElement'] == undefined) {
             }
             return uniforms;
         }
-        /**
-         * @private
-         */
         var EgretWebGLProgram = (function () {
             function EgretWebGLProgram(gl, vertSource, fragSource) {
                 this.vshaderSource = vertSource;
@@ -6056,10 +4142,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.uniforms = extractUniforms(gl, this.id);
                 this.attributes = extractAttributes(gl, this.id);
             }
-            /**
-             * 获取所需的WebGL Program
-             * @param key {string} 对于唯一的program程序，对应唯一的key
-             */
             EgretWebGLProgram.getProgram = function (gl, vertSource, fragSource, key) {
                 if (!this.programCache[key]) {
                     this.programCache[key] = new EgretWebGLProgram(gl, vertSource, fragSource);
@@ -6067,7 +4149,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 return this.programCache[key];
             };
             EgretWebGLProgram.deleteProgram = function (gl, vertSource, fragSource, key) {
-                // TODO delete
             };
             EgretWebGLProgram.programCache = {};
             return EgretWebGLProgram;
@@ -6076,41 +4157,10 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(EgretWebGLProgram.prototype, "egret.vivogame.EgretWebGLProgram");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var EgretWebGLUniform = (function () {
             function EgretWebGLUniform(gl, program, uniformData) {
                 this.gl = gl;
@@ -6310,34 +4360,6 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(EgretWebGLUniform.prototype, "egret.vivogame.EgretWebGLUniform");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
@@ -6351,45 +4373,7 @@ if (window['HTMLVideoElement'] == undefined) {
             EgretShaderLib.glow_frag = "precision highp float;\r\nvarying vec2 vTextureCoord;\r\n\r\nuniform sampler2D uSampler;\r\n\r\nuniform float dist;\r\nuniform float angle;\r\nuniform vec4 color;\r\nuniform float alpha;\r\nuniform float blurX;\r\nuniform float blurY;\r\n// uniform vec4 quality;\r\nuniform float strength;\r\nuniform float inner;\r\nuniform float knockout;\r\nuniform float hideObject;\r\n\r\nuniform vec2 uTextureSize;\r\n\r\nfloat random(vec2 scale)\r\n{\r\n    return fract(sin(dot(gl_FragCoord.xy, scale)) * 43758.5453);\r\n}\r\n\r\nvoid main(void) {\r\n    vec2 px = vec2(1.0 / uTextureSize.x, 1.0 / uTextureSize.y);\r\n    // TODO 自动调节采样次数？\r\n    const float linearSamplingTimes = 7.0;\r\n    const float circleSamplingTimes = 12.0;\r\n    vec4 ownColor = texture2D(uSampler, vTextureCoord);\r\n    vec4 curColor;\r\n    float totalAlpha = 0.0;\r\n    float maxTotalAlpha = 0.0;\r\n    float curDistanceX = 0.0;\r\n    float curDistanceY = 0.0;\r\n    float offsetX = dist * cos(angle) * px.x;\r\n    float offsetY = dist * sin(angle) * px.y;\r\n\r\n    const float PI = 3.14159265358979323846264;\r\n    float cosAngle;\r\n    float sinAngle;\r\n    float offset = PI * 2.0 / circleSamplingTimes * random(vec2(12.9898, 78.233));\r\n    float stepX = blurX * px.x / linearSamplingTimes;\r\n    float stepY = blurY * px.y / linearSamplingTimes;\r\n    for (float a = 0.0; a <= PI * 2.0; a += PI * 2.0 / circleSamplingTimes) {\r\n        cosAngle = cos(a + offset);\r\n        sinAngle = sin(a + offset);\r\n        for (float i = 1.0; i <= linearSamplingTimes; i++) {\r\n            curDistanceX = i * stepX * cosAngle;\r\n            curDistanceY = i * stepY * sinAngle;\r\n            if (vTextureCoord.x + curDistanceX - offsetX >= 0.0 && vTextureCoord.y + curDistanceY + offsetY <= 1.0){\r\n                curColor = texture2D(uSampler, vec2(vTextureCoord.x + curDistanceX - offsetX, vTextureCoord.y + curDistanceY + offsetY));\r\n                totalAlpha += (linearSamplingTimes - i) * curColor.a;\r\n            }\r\n            maxTotalAlpha += (linearSamplingTimes - i);\r\n        }\r\n    }\r\n\r\n    ownColor.a = max(ownColor.a, 0.0001);\r\n    ownColor.rgb = ownColor.rgb / ownColor.a;\r\n\r\n    float outerGlowAlpha = (totalAlpha / maxTotalAlpha) * strength * alpha * (1. - inner) * max(min(hideObject, knockout), 1. - ownColor.a);\r\n    float innerGlowAlpha = ((maxTotalAlpha - totalAlpha) / maxTotalAlpha) * strength * alpha * inner * ownColor.a;\r\n\r\n    ownColor.a = max(ownColor.a * knockout * (1. - hideObject), 0.0001);\r\n    vec3 mix1 = mix(ownColor.rgb, color.rgb, innerGlowAlpha / (innerGlowAlpha + ownColor.a));\r\n    vec3 mix2 = mix(mix1, color.rgb, outerGlowAlpha / (innerGlowAlpha + ownColor.a + outerGlowAlpha));\r\n    float resultAlpha = min(ownColor.a + outerGlowAlpha + innerGlowAlpha, 1.);\r\n    gl_FragColor = vec4(mix2 * resultAlpha, resultAlpha);\r\n}";
             EgretShaderLib.primitive_frag = "precision lowp float;\r\nvarying vec2 vTextureCoord;\r\nvarying vec4 vColor;\r\n\r\nvoid main(void) {\r\n    gl_FragColor = vColor;\r\n}";
             EgretShaderLib.texture_frag = "precision lowp float;\r\nvarying vec2 vTextureCoord;\r\nvarying vec4 vColor;\r\nuniform sampler2D uSampler;\r\n\r\nvoid main(void) {\r\n    gl_FragColor = texture2D(uSampler, vTextureCoord) * vColor;\r\n}";
-            /*
-            "precision lowp float;
-            varying vec2 vTextureCoord;
-            varying vec4 vColor;
-            uniform sampler2D uSampler;
-            uniform sampler2D uSamplerAlphaMask;
-            void main(void) {
-                float alpha = texture2D(uSamplerAlphaMask, vTextureCoord).r;
-                if (alpha < 0.0039) { discard; }
-                vec4 v4Color = texture2D(uSampler, vTextureCoord);
-                v4Color.rgb = v4Color.rgb * alpha;
-                v4Color.a = alpha;
-                gl_FragColor = v4Color * vColor;
-            }"
-            */
             EgretShaderLib.texture_etc_alphamask_frag = "precision lowp float;\r\nvarying vec2 vTextureCoord;\r\nvarying vec4 vColor;\r\nuniform sampler2D uSampler;\r\nuniform sampler2D uSamplerAlphaMask;\r\nvoid main(void) {\r\nfloat alpha = texture2D(uSamplerAlphaMask, vTextureCoord).r;\r\nif (alpha < 0.0039) { discard; }\r\nvec4 v4Color = texture2D(uSampler, vTextureCoord);\r\nv4Color.rgb = v4Color.rgb * alpha;\r\nv4Color.a = alpha;\r\ngl_FragColor = v4Color * vColor;\r\n}";
-            /*
-            "precision mediump float;
-            varying vec2 vTextureCoord;
-            varying vec4 vColor;
-            uniform mat4 matrix;
-            uniform vec4 colorAdd;
-            uniform sampler2D uSampler;
-            uniform sampler2D uSamplerAlphaMask;
-    
-            void main(void){
-                float alpha = texture2D(uSamplerAlphaMask, vTextureCoord).r;
-                if (alpha < 0.0039) { discard; }
-                vec4 texColor = texture2D(uSampler, vTextureCoord);
-                if(texColor.a > 0.0) {
-                    // 抵消预乘的alpha通道
-                    texColor = vec4(texColor.rgb / texColor.a, texColor.a);
-                }
-                vec4 v4Color = clamp(texColor * matrix + colorAdd, 0.0, 1.0);
-                v4Color.rgb = v4Color.rgb * alpha;
-                v4Color.a = alpha;
-                gl_FragColor = v4Color * vColor;
-            }"
-            */
             EgretShaderLib.colorTransform_frag_etc_alphamask_frag = "precision mediump float;\r\nvarying vec2 vTextureCoord;\r\nvarying vec4 vColor;\r\nuniform mat4 matrix;\r\nuniform vec4 colorAdd;\r\nuniform sampler2D uSampler;\r\nuniform sampler2D uSamplerAlphaMask;\r\n\r\nvoid main(void){\r\nfloat alpha = texture2D(uSamplerAlphaMask, vTextureCoord).r;\r\nif (alpha < 0.0039) { discard; }\r\nvec4 texColor = texture2D(uSampler, vTextureCoord);\r\nif(texColor.a > 0.0) {\r\n // 抵消预乘的alpha通道\r\ntexColor = vec4(texColor.rgb / texColor.a, texColor.a);\r\n}\r\nvec4 v4Color = clamp(texColor * matrix + colorAdd, 0.0, 1.0);\r\nv4Color.rgb = v4Color.rgb * alpha;\r\nv4Color.a = alpha;\r\ngl_FragColor = v4Color * vColor;\r\n}";
             return EgretShaderLib;
         }());
@@ -6398,54 +4382,18 @@ if (window['HTMLVideoElement'] == undefined) {
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 ;
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        //TO DO
         var debugLogCompressedTextureNotSupported = {};
-        /**
-         * @private
-         * WebGL上下文对象，提供简单的绘图接口
-         * 抽象出此类，以实现共用一个context
-         */
         var WebGLRenderContext = (function () {
             function WebGLRenderContext(width, height) {
-                //
                 this._defaultEmptyTexture = null;
                 this.glID = null;
                 this.projectionX = NaN;
                 this.projectionY = NaN;
                 this.contextLost = false;
-                //refactor
                 this._supportedCompressedTextureInfo = [];
                 this.$scissorState = false;
                 this.vertSize = 5;
@@ -6471,40 +4419,26 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.instance = new WebGLRenderContext(width, height);
                 return this.instance;
             };
-            /**
-             * 推入一个RenderBuffer并绑定
-             */
             WebGLRenderContext.prototype.pushBuffer = function (buffer) {
                 this.$bufferStack.push(buffer);
                 if (buffer != this.currentBuffer) {
                     if (this.currentBuffer) {
-                        // this.$drawWebGL();
                     }
                     this.drawCmdManager.pushActivateBuffer(buffer);
                 }
                 this.currentBuffer = buffer;
             };
-            /**
-             * 推出一个RenderBuffer并绑定上一个RenderBuffer
-             */
             WebGLRenderContext.prototype.popBuffer = function () {
-                // 如果只剩下一个buffer，则不执行pop操作
-                // 保证舞台buffer永远在最开始
                 if (this.$bufferStack.length <= 1) {
                     return;
                 }
                 var buffer = this.$bufferStack.pop();
                 var lastBuffer = this.$bufferStack[this.$bufferStack.length - 1];
-                // 重新绑定
                 if (buffer != lastBuffer) {
-                    // this.$drawWebGL();
                     this.drawCmdManager.pushActivateBuffer(lastBuffer);
                 }
                 this.currentBuffer = lastBuffer;
             };
-            /**
-             * 启用RenderBuffer
-             */
             WebGLRenderContext.prototype.activateBuffer = function (buffer, width, height) {
                 buffer.rootRenderTarget.activate();
                 if (!this.bindIndices) {
@@ -6514,25 +4448,15 @@ if (window['HTMLVideoElement'] == undefined) {
                 buffer.restoreScissor();
                 this.onResize(width, height);
             };
-            /**
-             * 上传顶点数据
-             */
             WebGLRenderContext.prototype.uploadVerticesArray = function (array) {
                 var gl = this.context;
                 gl.bufferData(gl.ARRAY_BUFFER, array, gl.STREAM_DRAW);
-                // gl.bufferSubData(gl.ARRAY_BUFFER, 0, array);
             };
-            /**
-             * 上传索引数据
-             */
             WebGLRenderContext.prototype.uploadIndicesArray = function (array) {
                 var gl = this.context;
                 gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, array, gl.STATIC_DRAW);
                 this.bindIndices = true;
             };
-            /**
-             * 销毁绘制对象
-             */
             WebGLRenderContext.prototype.destroy = function () {
                 this.surface.width = this.surface.height = 0;
             };
@@ -6545,43 +4469,11 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.context.viewport(0, 0, width, height);
                 }
             };
-            /**
-             * 改变渲染缓冲的大小并清空缓冲区
-             * @param width 改变后的宽
-             * @param height 改变后的高
-             * @param useMaxSize 若传入true，则将改变后的尺寸与已有尺寸对比，保留较大的尺寸。
-             */
             WebGLRenderContext.prototype.resize = function (width, height, useMaxSize) {
                 egret.sys.resizeContext(this, width, height, useMaxSize);
-                /*
-                let surface = this.surface;
-                if (useMaxSize) {
-                    if (surface.width < width) {
-                        surface.width = width;
-                    }
-                    if (surface.height < height) {
-                        surface.height = height;
-                    }
-                }
-                else {
-                    if (surface.width != width) {
-                        surface.width = width;
-                    }
-                    if (surface.height != height) {
-                        surface.height = height;
-                    }
-                }
-    
-                this.onResize();
-                */
             };
-            WebGLRenderContext.prototype._buildSupportedCompressedTextureInfo = function (/*gl: WebGLRenderingContext, compressedTextureExNames: string[],*/ extensions) {
-                // if (compressedTextureExNames.length === 0) {
-                //     return [];
-                // }
+            WebGLRenderContext.prototype._buildSupportedCompressedTextureInfo = function (extensions) {
                 var returnValue = [];
-                // for (const exName of compressedTextureExNames) {
-                //     const extension = gl.getExtension(exName);
                 for (var _i = 0, extensions_1 = extensions; _i < extensions_1.length; _i++) {
                     var extension = extensions_1[_i];
                     if (!extension) {
@@ -6591,11 +4483,9 @@ if (window['HTMLVideoElement'] == undefined) {
                         extensionName: extension.name,
                         supportedFormats: []
                     };
-                    //
                     for (var key in extension) {
                         info.supportedFormats.push([key, extension[key]]);
                     }
-                    //
                     if (true) {
                         if (info.supportedFormats.length === 0) {
                             console.error('buildSupportedCompressedTextureInfo failed = ' + extension.name);
@@ -6618,36 +4508,18 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.getWebGLContext();
                 var gl = this.context;
                 this.$maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
-                //refactor
-                // this._caps.astc = this._gl.getExtension('WEBGL_compressed_texture_astc') || this._gl.getExtension('WEBKIT_WEBGL_compressed_texture_astc');
-                // this._caps.s3tc = this._gl.getExtension('WEBGL_compressed_texture_s3tc') || this._gl.getExtension('WEBKIT_WEBGL_compressed_texture_s3tc');
-                // this._caps.pvrtc = this._gl.getExtension('WEBGL_compressed_texture_pvrtc') || this._gl.getExtension('WEBKIT_WEBGL_compressed_texture_pvrtc');
-                // this._caps.etc1 = this._gl.getExtension('WEBGL_compressed_texture_etc1') || this._gl.getExtension('WEBKIT_WEBGL_compressed_texture_etc1');
-                // this._caps.etc2 = this._gl.getExtension('WEBGL_compressed_texture_etc') || this._gl.getExtension('WEBKIT_WEBGL_compressed_texture_etc') ||
-                //     this._gl.getExtension('WEBGL_compressed_texture_es3_0'); // also a requirement of OpenGL ES 3
-                // const compressedTextureExNames = [
-                //     'WEBGL_compressed_texture_pvrtc', 'WEBKIT_WEBGL_compressed_texture_pvrtc',
-                //     'WEBGL_compressed_texture_etc1', 'WEBKIT_WEBGL_compressed_texture_etc1',
-                //     'WEBGL_compressed_texture_etc', 'WEBKIT_WEBGL_compressed_texture_etc',
-                //     'WEBGL_compressed_texture_astc', 'WEBKIT_WEBGL_compressed_texture_astc',
-                //     'WEBGL_compressed_texture_s3tc', 'WEBKIT_WEBGL_compressed_texture_s3tc',
-                //     'WEBGL_compressed_texture_es3_0'];
-                //
                 this.pvrtc = gl.getExtension('WEBGL_compressed_texture_pvrtc') || gl.getExtension('WEBKIT_WEBGL_compressed_texture_pvrtc');
                 if (this.pvrtc) {
                     this.pvrtc.name = 'WEBGL_compressed_texture_pvrtc';
                 }
-                //
                 this.etc1 = gl.getExtension('WEBGL_compressed_texture_etc1') || gl.getExtension('WEBKIT_WEBGL_compressed_texture_etc1');
                 if (this.etc1) {
                     this.etc1.name = 'WEBGL_compressed_texture_etc1';
                 }
-                //
                 egret.Capabilities.supportedCompressedTexture = egret.Capabilities.supportedCompressedTexture || {};
                 egret.Capabilities.supportedCompressedTexture.pvrtc = !!this.pvrtc;
                 egret.Capabilities.supportedCompressedTexture.etc1 = !!this.etc1;
-                //
-                this._supportedCompressedTextureInfo = this._buildSupportedCompressedTextureInfo(/*this.context, compressedTextureExNames,*/ [this.etc1, this.pvrtc]);
+                this._supportedCompressedTextureInfo = this._buildSupportedCompressedTextureInfo([this.etc1, this.pvrtc]);
             };
             WebGLRenderContext.prototype.handleContextLost = function () {
                 this.contextLost = true;
@@ -6657,28 +4529,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.contextLost = false;
             };
             WebGLRenderContext.prototype.getWebGLContext = function () {
-                /*
-                let options = {
-                    antialias: WebGLRenderContext.antialias,
-                    stencil: true//设置可以使用模板（用于不规则遮罩）
-                };
-                let gl: any;
-                //todo 是否使用chrome源码names
-                //let contextNames = ["moz-webgl", "webkit-3d", "experimental-webgl", "webgl", "3d"];
-                let names = ["webgl", "experimental-webgl"];
-                for (let i = 0; i < names.length; i++) {
-                    try {
-                        gl = this.surface.getContext(names[i], options);
-                    } catch (e) {
-                    }
-                    if (gl) {
-                        break;
-                    }
-                }
-                if (!gl) {
-                    $error(1021);
-                }
-                */
                 var gl = egret.sys.getContextWebGL(this.surface);
                 this.setContext(gl);
             };
@@ -6690,64 +4540,35 @@ if (window['HTMLVideoElement'] == undefined) {
                 gl.disable(gl.CULL_FACE);
                 gl.enable(gl.BLEND);
                 gl.colorMask(true, true, true, true);
-                // 目前只使用0号材质单元，默认开启
                 gl.activeTexture(gl.TEXTURE0);
             };
-            /**
-             * 开启模版检测
-             */
             WebGLRenderContext.prototype.enableStencilTest = function () {
                 var gl = this.context;
                 gl.enable(gl.STENCIL_TEST);
             };
-            /**
-             * 关闭模版检测
-             */
             WebGLRenderContext.prototype.disableStencilTest = function () {
                 var gl = this.context;
                 gl.disable(gl.STENCIL_TEST);
             };
-            /**
-             * 开启scissor检测
-             */
             WebGLRenderContext.prototype.enableScissorTest = function (rect) {
                 var gl = this.context;
                 gl.enable(gl.SCISSOR_TEST);
                 gl.scissor(rect.x, rect.y, rect.width, rect.height);
             };
-            /**
-             * 关闭scissor检测
-             */
             WebGLRenderContext.prototype.disableScissorTest = function () {
                 var gl = this.context;
                 gl.disable(gl.SCISSOR_TEST);
             };
-            /**
-             * 获取像素信息
-             */
             WebGLRenderContext.prototype.getPixels = function (x, y, width, height, pixels) {
                 var gl = this.context;
                 gl.readPixels(x, y, width, height, gl.RGBA, gl.UNSIGNED_BYTE, pixels);
             };
-            /**
-             * 创建一个WebGLTexture
-             */
             WebGLRenderContext.prototype.createTexture = function (bitmapData) {
                 return egret.sys.createTexture(this, bitmapData);
             };
-            /*
-            * TO DO
-            */
             WebGLRenderContext.prototype.checkCompressedTextureInternalFormat = function (supportedCompressedTextureInfo, internalFormat) {
-                //width: number, height: number max ?
                 for (var i = 0, length_5 = supportedCompressedTextureInfo.length; i < length_5; ++i) {
                     var ss = supportedCompressedTextureInfo[i];
-                    // const formats = ss._COMPRESSED_TEXTURE_FORMATS_;
-                    // for (let j = 0, length = formats.length; j < length; ++j) {
-                    //     if (formats[j] === internalFormat) {
-                    //         return true;
-                    //     }
-                    // }
                     var supportedFormats = ss.supportedFormats;
                     for (var j = 0, length_6 = supportedFormats.length; j < length_6; ++j) {
                         if (supportedFormats[j][1] === internalFormat) {
@@ -6757,9 +4578,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return false;
             };
-            /*
-            * TO DO
-            */
             WebGLRenderContext.prototype.$debugLogCompressedTextureNotSupported = function (supportedCompressedTextureInfo, internalFormat) {
                 if (!debugLogCompressedTextureNotSupported[internalFormat]) {
                     debugLogCompressedTextureNotSupported[internalFormat] = true;
@@ -6776,14 +4594,12 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                 }
             };
-            //
             WebGLRenderContext.prototype.createCompressedTexture = function (data, width, height, levels, internalFormat) {
                 var checkSupported = this.checkCompressedTextureInternalFormat(this._supportedCompressedTextureInfo, internalFormat);
                 if (!checkSupported) {
                     this.$debugLogCompressedTextureNotSupported(this._supportedCompressedTextureInfo, internalFormat);
                     return this.defaultEmptyTexture;
                 }
-                ///
                 var gl = this.context;
                 var texture = gl.createTexture();
                 if (!texture) {
@@ -6803,9 +4619,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 gl.bindTexture(gl.TEXTURE_2D, null);
                 return texture;
             };
-            /**
-             * 更新材质的bitmapData
-             */
             WebGLRenderContext.prototype.updateTexture = function (texture, bitmapData) {
                 var gl = this.context;
                 gl.bindTexture(gl.TEXTURE_2D, texture);
@@ -6816,7 +4629,7 @@ if (window['HTMLVideoElement'] == undefined) {
                     if (!this._defaultEmptyTexture) {
                         var size = 16;
                         var canvas = egret.sys.createCanvas(size, size);
-                        var context = egret.sys.getContext2d(canvas); //canvas.getContext('2d');
+                        var context = egret.sys.getContext2d(canvas);
                         context.fillStyle = 'white';
                         context.fillRect(0, 0, size, size);
                         this._defaultEmptyTexture = this.createTexture(canvas);
@@ -6835,7 +4648,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     else if (bitmapData.hasCompressed2d()) {
                         var compressedData = bitmapData.getCompressed2dTextureData();
                         bitmapData.webGLTexture = this.createCompressedTexture(compressedData.byteArray, compressedData.width, compressedData.height, compressedData.level, compressedData.glInternalFormat);
-                        ///
                         var etcAlphaMask = bitmapData.etcAlphaMask;
                         if (etcAlphaMask) {
                             var maskTexture = this.getWebGLTexture(etcAlphaMask);
@@ -6846,22 +4658,17 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                     if (bitmapData.$deleteSource && bitmapData.webGLTexture) {
                         if (bitmapData.source) {
-                            // WeChat Memory leakage bug
                             bitmapData.source.src = '';
                             bitmapData.source = null;
                         }
                         bitmapData.clearCompressedTextureData();
                     }
                     if (bitmapData.webGLTexture) {
-                        //todo 默认值
                         bitmapData.webGLTexture["smoothing"] = true;
                     }
                 }
                 return bitmapData.webGLTexture;
             };
-            /**
-             * 清除矩形区域
-             */
             WebGLRenderContext.prototype.clearRect = function (x, y, width, height) {
                 if (x != 0 || y != 0 || width != this.surface.width || height != this.surface.height) {
                     var buffer = this.currentBuffer;
@@ -6892,15 +4699,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.clear();
                 }
             };
-            /**
-             * 设置混色
-             */
             WebGLRenderContext.prototype.setGlobalCompositeOperation = function (value) {
                 this.drawCmdManager.pushSetBlend(value);
             };
-            /**
-             * 绘制图片，image参数可以是BitmapData或者renderTarget
-             */
             WebGLRenderContext.prototype.drawImage = function (image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, rotated, smoothing) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !image || !buffer) {
@@ -6910,13 +4711,12 @@ if (window['HTMLVideoElement'] == undefined) {
                 var offsetX;
                 var offsetY;
                 if (image["texture"] || (image.source && image.source["texture"])) {
-                    // 如果是render target
                     texture = image["texture"] || image.source["texture"];
                     buffer.saveTransform();
                     offsetX = buffer.$offsetX;
                     offsetY = buffer.$offsetY;
                     buffer.useOffset();
-                    buffer.transform(1, 0, 0, -1, 0, destHeight + destY * 2); // 翻转
+                    buffer.transform(1, 0, 0, -1, 0, destHeight + destY * 2);
                 }
                 else if (!image.source && !image.webGLTexture) {
                     return;
@@ -6934,9 +4734,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.restoreTransform();
                 }
             };
-            /**
-             * 绘制Mesh
-             */
             WebGLRenderContext.prototype.drawMesh = function (image, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, imageSourceWidth, imageSourceHeight, meshUVs, meshVertices, meshIndices, bounds, rotated, smoothing) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !image || !buffer) {
@@ -6946,13 +4743,12 @@ if (window['HTMLVideoElement'] == undefined) {
                 var offsetX;
                 var offsetY;
                 if (image["texture"] || (image.source && image.source["texture"])) {
-                    // 如果是render target
                     texture = image["texture"] || image.source["texture"];
                     buffer.saveTransform();
                     offsetX = buffer.$offsetX;
                     offsetY = buffer.$offsetY;
                     buffer.useOffset();
-                    buffer.transform(1, 0, 0, -1, 0, destHeight + destY * 2); // 翻转
+                    buffer.transform(1, 0, 0, -1, 0, destHeight + destY * 2);
                 }
                 else if (!image.source && !image.webGLTexture) {
                     return;
@@ -6970,9 +4766,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.restoreTransform();
                 }
             };
-            /**
-             * 绘制材质
-             */
             WebGLRenderContext.prototype.drawTexture = function (texture, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, textureWidth, textureHeight, meshUVs, meshVertices, meshIndices, bounds, rotated, smoothing) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !texture || !buffer) {
@@ -6995,14 +4788,10 @@ if (window['HTMLVideoElement'] == undefined) {
                     this.vao.changeToMeshIndices();
                 }
                 var count = meshIndices ? meshIndices.length / 3 : 2;
-                // 应用$filter，因为只可能是colorMatrixFilter，最后两个参数可不传
                 this.drawCmdManager.pushDrawTexture(texture, count, this.$filter, textureWidth, textureHeight);
                 buffer.currentTexture = texture;
                 this.vao.cacheArrays(buffer, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight, textureWidth, textureHeight, meshUVs, meshVertices, meshIndices, rotated);
             };
-            /**
-             * 绘制矩形（仅用于遮罩擦除等）
-             */
             WebGLRenderContext.prototype.drawRect = function (x, y, width, height) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !buffer) {
@@ -7015,9 +4804,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 buffer.currentTexture = null;
                 this.vao.cacheArrays(buffer, 0, 0, width, height, x, y, width, height, width, height);
             };
-            /**
-             * 绘制遮罩
-             */
             WebGLRenderContext.prototype.pushMask = function (x, y, width, height) {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !buffer) {
@@ -7031,9 +4817,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 buffer.currentTexture = null;
                 this.vao.cacheArrays(buffer, 0, 0, width, height, x, y, width, height, width, height);
             };
-            /**
-             * 恢复遮罩
-             */
             WebGLRenderContext.prototype.popMask = function () {
                 var buffer = this.currentBuffer;
                 if (this.contextLost || !buffer) {
@@ -7047,23 +4830,14 @@ if (window['HTMLVideoElement'] == undefined) {
                 buffer.currentTexture = null;
                 this.vao.cacheArrays(buffer, 0, 0, mask.width, mask.height, mask.x, mask.y, mask.width, mask.height, mask.width, mask.height);
             };
-            /**
-             * 清除颜色缓存
-             */
             WebGLRenderContext.prototype.clear = function () {
                 this.drawCmdManager.pushClearColor();
             };
-            /**
-             * 开启scissor test
-             */
             WebGLRenderContext.prototype.enableScissor = function (x, y, width, height) {
                 var buffer = this.currentBuffer;
                 this.drawCmdManager.pushEnableScissor(x, y, width, height);
                 buffer.$hasScissor = true;
             };
-            /**
-             * 关闭scissor test
-             */
             WebGLRenderContext.prototype.disableScissor = function () {
                 var buffer = this.currentBuffer;
                 this.drawCmdManager.pushDisableScissor();
@@ -7074,7 +4848,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     return;
                 }
                 this.uploadVerticesArray(this.vao.getVertices());
-                // 有mesh，则使用indicesForMesh
                 if (this.vao.isMesh()) {
                     this.uploadIndicesArray(this.vao.getMeshIndices());
                 }
@@ -7083,27 +4856,21 @@ if (window['HTMLVideoElement'] == undefined) {
                 for (var i = 0; i < length; i++) {
                     var data = this.drawCmdManager.drawData[i];
                     offset = this.drawData(data, offset);
-                    // 计算draw call
-                    if (data.type == 7 /* ACT_BUFFER */) {
+                    if (data.type == 7) {
                         this.activatedBuffer = data.buffer;
                     }
-                    if (data.type == 0 /* TEXTURE */ || data.type == 1 /* RECT */ || data.type == 2 /* PUSH_MASK */ || data.type == 3 /* POP_MASK */) {
+                    if (data.type == 0 || data.type == 1 || data.type == 2 || data.type == 3) {
                         if (this.activatedBuffer && this.activatedBuffer.$computeDrawCall) {
                             this.activatedBuffer.$drawCalls++;
                         }
                     }
                 }
-                // 切换回默认indices
                 if (this.vao.isMesh()) {
                     this.uploadIndicesArray(this.vao.getIndices());
                 }
-                // 清空数据
                 this.drawCmdManager.clear();
                 this.vao.clear();
             };
-            /**
-             * 执行绘制命令
-             */
             WebGLRenderContext.prototype.drawData = function (data, offset) {
                 if (!data) {
                     return;
@@ -7112,8 +4879,7 @@ if (window['HTMLVideoElement'] == undefined) {
                 var program;
                 var filter = data.filter;
                 switch (data.type) {
-                    case 0 /* TEXTURE */:
-                        //这段的切换可以优化
+                    case 0:
                         if (filter) {
                             if (filter.type === "custom") {
                                 program = vivogame.EgretWebGLProgram.getProgram(gl, filter.$vertexSrc, filter.$fragmentSrc, filter.$shaderKey);
@@ -7141,7 +4907,6 @@ if (window['HTMLVideoElement'] == undefined) {
                         else {
                             if (data.texture[egret.etc_alpha_mask]) {
                                 program = vivogame.EgretWebGLProgram.getProgram(gl, vivogame.EgretShaderLib.default_vert, vivogame.EgretShaderLib.texture_etc_alphamask_frag, egret.etc_alpha_mask);
-                                ///need refactor
                                 gl.activeTexture(gl.TEXTURE1);
                                 gl.bindTexture(gl.TEXTURE_2D, data.texture[egret.etc_alpha_mask]);
                             }
@@ -7153,32 +4918,32 @@ if (window['HTMLVideoElement'] == undefined) {
                         this.syncUniforms(program, filter, data.textureWidth, data.textureHeight);
                         offset += this.drawTextureElements(data, offset);
                         break;
-                    case 1 /* RECT */:
+                    case 1:
                         program = vivogame.EgretWebGLProgram.getProgram(gl, vivogame.EgretShaderLib.default_vert, vivogame.EgretShaderLib.primitive_frag, "primitive");
                         this.activeProgram(gl, program);
                         this.syncUniforms(program, filter, data.textureWidth, data.textureHeight);
                         offset += this.drawRectElements(data, offset);
                         break;
-                    case 2 /* PUSH_MASK */:
+                    case 2:
                         program = vivogame.EgretWebGLProgram.getProgram(gl, vivogame.EgretShaderLib.default_vert, vivogame.EgretShaderLib.primitive_frag, "primitive");
                         this.activeProgram(gl, program);
                         this.syncUniforms(program, filter, data.textureWidth, data.textureHeight);
                         offset += this.drawPushMaskElements(data, offset);
                         break;
-                    case 3 /* POP_MASK */:
+                    case 3:
                         program = vivogame.EgretWebGLProgram.getProgram(gl, vivogame.EgretShaderLib.default_vert, vivogame.EgretShaderLib.primitive_frag, "primitive");
                         this.activeProgram(gl, program);
                         this.syncUniforms(program, filter, data.textureWidth, data.textureHeight);
                         offset += this.drawPopMaskElements(data, offset);
                         break;
-                    case 4 /* BLEND */:
+                    case 4:
                         this.setBlendMode(data.value);
                         break;
-                    case 5 /* RESIZE_TARGET */:
+                    case 5:
                         data.buffer.rootRenderTarget.resize(data.width, data.height);
                         this.onResize(data.width, data.height);
                         break;
-                    case 6 /* CLEAR_COLOR */:
+                    case 6:
                         if (this.activatedBuffer) {
                             var target = this.activatedBuffer.rootRenderTarget;
                             if (target.width != 0 || target.height != 0) {
@@ -7186,10 +4951,10 @@ if (window['HTMLVideoElement'] == undefined) {
                             }
                         }
                         break;
-                    case 7 /* ACT_BUFFER */:
+                    case 7:
                         this.activateBuffer(data.buffer, data.width, data.height);
                         break;
-                    case 8 /* ENABLE_SCISSOR */:
+                    case 8:
                         var buffer = this.activatedBuffer;
                         if (buffer) {
                             if (buffer.rootRenderTarget) {
@@ -7198,13 +4963,13 @@ if (window['HTMLVideoElement'] == undefined) {
                             buffer.enableScissor(data.x, data.y, data.width, data.height);
                         }
                         break;
-                    case 9 /* DISABLE_SCISSOR */:
+                    case 9:
                         buffer = this.activatedBuffer;
                         if (buffer) {
                             buffer.disableScissor();
                         }
                         break;
-                    case 10 /* SMOOTHING */:
+                    case 10:
                         gl.bindTexture(gl.TEXTURE_2D, data.texture);
                         if (data.smoothing) {
                             gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -7223,7 +4988,6 @@ if (window['HTMLVideoElement'] == undefined) {
             WebGLRenderContext.prototype.activeProgram = function (gl, program) {
                 if (program != this.currentProgram) {
                     gl.useProgram(program.id);
-                    // 目前所有attribute buffer的绑定方法都是一致的
                     var attribute = program.attributes;
                     for (var key in attribute) {
                         if (key === "aVertexPosition") {
@@ -7264,39 +5028,19 @@ if (window['HTMLVideoElement'] == undefined) {
                             uniforms[key].setValue(value);
                         }
                         else {
-                            // egret.warn("filter custom: uniform " + key + " not defined!");
                         }
                     }
                 }
             };
-            /**
-             * 画texture
-             **/
             WebGLRenderContext.prototype.drawTextureElements = function (data, offset) {
                 return egret.sys.drawTextureElements(this, data, offset);
-                /*
-                let gl: any = this.context;
-                gl.activeTexture(gl.TEXTURE0); ///refactor
-                gl.bindTexture(gl.TEXTURE_2D, data.texture);
-                let size = data.count * 3;
-                gl.drawElements(gl.TRIANGLES, size, gl.UNSIGNED_SHORT, offset * 2);
-                return size;
-                */
             };
-            /**
-             * @private
-             * 画rect
-             **/
             WebGLRenderContext.prototype.drawRectElements = function (data, offset) {
                 var gl = this.context;
-                // gl.bindTexture(gl.TEXTURE_2D, null);
                 var size = data.count * 3;
                 gl.drawElements(gl.TRIANGLES, size, gl.UNSIGNED_SHORT, offset * 2);
                 return size;
             };
-            /**
-             * 画push mask
-             **/
             WebGLRenderContext.prototype.drawPushMaskElements = function (data, offset) {
                 var gl = this.context;
                 var size = data.count * 3;
@@ -7307,14 +5051,13 @@ if (window['HTMLVideoElement'] == undefined) {
                     }
                     if (buffer.stencilHandleCount == 0) {
                         buffer.enableStencil();
-                        gl.clear(gl.STENCIL_BUFFER_BIT); // clear
+                        gl.clear(gl.STENCIL_BUFFER_BIT);
                     }
                     var level = buffer.stencilHandleCount;
                     buffer.stencilHandleCount++;
                     gl.colorMask(false, false, false, false);
                     gl.stencilFunc(gl.EQUAL, level, 0xFF);
                     gl.stencilOp(gl.KEEP, gl.KEEP, gl.INCR);
-                    // gl.bindTexture(gl.TEXTURE_2D, null);
                     gl.drawElements(gl.TRIANGLES, size, gl.UNSIGNED_SHORT, offset * 2);
                     gl.stencilFunc(gl.EQUAL, level + 1, 0xFF);
                     gl.colorMask(true, true, true, true);
@@ -7322,9 +5065,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return size;
             };
-            /**
-             * 画pop mask
-             **/
             WebGLRenderContext.prototype.drawPopMaskElements = function (data, offset) {
                 var gl = this.context;
                 var size = data.count * 3;
@@ -7332,14 +5072,13 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (buffer) {
                     buffer.stencilHandleCount--;
                     if (buffer.stencilHandleCount == 0) {
-                        buffer.disableStencil(); // skip this draw
+                        buffer.disableStencil();
                     }
                     else {
                         var level = buffer.stencilHandleCount;
                         gl.colorMask(false, false, false, false);
                         gl.stencilFunc(gl.EQUAL, level + 1, 0xFF);
                         gl.stencilOp(gl.KEEP, gl.KEEP, gl.DECR);
-                        // gl.bindTexture(gl.TEXTURE_2D, null);
                         gl.drawElements(gl.TRIANGLES, size, gl.UNSIGNED_SHORT, offset * 2);
                         gl.stencilFunc(gl.EQUAL, level, 0xFF);
                         gl.colorMask(true, true, true, true);
@@ -7348,9 +5087,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return size;
             };
-            /**
-             * 设置混色
-             */
             WebGLRenderContext.prototype.setBlendMode = function (value) {
                 var gl = this.context;
                 var blendModeWebGL = WebGLRenderContext.blendModesForGL[value];
@@ -7358,13 +5094,8 @@ if (window['HTMLVideoElement'] == undefined) {
                     gl.blendFunc(blendModeWebGL[0], blendModeWebGL[1]);
                 }
             };
-            /**
-             * 应用滤镜绘制给定的render target
-             * 此方法不会导致input被释放，所以如果需要释放input，需要调用此方法后手动调用release
-             */
             WebGLRenderContext.prototype.drawTargetWidthFilters = function (filters, input) {
                 var originInput = input, filtersLen = filters.length, output;
-                // 应用前面的滤镜
                 if (filtersLen > 1) {
                     for (var i = 0; i < filtersLen - 1; i++) {
                         var filter_1 = filters[i];
@@ -7380,17 +5111,12 @@ if (window['HTMLVideoElement'] == undefined) {
                         input = output;
                     }
                 }
-                // 应用最后一个滤镜并绘制到当前场景中
                 var filter = filters[filtersLen - 1];
                 this.drawToRenderTarget(filter, input, this.currentBuffer);
-                // 释放掉用于交换的buffer
                 if (input != originInput) {
                     vivogame.WebGLRenderBuffer.release(input);
                 }
             };
-            /**
-             * 向一个renderTarget中绘制
-             * */
             WebGLRenderContext.prototype.drawToRenderTarget = function (filter, input, output) {
                 if (this.contextLost) {
                     return;
@@ -7400,7 +5126,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 this.pushBuffer(output);
                 var originInput = input, temp, width = input.rootRenderTarget.width, height = input.rootRenderTarget.height;
-                // 模糊滤镜分别处理blurX与blurY
                 if (filter.type == "blur") {
                     var blurXFilter = filter.blurXFilter;
                     var blurYFilter = filter.blurYFilter;
@@ -7419,37 +5144,18 @@ if (window['HTMLVideoElement'] == undefined) {
                         filter = blurXFilter.blurX === 0 ? blurYFilter : blurXFilter;
                     }
                 }
-                // 绘制input结果到舞台
                 output.saveTransform();
                 output.transform(1, 0, 0, -1, 0, height);
                 output.currentTexture = input.rootRenderTarget.texture;
                 this.vao.cacheArrays(output, 0, 0, width, height, 0, 0, width, height, width, height);
                 output.restoreTransform();
                 this.drawCmdManager.pushDrawTexture(input.rootRenderTarget.texture, 2, filter, width, height);
-                // 释放掉input
                 if (input != originInput) {
                     vivogame.WebGLRenderBuffer.release(input);
                 }
                 this.popBuffer();
             };
             WebGLRenderContext.initBlendMode = function () {
-                /*参考
-                gl.ZERO = 0
-                gl.ONE = 1
-                gl.SRC_COLOR = 768
-                gl.ONE_MINUS_SRC_COLOR = 769
-                gl.DST_COLOR = 774
-                gl.ONE_MINUS_DST_COLOR = 775
-                gl.SRC_ALPHA = 770
-                gl.ONE_MINUS_SRC_ALPHA = 771
-                gl.DST_ALPHA = 772
-                gl.ONE_MINUS_DST_ALPHA = 773
-                gl.CONSTANT_COLOR = 32769
-                gl.ONE_MINUS_CONSTANT_COLOR = 32770
-                gl.CONSTANT_ALPHA = 32771
-                gl.ONE_MINUS_CONSTANT_ALPHA = 32772
-                gl.SRC_ALPHA_SATURATE = 776
-                */
                 WebGLRenderContext.blendModesForGL = {};
                 WebGLRenderContext.blendModesForGL["source-over"] = [1, 771];
                 WebGLRenderContext.blendModesForGL["lighter"] = [1, 1];
@@ -7466,37 +5172,6 @@ if (window['HTMLVideoElement'] == undefined) {
         WebGLRenderContext.initBlendMode();
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
-/*
-*** 一个管理模型，逐级包含: back -> page -> line -> textBlock
-*/
 
 (function (egret) {
     var vivogame;
@@ -7574,7 +5249,7 @@ if (window['HTMLVideoElement'] == undefined) {
             TextBlock.prototype.updateUV = function () {
                 var line = this.line;
                 if (!line) {
-                    return false; //不属于任何的line就是错的
+                    return false;
                 }
                 this.u = line.x + this.x + this.border * 1;
                 this.v = line.y + this.y + this.border * 1;
@@ -7623,7 +5298,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (!textBlock) {
                     return false;
                 }
-                //
                 var posx = 0;
                 var posy = 0;
                 var lastTxtBlock = this.lastTextBlock();
@@ -7631,14 +5305,12 @@ if (window['HTMLVideoElement'] == undefined) {
                     posx = lastTxtBlock.x + lastTxtBlock.width;
                     posy = lastTxtBlock.y;
                 }
-                //
                 if (posx + textBlock.width > this.maxWidth) {
-                    return false; //宽度不够
+                    return false;
                 }
-                //
                 if (this.dynamicMaxHeight > 0) {
                     if (textBlock.height > this.dynamicMaxHeight || (textBlock.height / this.dynamicMaxHeight < 0.5)) {
-                        return false; //如果有已经有动态高度，到这里，要么高度不够，要么小于动态高度的0.6差距, 就不填充
+                        return false;
                     }
                 }
                 return true;
@@ -7651,17 +5323,14 @@ if (window['HTMLVideoElement'] == undefined) {
                 return null;
             };
             Line.prototype.addTextBlock = function (textBlock, needCheck) {
-                //
                 if (!textBlock) {
                     return false;
                 }
-                //
                 if (needCheck) {
                     if (!this.isCapacityOf(textBlock)) {
                         return false;
                     }
                 }
-                //
                 var posx = 0;
                 var posy = 0;
                 var lastTxtBlock = this.lastTextBlock();
@@ -7669,7 +5338,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     posx = lastTxtBlock.x + lastTxtBlock.width;
                     posy = lastTxtBlock.y;
                 }
-                //
                 textBlock.x = posx;
                 textBlock.y = posy;
                 textBlock.line = this;
@@ -7697,10 +5365,8 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (!line) {
                     return false;
                 }
-                //
                 var posx = 0;
                 var posy = 0;
-                //
                 var lines = this.lines;
                 if (lines.length > 0) {
                     var lastLine = lines[lines.length - 1];
@@ -7709,12 +5375,11 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 if (line.maxWidth > this.pageWidth) {
                     console.error('line.maxWidth = ' + line.maxWidth + ', ' + 'this.pageWidth = ' + this.pageWidth);
-                    return false; //宽度不够
+                    return false;
                 }
                 if (posy + line.dynamicMaxHeight > this.pageHeight) {
-                    return false; //满了
+                    return false;
                 }
-                //更新数据
                 line.x = posx;
                 line.y = posy;
                 line.page = this;
@@ -7742,9 +5407,7 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (!result) {
                     return false;
                 }
-                //更新下uv
                 textBlock.updateUV();
-                //没有才要添加
                 var exist = false;
                 var cast = result;
                 var _sortLines = this._sortLines;
@@ -7758,7 +5421,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (!exist) {
                     _sortLines.push(cast[1]);
                 }
-                //重新排序
                 this.sort();
                 return true;
             };
@@ -7767,10 +5429,8 @@ if (window['HTMLVideoElement'] == undefined) {
                     return null;
                 }
                 if (textBlock.width > this._maxSize || textBlock.height > this._maxSize) {
-                    //console.log('this._maxSize = ' + this._maxSize + ', textBlock.width = ' + textBlock.width + ', textBlock.height = ' + textBlock.height);
                     return null;
                 }
-                //找到最合适的
                 var _sortLines = this._sortLines;
                 for (var i = 0, length_9 = _sortLines.length; i < length_9; ++i) {
                     var line = _sortLines[i];
@@ -7781,13 +5441,11 @@ if (window['HTMLVideoElement'] == undefined) {
                         return [line.page, line];
                     }
                 }
-                //做新的行
                 var newLine = new Line(this._maxSize);
                 if (!newLine.addTextBlock(textBlock, true)) {
                     console.error('_addTextBlock !newLine.addTextBlock(textBlock, true)');
                     return null;
                 }
-                //现有的page中插入
                 var _pages = this._pages;
                 for (var i = 0, length_10 = _pages.length; i < length_10; ++i) {
                     var page = _pages[i];
@@ -7795,8 +5453,6 @@ if (window['HTMLVideoElement'] == undefined) {
                         return [page, newLine];
                     }
                 }
-                //都没有，就做新的page
-                //添加目标行
                 var newPage = this.createPage(this._maxSize, this._maxSize);
                 if (!newPage.addLine(newLine)) {
                     console.error('_addText newPage.addLine failed');
@@ -7821,8 +5477,6 @@ if (window['HTMLVideoElement'] == undefined) {
             Book.prototype.createTextBlock = function (tag, width, height, measureWidth, measureHeight, canvasWidthOffset, canvasHeightOffset, stroke2) {
                 var txtBlock = new TextBlock(width, height, measureWidth, measureHeight, canvasWidthOffset, canvasHeightOffset, stroke2, this._border);
                 if (!this.addTextBlock(txtBlock)) {
-                    //走到这里几乎是不可能的，除非内存分配没了
-                    //暂时还没有到提交纹理的地步，现在都是虚拟的
                     return null;
                 }
                 txtBlock.tag = tag;
@@ -7834,65 +5488,28 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(Book.prototype, "egret.vivogame.Book");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        //测试开关,打开会截住老的字体渲染
         vivogame.textAtlasRenderEnable = false;
-        //测试对象, 先不用singleton的，后续整理代码，就new一个，放在全局的context上做成员变量
         vivogame.__textAtlasRender__ = null;
-        //不想改TextNode的代码了，先用这种方式实现，以后稳了再改
         vivogame.property_drawLabel = 'DrawLabel';
-        //开启这个，用textAtlas渲染出来的，都是红字，而且加黑框
         var textAtlasDebug = false;
-        //画一行
         var DrawLabel = (function (_super) {
             __extends(DrawLabel, _super);
             function DrawLabel() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                //记录初始位置
                 _this.anchorX = 0;
                 _this.anchorY = 0;
-                //要画的字块
                 _this.textBlocks = [];
                 return _this;
             }
-            //清除数据，回池
             DrawLabel.prototype.clear = function () {
                 this.anchorX = 0;
                 this.anchorY = 0;
-                this.textBlocks.length = 0; //这个没事,实体在book里面存着
+                this.textBlocks.length = 0;
             };
-            //池子创建
             DrawLabel.create = function () {
                 var pool = DrawLabel.pool;
                 if (pool.length === 0) {
@@ -7900,7 +5517,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return pool.pop();
             };
-            //回池
             DrawLabel.back = function (drawLabel, checkRepeat) {
                 if (!drawLabel) {
                     return;
@@ -7913,26 +5529,21 @@ if (window['HTMLVideoElement'] == undefined) {
                 drawLabel.clear();
                 pool.push(drawLabel);
             };
-            //池子，防止反复创建
             DrawLabel.pool = [];
             return DrawLabel;
         }(egret.HashObject));
         vivogame.DrawLabel = DrawLabel;
         __reflect(DrawLabel.prototype, "egret.vivogame.DrawLabel");
-        //记录样式的
         var StyleInfo = (function (_super) {
             __extends(StyleInfo, _super);
-            //
             function StyleInfo(textNode, format) {
                 var _this = _super.call(this) || this;
                 _this.format = null;
-                //debug强制红色
                 var saveTextColorForDebug = 0;
                 if (textAtlasDebug) {
                     saveTextColorForDebug = textNode.textColor;
                     textNode.textColor = 0xff0000;
                 }
-                //存上
                 _this.textColor = textNode.textColor;
                 _this.strokeColor = textNode.strokeColor;
                 _this.size = textNode.size;
@@ -7942,19 +5553,16 @@ if (window['HTMLVideoElement'] == undefined) {
                 _this.fontFamily = textNode.fontFamily;
                 _this.format = format;
                 _this.font = egret.getFontString(textNode, _this.format);
-                //描述用于生成hashcode
                 var textColor = (!format.textColor ? textNode.textColor : format.textColor);
                 var strokeColor = (!format.strokeColor ? textNode.strokeColor : format.strokeColor);
                 var stroke = (!format.stroke ? textNode.stroke : format.stroke);
                 var size = (!format.size ? textNode.size : format.size);
-                //
                 _this.description = '' + _this.font + '-' + size;
                 _this.description += '-' + egret.toColorString(textColor);
                 _this.description += '-' + egret.toColorString(strokeColor);
                 if (stroke) {
                     _this.description += '-' + stroke * 2;
                 }
-                //还原
                 if (textAtlasDebug) {
                     textNode.textColor = saveTextColorForDebug;
                 }
@@ -7963,26 +5571,18 @@ if (window['HTMLVideoElement'] == undefined) {
             return StyleInfo;
         }(egret.HashObject));
         __reflect(StyleInfo.prototype, "StyleInfo");
-        //测量字体和绘制的
         var CharImageRender = (function (_super) {
             __extends(CharImageRender, _super);
             function CharImageRender() {
                 var _this = _super !== null && _super.apply(this, arguments) || this;
-                //要渲染的字符串
                 _this.char = '';
-                //StyleInfo
                 _this.styleInfo = null;
-                //生成hashcode的字符串
                 _this.hashCodeString = '';
-                //字母：style设置行程唯一值
                 _this.charWithStyleHashCode = 0;
-                //测量实际的size
                 _this.measureWidth = 0;
                 _this.measureHeight = 0;
-                //边缘放大之后的偏移
                 _this.canvasWidthOffset = 0;
                 _this.canvasHeightOffset = 0;
-                //描边的记录
                 _this.stroke2 = 0;
                 return _this;
             }
@@ -8001,17 +5601,14 @@ if (window['HTMLVideoElement'] == undefined) {
                 if (!canvas) {
                     return;
                 }
-                //读取设置
                 var text = this.char;
                 var format = this.styleInfo.format;
                 var textColor = (!format.textColor ? this.styleInfo.textColor : format.textColor);
                 var strokeColor = (!format.strokeColor ? this.styleInfo.strokeColor : format.strokeColor);
                 var stroke = (!format.stroke ? this.styleInfo.stroke : format.stroke);
                 var size = (!format.size ? this.styleInfo.size : format.size);
-                //开始测量---------------------------------------
                 this.measureWidth = this.measure(text, this.styleInfo, size);
-                this.measureHeight = size; //this.styleInfo.size;
-                //调整 参考TextField: $getRenderBounds(): Rectangle {
+                this.measureHeight = size;
                 var canvasWidth = this.measureWidth;
                 var canvasHeight = this.measureHeight;
                 var _strokeDouble = stroke * 2;
@@ -8020,17 +5617,14 @@ if (window['HTMLVideoElement'] == undefined) {
                     canvasHeight += _strokeDouble * 2;
                 }
                 this.stroke2 = _strokeDouble;
-                //赋值
                 canvas.width = canvasWidth = Math.ceil(canvasWidth) + 2 * 2;
                 canvas.height = canvasHeight = Math.ceil(canvasHeight) + 2 * 2;
                 this.canvasWidthOffset = (canvas.width - this.measureWidth) / 2;
                 this.canvasHeightOffset = (canvas.height - this.measureHeight) / 2;
-                //全部保留numberOfPrecision位小数
                 var numberOfPrecision = 3;
                 var precision = Math.pow(10, numberOfPrecision);
                 this.canvasWidthOffset = Math.floor(this.canvasWidthOffset * precision) / precision;
                 this.canvasHeightOffset = Math.floor(this.canvasHeightOffset * precision) / precision;
-                //再开始绘制---------------------------------------
                 var context = egret.sys.getContext2d(canvas);
                 context.save();
                 context.textAlign = 'center';
@@ -8060,16 +5654,13 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
                 return measureTextWidth;
             };
-            //针对中文的加速查找
             CharImageRender.chineseCharactersRegExp = new RegExp("^[\u4E00-\u9FA5]$");
             CharImageRender.chineseCharacterMeasureFastMap = {};
             return CharImageRender;
         }(egret.HashObject));
         __reflect(CharImageRender.prototype, "CharImageRender");
-        //对外的类
         var TextAtlasRender = (function (_super) {
             __extends(TextAtlasRender, _super);
-            //
             function TextAtlasRender(webglRenderContext, maxSize, border) {
                 var _this = _super.call(this) || this;
                 _this.book = null;
@@ -8082,27 +5673,21 @@ if (window['HTMLVideoElement'] == undefined) {
                 _this.book = new vivogame.Book(maxSize, border);
                 return _this;
             }
-            //分析textNode，把数据提取出来，然后给textNode挂上渲染的信息
             TextAtlasRender.analysisTextNodeAndFlushDrawLabel = function (textNode) {
                 if (!textNode) {
                     return;
                 }
                 if (!vivogame.__textAtlasRender__) {
-                    //创建，后续会转移给WebGLRenderContext
                     var webglcontext = egret.vivogame.WebGLRenderContext.getInstance(0, 0);
-                    //初期先512，因为不会大规模batch, 老项目最好不要直接使用这个，少数几个总变内容的TextField可以用，所以先不用$maxTextureSize
-                    vivogame.__textAtlasRender__ = new TextAtlasRender(webglcontext, textAtlasDebug ? 512 : 512 /*webglcontext.$maxTextureSize*/, textAtlasDebug ? 12 : 1);
+                    vivogame.__textAtlasRender__ = new TextAtlasRender(webglcontext, textAtlasDebug ? 512 : 512, textAtlasDebug ? 12 : 1);
                 }
-                //清除命令
                 textNode[vivogame.property_drawLabel] = textNode[vivogame.property_drawLabel] || [];
                 var drawLabels = textNode[vivogame.property_drawLabel];
                 for (var _i = 0, drawLabels_1 = drawLabels; _i < drawLabels_1.length; _i++) {
                     var drawLabel = drawLabels_1[_i];
-                    //还回去
                     DrawLabel.back(drawLabel, false);
                 }
                 drawLabels.length = 0;
-                //重新装填
                 var offset = 4;
                 var drawData = textNode.drawData;
                 var anchorX = 0;
@@ -8116,9 +5701,7 @@ if (window['HTMLVideoElement'] == undefined) {
                     labelString = drawData[i + 2];
                     labelFormat = drawData[i + 3] || {};
                     resultAsRenderTextBlocks.length = 0;
-                    //提取数据
                     vivogame.__textAtlasRender__.convertLabelStringToTextAtlas(labelString, new StyleInfo(textNode, labelFormat), resultAsRenderTextBlocks);
-                    //pool创建 + 添加命令
                     var drawLabel = DrawLabel.create();
                     drawLabel.anchorX = anchorX;
                     drawLabel.anchorY = anchorY;
@@ -8126,32 +5709,24 @@ if (window['HTMLVideoElement'] == undefined) {
                     drawLabels.push(drawLabel);
                 }
             };
-            //字符串转化成为TextBlock
             TextAtlasRender.prototype.convertLabelStringToTextAtlas = function (labelstring, styleKey, resultAsRenderTextBlocks) {
                 var canvas = this.canvas;
                 var charImageRender = this.charImageRender;
                 var textBlockMap = this.textBlockMap;
                 for (var _i = 0, labelstring_1 = labelstring; _i < labelstring_1.length; _i++) {
                     var char = labelstring_1[_i];
-                    //不反复创建
                     charImageRender.reset(char, styleKey);
                     if (textBlockMap[charImageRender.charWithStyleHashCode]) {
-                        //检查重复
                         resultAsRenderTextBlocks.push(textBlockMap[charImageRender.charWithStyleHashCode]);
                         continue;
                     }
-                    //画到到canvas
                     charImageRender.measureAndDraw(canvas);
-                    //创建新的文字块
                     var txtBlock = this.book.createTextBlock(char, canvas.width, canvas.height, charImageRender.measureWidth, charImageRender.measureHeight, charImageRender.canvasWidthOffset, charImageRender.canvasHeightOffset, charImageRender.stroke2);
                     if (!txtBlock) {
                         continue;
                     }
-                    //需要绘制
                     resultAsRenderTextBlocks.push(txtBlock);
-                    //记录快速查找
                     textBlockMap[charImageRender.charWithStyleHashCode] = txtBlock;
-                    //生成纹理
                     var page = txtBlock.page;
                     if (!page.webGLTexture) {
                         page.webGLTexture = this.createTextTextureAtlas(page.pageWidth, page.pageHeight, textAtlasDebug);
@@ -8165,11 +5740,9 @@ if (window['HTMLVideoElement'] == undefined) {
                     gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
                 }
             };
-            //给一个page创建一个纹理
             TextAtlasRender.prototype.createTextTextureAtlas = function (width, height, debug) {
                 var texture = null;
                 if (debug) {
-                    //做一个黑底子的，方便调试代码
                     var canvas = egret.sys.createCanvas(width, width);
                     var context = egret.sys.getContext2d(canvas);
                     context.fillStyle = 'black';
@@ -8177,20 +5750,16 @@ if (window['HTMLVideoElement'] == undefined) {
                     texture = egret.sys.createTexture(this.webglRenderContext, canvas);
                 }
                 else {
-                    //真的
                     texture = egret.sys._createTexture(this.webglRenderContext, width, height, null);
                 }
                 if (texture) {
-                    //存起来，未来可以删除，或者查看
                     this.textAtlasTextureCache.push(texture);
                 }
                 return texture;
             };
             Object.defineProperty(TextAtlasRender.prototype, "canvas", {
-                //给CharImageRender用的canvas
                 get: function () {
                     if (!this._canvas) {
-                        //就用默认体积24
                         this._canvas = egret.sys.createCanvas(24, 24);
                     }
                     return this._canvas;
@@ -8204,40 +5773,8 @@ if (window['HTMLVideoElement'] == undefined) {
         __reflect(TextAtlasRender.prototype, "egret.vivogame.TextAtlasRender");
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
-    /**
-     * @private
-     * 格式化弧线角度的值
-     */
     function clampAngle(value) {
         value %= Math.PI * 2;
         if (value < 0) {
@@ -8245,14 +5782,6 @@ if (window['HTMLVideoElement'] == undefined) {
         }
         return value;
     }
-    /**
-     * @private
-     * 根据传入的锚点组返回贝塞尔曲线上的一组点,返回类型为egret.Point[];
-     * @param pointsData 锚点组,保存着所有控制点的x和y坐标,格式为[x0,y0,x1,y1,x2,y2...]
-     * @param pointsAmount 要获取的点的总个数，实际返回点数不一定等于该属性，与范围有关
-     * @param range 要获取的点与中心锚点的范围值，0~1之间
-     * @returns egret.Point[];
-     */
     function createBezierPoints(pointsData, pointsAmount) {
         var points = [];
         for (var i = 0; i < pointsAmount; i++) {
@@ -8262,20 +5791,11 @@ if (window['HTMLVideoElement'] == undefined) {
         }
         return points;
     }
-    /**
-     * @private
-     * 根据锚点组与取值系数获取贝塞尔曲线上的一点
-     * @param pointsData 锚点组,保存着所有控制点的x和y坐标,格式为[x0,y0,x1,y1,x2,y2...]
-     * @param t 取值系数
-     * @returns egret.Point
-     */
     function getBezierPointByFactor(pointsData, t) {
         var i = 0;
         var x = 0, y = 0;
         var len = pointsData.length;
-        //根据传入的数据数量判断是二次贝塞尔还是三次贝塞尔
         if (len / 2 == 3) {
-            //二次
             var x0 = pointsData[i++];
             var y0 = pointsData[i++];
             var x1 = pointsData[i++];
@@ -8286,7 +5806,6 @@ if (window['HTMLVideoElement'] == undefined) {
             y = getCurvePoint(y0, y1, y2, t);
         }
         else if (len / 2 == 4) {
-            //三次
             var x0 = pointsData[i++];
             var y0 = pointsData[i++];
             var x1 = pointsData[i++];
@@ -8300,116 +5819,32 @@ if (window['HTMLVideoElement'] == undefined) {
         }
         return egret.Point.create(x, y);
     }
-    /**
-     * 通过factor参数获取二次贝塞尔曲线上的位置
-     * 公式为B(t) = (1-t)^2 * P0 + 2t(1-t) * P1 + t^2 * P2
-     * @param value0 P0
-     * @param value1 P1
-     * @param value2 P2
-     * @param factor t，从0到1的闭区间
-     */
     function getCurvePoint(value0, value1, value2, factor) {
         var result = Math.pow((1 - factor), 2) * value0 + 2 * factor * (1 - factor) * value1 + Math.pow(factor, 2) * value2;
         return result;
     }
-    /**
-     * 通过factor参数获取三次贝塞尔曲线上的位置
-     * 公式为B(t) = (1-t)^3 * P0 + 3t(1-t)^2 * P1 + 3t^2 * (1-t) t^2 * P2 + t^3 *P3
-     * @param value0 P0
-     * @param value1 P1
-     * @param value2 P2
-     * @param value3 P3
-     * @param factor t，从0到1的闭区间
-     */
     function getCubicCurvePoint(value0, value1, value2, value3, factor) {
         var result = Math.pow((1 - factor), 3) * value0 + 3 * factor * Math.pow((1 - factor), 2) * value1 + 3 * (1 - factor) * Math.pow(factor, 2) * value2 + Math.pow(factor, 3) * value3;
         return result;
     }
-    /**
-     * The Graphics class contains a set of methods for creating vector shape. Display objects that support drawing include Sprite and Shape objects. Each class in these classes includes the graphics attribute that is a Graphics object.
-     * The following auxiliary functions are provided for ease of use: drawRect(), drawRoundRect(), drawCircle(), and drawEllipse().
-     * @see http://edn.egret.com/cn/docs/page/136 Draw Rectangle
-     * @version Egret 2.4
-     * @platform Web,Native
-     * @includeExample egret/display/Graphics.ts
-     * @language en_US
-     */
-    /**
-     * Graphics 类包含一组可用来创建矢量形状的方法。支持绘制的显示对象包括 Sprite 和 Shape 对象。这些类中的每一个类都包括 graphics 属性，该属性是一个 Graphics 对象。
-     * 以下是为便于使用而提供的一些辅助函数：drawRect()、drawRoundRect()、drawCircle() 和 drawEllipse()。
-     * @see http://edn.egret.com/cn/docs/page/136 绘制矩形
-     * @version Egret 2.4
-     * @platform Web,Native
-     * @includeExample egret/display/Graphics.ts
-     * @language zh_CN
-     */
     var Graphics = (function (_super) {
         __extends(Graphics, _super);
-        /**
-         * Initializes a Graphics object.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 创建一个 Graphics 对象。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         function Graphics() {
             var _this = _super.call(this) || this;
-            /**
-             * 当前移动到的坐标X
-             */
             _this.lastX = 0;
-            /**
-             * 当前移动到的坐标Y
-             */
             _this.lastY = 0;
-            /**
-             * 当前正在绘制的填充
-             */
             _this.fillPath = null;
-            /**
-             * 当前正在绘制的线条
-             */
             _this.strokePath = null;
-            /**
-             * 线条的左上方宽度
-             */
             _this.topLeftStrokeWidth = 0;
-            /**
-             * 线条的右下方宽度
-             */
             _this.bottomRightStrokeWidth = 0;
-            /**
-             * @private
-             */
             _this.minX = Infinity;
-            /**
-             * @private
-             */
             _this.minY = Infinity;
-            /**
-             * @private
-             */
             _this.maxX = -Infinity;
-            /**
-             * @private
-             */
             _this.maxY = -Infinity;
-            /**
-             * 是否已经包含上一次moveTo的坐标点
-             */
             _this.includeLastPosition = true;
             _this.$renderNode = new egret.sys.GraphicsNode();
             return _this;
         }
-        /**
-         * @private
-         * 设置绑定到的目标显示对象
-         */
         Graphics.prototype.$setTarget = function (target) {
             if (this.$targetDisplay) {
                 this.$targetDisplay.$renderNode = null;
@@ -8418,9 +5853,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.$targetDisplay = target;
             this.$targetIsSprite = target instanceof egret.Sprite;
         };
-        /**
-         * 对1像素和3像素特殊处理，向右下角偏移0.5像素，以显示清晰锐利的线条。
-         */
         Graphics.prototype.setStrokeWidth = function (width) {
             switch (width) {
                 case 1:
@@ -8438,24 +5870,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     break;
             }
         };
-        /**
-         * Specify a simple single color fill that will be used for subsequent calls to other Graphics methods (for example, lineTo() and drawCircle()) when drawing.
-         * Calling the clear() method will clear the fill.
-         * @param color Filled color
-         * @param alpha Filled Alpha value
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 指定一种简单的单一颜色填充，在绘制时该填充将在随后对其他 Graphics 方法（如 lineTo() 或 drawCircle()）的调用中使用。
-         * 调用 clear() 方法会清除填充。
-         * @param color 填充的颜色
-         * @param alpha 填充的 Alpha 值
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.beginFill = function (color, alpha) {
             if (alpha === void 0) { alpha = 1; }
             color = +color || 0;
@@ -8468,30 +5882,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.fillPath.moveTo(this.lastX, this.lastY);
             }
         };
-        /**
-         * Specifies a gradient fill used by subsequent calls to other Graphics methods (such as lineTo() or drawCircle()) for the object.
-         * Calling the clear() method clears the fill.
-         * @param type A value from the GradientType class that specifies which gradient type to use: GradientType.LINEAR or GradientType.RADIAL.
-         * @param colors An array of RGB hexadecimal color values used in the gradient; for example, red is 0xFF0000, blue is 0x0000FF, and so on. You can specify up to 15 colors. For each color, specify a corresponding value in the alphas and ratios parameters.
-         * @param alphas An array of alpha values for the corresponding colors in the colors array;
-         * @param ratios An array of color distribution ratios; valid values are 0-255.
-         * @param matrix A transformation matrix as defined by the egret.Matrix class. The egret.Matrix class includes a createGradientBox() method, which lets you conveniently set up the matrix for use with the beginGradientFill() method.
-         * @platform Web,Native
-         * @version Egret 2.4
-         * @language en_US
-         */
-        /**
-         * 指定一种渐变填充，用于随后调用对象的其他 Graphics 方法（如 lineTo() 或 drawCircle()）。
-         * 调用 clear() 方法会清除填充。
-         * @param type 用于指定要使用哪种渐变类型的 GradientType 类的值：GradientType.LINEAR 或 GradientType.RADIAL。
-         * @param colors 渐变中使用的 RGB 十六进制颜色值的数组（例如，红色为 0xFF0000，蓝色为 0x0000FF，等等）。对于每种颜色，请在 alphas 和 ratios 参数中指定对应值。
-         * @param alphas colors 数组中对应颜色的 alpha 值数组。
-         * @param ratios 颜色分布比率的数组。有效值为 0 到 255。
-         * @param matrix 一个由 egret.Matrix 类定义的转换矩阵。egret.Matrix 类包括 createGradientBox() 方法，通过该方法可以方便地设置矩阵，以便与 beginGradientFill() 方法一起使用
-         * @platform Web,Native
-         * @version Egret 2.4
-         * @language zh_CN
-         */
         Graphics.prototype.beginGradientFill = function (type, colors, alphas, ratios, matrix) {
             if (matrix === void 0) { matrix = null; }
             if (egret.nativeRender) {
@@ -8502,54 +5892,12 @@ if (window['HTMLVideoElement'] == undefined) {
                 this.fillPath.moveTo(this.lastX, this.lastY);
             }
         };
-        /**
-         * Apply fill to the lines and curves added after the previous calling to the beginFill() method.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 对从上一次调用 beginFill()方法之后添加的直线和曲线应用填充。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.endFill = function () {
             if (egret.nativeRender) {
                 this.$targetDisplay.$nativeDisplayObject.setEndFill();
             }
             this.fillPath = null;
         };
-        /**
-         * Specify a line style that will be used for subsequent calls to Graphics methods such as lineTo() and drawCircle().
-         * @param thickness An integer, indicating the thickness of the line in points. Valid values are 0 to 255. If a number is not specified, or if the parameter is undefined, a line is not drawn. If a value less than 0 is passed, the default value is 0. Value 0 indicates hairline thickness; the maximum thickness is 255. If a value greater than 255 is passed, the default value is 255.
-         * @param color A hexadecimal color value of the line (for example, red is 0xFF0000, and blue is 0x0000FF, etc.). If no value is specified, the default value is 0x000000 (black). Optional.
-         * @param alpha Indicates Alpha value of the line's color. Valid values are 0 to 1. If no value is specified, the default value is 1 (solid). If the value is less than 0, the default value is 0. If the value is greater than 1, the default value is 1.
-         * @param pixelHinting A boolean value that specifies whether to hint strokes to full pixels. This affects both the position of anchors of a curve and the line stroke size itself. With pixelHinting set to true, the line width is adjusted to full pixel width. With pixelHinting set to false, disjoints can appear for curves and straight lines.
-         * @param scaleMode Specifies the scale mode to be used
-         * @param caps Specifies the value of the CapsStyle class of the endpoint type at the end of the line. (default = CapsStyle.ROUND)
-         * @param joints Specifies the type of joint appearance of corner.  (default = JointStyle.ROUND)
-         * @param miterLimit Indicates the limit number of cut miter.
-         * @param lineDash set the line dash.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 指定一种线条样式以用于随后对 lineTo() 或 drawCircle() 等 Graphics 方法的调用。
-         * @param thickness 一个整数，以点为单位表示线条的粗细，有效值为 0 到 255。如果未指定数字，或者未定义该参数，则不绘制线条。如果传递的值小于 0，则默认值为 0。值 0 表示极细的粗细；最大粗细为 255。如果传递的值大于 255，则默认值为 255。
-         * @param color 线条的十六进制颜色值（例如，红色为 0xFF0000，蓝色为 0x0000FF 等）。如果未指明值，则默认值为 0x000000（黑色）。可选。
-         * @param alpha 表示线条颜色的 Alpha 值的数字；有效值为 0 到 1。如果未指明值，则默认值为 1（纯色）。如果值小于 0，则默认值为 0。如果值大于 1，则默认值为 1。
-         * @param pixelHinting 布尔型值，指定是否提示笔触采用完整像素。它同时影响曲线锚点的位置以及线条笔触大小本身。在 pixelHinting 设置为 true 的情况下，线条宽度会调整到完整像素宽度。在 pixelHinting 设置为 false 的情况下，对于曲线和直线可能会出现脱节。
-         * @param scaleMode 用于指定要使用的比例模式
-         * @param caps 用于指定线条末端处端点类型的 CapsStyle 类的值。默认值：CapsStyle.ROUND
-         * @param joints 指定用于拐角的连接外观的类型。默认值：JointStyle.ROUND
-         * @param miterLimit 用于表示剪切斜接的极限值的数字。
-         * @param lineDash 设置虚线样式。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.lineStyle = function (thickness, color, alpha, pixelHinting, scaleMode, caps, joints, miterLimit, lineDash) {
             if (thickness === void 0) { thickness = NaN; }
             if (color === void 0) { color = 0; }
@@ -8578,26 +5926,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
             }
         };
-        /**
-         * Draw a rectangle
-         * @param x x position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param y y position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param width Width of the rectangle (in pixels).
-         * @param height Height of the rectangle (in pixels).
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 绘制一个矩形
-         * @param x 圆心相对于父显示对象注册点的 x 位置（以像素为单位）。
-         * @param y 相对于父显示对象注册点的圆心的 y 位置（以像素为单位）。
-         * @param width 矩形的宽度（以像素为单位）。
-         * @param height 矩形的高度（以像素为单位）。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.drawRect = function (x, y, width, height) {
             x = +x || 0;
             y = +y || 0;
@@ -8614,30 +5942,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.updatePosition(x, y);
             this.dirty();
         };
-        /**
-         * Draw a rectangle with rounded corners.
-         * @param x x position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param y y position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param width Width of the rectangle (in pixels).
-         * @param height Height of the rectangle (in pixels).
-         * @param ellipseWidth Width used to draw an ellipse with rounded corners (in pixels).
-         * @param ellipseHeight Height used to draw an ellipse with rounded corners (in pixels). (Optional) If no value is specified, the default value matches the value of the ellipseWidth parameter.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 绘制一个圆角矩形。
-         * @param x 圆心相对于父显示对象注册点的 x 位置（以像素为单位）。
-         * @param y 相对于父显示对象注册点的圆心的 y 位置（以像素为单位）。
-         * @param width 矩形的宽度（以像素为单位）。
-         * @param height 矩形的高度（以像素为单位）。
-         * @param ellipseWidth 用于绘制圆角的椭圆的宽度（以像素为单位）。
-         * @param ellipseHeight 用于绘制圆角的椭圆的高度（以像素为单位）。 （可选）如果未指定值，则默认值与为 ellipseWidth 参数提供的值相匹配。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.drawRoundRect = function (x, y, width, height, ellipseWidth, ellipseHeight) {
             x = +x || 0;
             y = +y || 0;
@@ -8662,24 +5966,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.updatePosition(right, ybw);
             this.dirty();
         };
-        /**
-         * Draw a circle.
-         * @param x x position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param y y position of the center, relative to the registration point of the parent display object (in pixels).
-         * @param r Radius of the circle (in pixels).
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 绘制一个圆。
-         * @param x 圆心相对于父显示对象注册点的 x 位置（以像素为单位）。
-         * @param y 相对于父显示对象注册点的圆心的 y 位置（以像素为单位）。
-         * @param radius 圆的半径（以像素为单位）。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.drawCircle = function (x, y, radius) {
             x = +x || 0;
             y = +y || 0;
@@ -8691,32 +5977,11 @@ if (window['HTMLVideoElement'] == undefined) {
             var strokePath = this.strokePath;
             fillPath && fillPath.drawCircle(x, y, radius);
             strokePath && strokePath.drawCircle(x, y, radius);
-            //-1 +2 解决WebGL裁切问题
             this.extendBoundsByPoint(x - radius - 1, y - radius - 1);
             this.extendBoundsByPoint(x + radius + 2, y + radius + 2);
             this.updatePosition(x + radius, y);
             this.dirty();
         };
-        /**
-         * Draw an ellipse.
-         * @param x A number indicating the horizontal position, relative to the registration point of the parent display object (in pixels).
-         * @param y A number indicating the vertical position, relative to the registration point of the parent display object (in pixels).
-         * @param width Width of the rectangle (in pixels).
-         * @param height Height of the rectangle (in pixels).
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 绘制一个椭圆。
-         * @param x 一个表示相对于父显示对象注册点的水平位置的数字（以像素为单位）。
-         * @param y 一个表示相对于父显示对象注册点的垂直位置的数字（以像素为单位）。
-         * @param width 矩形的宽度（以像素为单位）。
-         * @param height 矩形的高度（以像素为单位）。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.drawEllipse = function (x, y, width, height) {
             x = +x || 0;
             y = +y || 0;
@@ -8729,28 +5994,11 @@ if (window['HTMLVideoElement'] == undefined) {
             var strokePath = this.strokePath;
             fillPath && fillPath.drawEllipse(x, y, width, height);
             strokePath && strokePath.drawEllipse(x, y, width, height);
-            //-1 +2 解决WebGL裁切问题
             this.extendBoundsByPoint(x - 1, y - 1);
             this.extendBoundsByPoint(x + width + 2, y + height + 2);
             this.updatePosition(x + width, y + height * 0.5);
             this.dirty();
         };
-        /**
-         * Move the current drawing position to (x, y). If any of these parameters is missed, calling this method will fail and the current drawing position keeps unchanged.
-         * @param x A number indicating the horizontal position, relative to the registration point of the parent display object (in pixels).
-         * @param y A number indicating the vertical position, relative to the registration point of the parent display object (in pixels).
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 将当前绘图位置移动到 (x, y)。如果缺少任何一个参数，则此方法将失败，并且当前绘图位置不改变。
-         * @param x 一个表示相对于父显示对象注册点的水平位置的数字（以像素为单位）。
-         * @param y 一个表示相对于父显示对象注册点的垂直位置的数字（以像素为单位）。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.moveTo = function (x, y) {
             x = +x || 0;
             y = +y || 0;
@@ -8766,22 +6014,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.lastY = y;
             this.dirty();
         };
-        /**
-         * Draw a straight line from the current drawing position to (x, y) using the current line style; the current drawing position is then set to (x, y).
-         * @param x A number indicating the horizontal position, relative to the registration point of the parent display object (in pixels).
-         * @param y A number indicating the vertical position, relative to the registration point of the parent display object (in pixels).
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 使用当前线条样式绘制一条从当前绘图位置开始到 (x, y) 结束的直线；当前绘图位置随后会设置为 (x, y)。
-         * @param x 一个表示相对于父显示对象注册点的水平位置的数字（以像素为单位）。
-         * @param y 一个表示相对于父显示对象注册点的垂直位置的数字（以像素为单位）。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.lineTo = function (x, y) {
             x = +x || 0;
             y = +y || 0;
@@ -8795,30 +6027,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.updatePosition(x, y);
             this.dirty();
         };
-        /**
-         * Draw a quadratic Bezier curve from the current drawing position to (anchorX, anchorY) using the current line style according to the control points specified by (controlX, controlY). The current drawing position is then set to (anchorX, anchorY).
-         * If the curveTo() method is called before the moveTo() method, the default value of the current drawing position is (0, 0). If any of these parameters is missed, calling this method will fail and the current drawing position keeps unchanged.
-         * The drawn curve is a quadratic Bezier curve. A quadratic Bezier curve contains two anchor points and one control point. The curve interpolates the two anchor points and bends to the control point.
-         * @param controlX A number indicating the horizontal position of the control point, relative to the registration point of the parent display object.
-         * @param controlY A number indicating the vertical position of the control point, relative to the registration point of the parent display object.
-         * @param anchorX A number indicating the horizontal position of the next anchor point, relative to the registration point of the parent display object.
-         * @param anchorY A number indicating the vertical position of the next anchor point, relative to the registration point of the parent display object.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 使用当前线条样式和由 (controlX, controlY) 指定的控制点绘制一条从当前绘图位置开始到 (anchorX, anchorY) 结束的二次贝塞尔曲线。当前绘图位置随后设置为 (anchorX, anchorY)。
-         * 如果在调用 moveTo() 方法之前调用了 curveTo() 方法，则当前绘图位置的默认值为 (0, 0)。如果缺少任何一个参数，则此方法将失败，并且当前绘图位置不改变。
-         * 绘制的曲线是二次贝塞尔曲线。二次贝塞尔曲线包含两个锚点和一个控制点。该曲线内插这两个锚点，并向控制点弯曲。
-         * @param controlX 一个数字，指定控制点相对于父显示对象注册点的水平位置。
-         * @param controlY 一个数字，指定控制点相对于父显示对象注册点的垂直位置。
-         * @param anchorX 一个数字，指定下一个锚点相对于父显示对象注册点的水平位置。
-         * @param anchorY 一个数字，指定下一个锚点相对于父显示对象注册点的垂直位置。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.curveTo = function (controlX, controlY, anchorX, anchorY) {
             controlX = +controlX || 0;
             controlY = +controlY || 0;
@@ -8843,30 +6051,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.updatePosition(anchorX, anchorY);
             this.dirty();
         };
-        /**
-         * Draws a cubic Bezier curve from the current drawing position to the specified anchor. Cubic Bezier curves consist of two anchor points and two control points. The curve interpolates the two anchor points and two control points to the curve.
-         * @param controlX1 Specifies the first control point relative to the registration point of the parent display the horizontal position of the object.
-         * @param controlY1 Specifies the first control point relative to the registration point of the parent display the vertical position of the object.
-         * @param controlX2 Specify the second control point relative to the registration point of the parent display the horizontal position of the object.
-         * @param controlY2 Specify the second control point relative to the registration point of the parent display the vertical position of the object.
-         * @param anchorX Specifies the anchor point relative to the registration point of the parent display the horizontal position of the object.
-         * @param anchorY Specifies the anchor point relative to the registration point of the parent display the vertical position of the object.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 从当前绘图位置到指定的锚点绘制一条三次贝塞尔曲线。三次贝塞尔曲线由两个锚点和两个控制点组成。该曲线内插这两个锚点，并向两个控制点弯曲。
-         * @param controlX1 指定首个控制点相对于父显示对象的注册点的水平位置。
-         * @param controlY1 指定首个控制点相对于父显示对象的注册点的垂直位置。
-         * @param controlX2 指定第二个控制点相对于父显示对象的注册点的水平位置。
-         * @param controlY2 指定第二个控制点相对于父显示对象的注册点的垂直位置。
-         * @param anchorX 指定锚点相对于父显示对象的注册点的水平位置。
-         * @param anchorY 指定锚点相对于父显示对象的注册点的垂直位置。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.cubicCurveTo = function (controlX1, controlY1, controlX2, controlY2, anchorX, anchorY) {
             controlX1 = +controlX1 || 0;
             controlY1 = +controlY1 || 0;
@@ -8893,31 +6077,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.updatePosition(anchorX, anchorY);
             this.dirty();
         };
-        /**
-         * adds an arc to the path which is centered at (x, y) position with radius r starting at startAngle and ending
-         * at endAngle going in the given direction by anticlockwise (defaulting to clockwise).
-         * @param x The x coordinate of the arc's center.
-         * @param y The y coordinate of the arc's center.
-         * @param radius The arc's radius.
-         * @param startAngle The angle at which the arc starts, measured clockwise from the positive x axis and expressed in radians.
-         * @param endAngle The angle at which the arc ends, measured clockwise from the positive x axis and expressed in radians.
-         * @param anticlockwise if true, causes the arc to be drawn counter-clockwise between the two angles. By default it is drawn clockwise.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 绘制一段圆弧路径。圆弧路径的圆心在 (x, y) 位置，半径为 r ，根据anticlockwise （默认为顺时针）指定的方向从 startAngle 开始绘制，到 endAngle 结束。
-         * @param x 圆弧中心（圆心）的 x 轴坐标。
-         * @param y 圆弧中心（圆心）的 y 轴坐标。
-         * @param radius 圆弧的半径。
-         * @param startAngle 圆弧的起始点， x轴方向开始计算，单位以弧度表示。
-         * @param endAngle 圆弧的终点， 单位以弧度表示。
-         * @param anticlockwise 如果为 true，逆时针绘制圆弧，反之，顺时针绘制。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.drawArc = function (x, y, radius, startAngle, endAngle, anticlockwise) {
             if (radius < 0 || startAngle === endAngle) {
                 return;
@@ -8974,10 +6133,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 }
             }
         };
-        /**
-         * @private
-         * 测量圆弧的矩形大小
-         */
         Graphics.prototype.arcBounds = function (x, y, radius, startAngle, endAngle) {
             var PI = Math.PI;
             if (Math.abs(startAngle - endAngle) < 0.01) {
@@ -9021,18 +6176,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.extendBoundsByPoint(xMin + x, yMin + y);
             this.extendBoundsByPoint(xMax + x, yMax + y);
         };
-        /**
-         * Clear graphics that are drawn to this Graphics object, and reset fill and line style settings.
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language en_US
-         */
-        /**
-         * 清除绘制到此 Graphics 对象的图形，并重置填充和线条样式设置。
-         * @version Egret 2.4
-         * @platform Web,Native
-         * @language zh_CN
-         */
         Graphics.prototype.clear = function () {
             if (egret.nativeRender) {
                 this.$targetDisplay.$nativeDisplayObject.setGraphicsClear();
@@ -9045,32 +6188,20 @@ if (window['HTMLVideoElement'] == undefined) {
             this.maxY = -Infinity;
             this.dirty();
         };
-        /**
-         * @private
-         */
         Graphics.prototype.extendBoundsByPoint = function (x, y) {
             this.extendBoundsByX(x);
             this.extendBoundsByY(y);
         };
-        /**
-         * @private
-         */
         Graphics.prototype.extendBoundsByX = function (x) {
             this.minX = Math.min(this.minX, x - this.topLeftStrokeWidth);
             this.maxX = Math.max(this.maxX, x + this.bottomRightStrokeWidth);
             this.updateNodeBounds();
         };
-        /**
-         * @private
-         */
         Graphics.prototype.extendBoundsByY = function (y) {
             this.minY = Math.min(this.minY, y - this.topLeftStrokeWidth);
             this.maxY = Math.max(this.maxY, y + this.bottomRightStrokeWidth);
             this.updateNodeBounds();
         };
-        /**
-         * @private
-         */
         Graphics.prototype.updateNodeBounds = function () {
             var node = this.$renderNode;
             node.x = this.minX;
@@ -9078,10 +6209,6 @@ if (window['HTMLVideoElement'] == undefined) {
             node.width = Math.ceil(this.maxX - this.minX);
             node.height = Math.ceil(this.maxY - this.minY);
         };
-        /**
-         * 更新当前的lineX和lineY值，并标记尺寸失效。
-         * @private
-         */
         Graphics.prototype.updatePosition = function (x, y) {
             if (!this.includeLastPosition) {
                 this.extendBoundsByPoint(this.lastX, this.lastY);
@@ -9091,9 +6218,6 @@ if (window['HTMLVideoElement'] == undefined) {
             this.lastY = y;
             this.extendBoundsByPoint(x, y);
         };
-        /**
-         * @private
-         */
         Graphics.prototype.$measureContentBounds = function (bounds) {
             if (this.minX === Infinity) {
                 bounds.setEmpty();
@@ -9102,10 +6226,6 @@ if (window['HTMLVideoElement'] == undefined) {
                 bounds.setTo(this.minX, this.minY, this.maxX - this.minX, this.maxY - this.minY);
             }
         };
-        /**
-         * @private
-         *
-         */
         Graphics.prototype.$hitTest = function (stageX, stageY) {
             var target = this.$targetDisplay;
             var m = target.$getInvertedConcatenatedMatrix();
@@ -9121,7 +6241,6 @@ if (window['HTMLVideoElement'] == undefined) {
             egret.Matrix.release(matrix);
             try {
                 var data = buffer.getPixels(1, 1);
-                // for vivo
                 if (!data || data[3] === 0) {
                     return null;
                 }
@@ -9131,9 +6250,6 @@ if (window['HTMLVideoElement'] == undefined) {
             }
             return target;
         };
-        /**
-         * @private
-         */
         Graphics.prototype.$onRemoveFromStage = function () {
             if (this.$renderNode) {
                 this.$renderNode.clean();
@@ -9147,41 +6263,10 @@ if (window['HTMLVideoElement'] == undefined) {
     egret.Graphics = Graphics;
     __reflect(Graphics.prototype, "egret.Graphics");
 })(egret || (egret = {}));
-//////////////////////////////////////////////////////////////////////////////////////
-//
-//  Copyright (c) 2014-present, Egret Technology.
-//  All rights reserved.
-//  Redistribution and use in source and binary forms, with or without
-//  modification, are permitted provided that the following conditions are met:
-//
-//     * Redistributions of source code must retain the above copyright
-//       notice, this list of conditions and the following disclaimer.
-//     * Redistributions in binary form must reproduce the above copyright
-//       notice, this list of conditions and the following disclaimer in the
-//       documentation and/or other materials provided with the distribution.
-//     * Neither the name of the Egret nor the
-//       names of its contributors may be used to endorse or promote products
-//       derived from this software without specific prior written permission.
-//
-//  THIS SOFTWARE IS PROVIDED BY EGRET AND CONTRIBUTORS "AS IS" AND ANY EXPRESS
-//  OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-//  OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
-//  IN NO EVENT SHALL EGRET AND CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-//  INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-//  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;LOSS OF USE, DATA,
-//  OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
-//  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
-//  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE,
-//  EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-//
-//////////////////////////////////////////////////////////////////////////////////////
 
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        /**
-         * @private
-         */
         var WEBGL_ATTRIBUTE_TYPE;
         (function (WEBGL_ATTRIBUTE_TYPE) {
             WEBGL_ATTRIBUTE_TYPE[WEBGL_ATTRIBUTE_TYPE["FLOAT_VEC2"] = 35664] = "FLOAT_VEC2";
@@ -9192,9 +6277,6 @@ if (window['HTMLVideoElement'] == undefined) {
             WEBGL_ATTRIBUTE_TYPE[WEBGL_ATTRIBUTE_TYPE["UNSIGNED_BYTE"] = 5121] = "UNSIGNED_BYTE";
             WEBGL_ATTRIBUTE_TYPE[WEBGL_ATTRIBUTE_TYPE["UNSIGNED_SHORT"] = 5123] = "UNSIGNED_SHORT";
         })(WEBGL_ATTRIBUTE_TYPE = vivogame.WEBGL_ATTRIBUTE_TYPE || (vivogame.WEBGL_ATTRIBUTE_TYPE = {}));
-        /**
-         * @private
-         */
         var WEBGL_UNIFORM_TYPE;
         (function (WEBGL_UNIFORM_TYPE) {
             WEBGL_UNIFORM_TYPE[WEBGL_UNIFORM_TYPE["FLOAT_VEC2"] = 35664] = "FLOAT_VEC2";
@@ -9220,9 +6302,6 @@ if (window['HTMLVideoElement'] == undefined) {
             WEBGL_UNIFORM_TYPE[WEBGL_UNIFORM_TYPE["UNSIGNED_INT"] = 5125] = "UNSIGNED_INT";
             WEBGL_UNIFORM_TYPE[WEBGL_UNIFORM_TYPE["FLOAT"] = 5126] = "FLOAT";
         })(WEBGL_UNIFORM_TYPE = vivogame.WEBGL_UNIFORM_TYPE || (vivogame.WEBGL_UNIFORM_TYPE = {}));
-        /*
-        * 覆盖掉系统的 createCanvas
-        */
         function mainCanvas(width, height) {
             return document.getElementById('canvas');
         }
@@ -9236,9 +6315,6 @@ if (window['HTMLVideoElement'] == undefined) {
             return canvas;
         }
         egret.sys.createCanvas = createCanvas;
-        /*
-        * 覆盖掉系统的 resizeContext
-        */
         function resizeContext(renderContext, width, height, useMaxSize) {
             if (!renderContext) {
                 return;
@@ -9265,24 +6341,15 @@ if (window['HTMLVideoElement'] == undefined) {
         }
         vivogame.resizeContext = resizeContext;
         egret.sys.resizeContext = resizeContext;
-        /**
-         * sys.getContextWebGL
-         */
         function getContextWebGL(surface) {
             return surface ? surface.getContext('webgl') : null;
         }
         egret.sys.getContextWebGL = getContextWebGL;
-        /**
-         * sys.getContext2d
-         */
         function getContext2d(surface) {
             return surface ? surface.getContext('2d') : null;
         }
         vivogame.getContext2d = getContext2d;
         egret.sys.getContext2d = getContext2d;
-        /**
-         * 覆盖掉系统的createTexture
-         */
         function createTexture(renderContext, bitmapData) {
             var webglrendercontext = renderContext;
             var gl = webglrendercontext.context;
@@ -9291,7 +6358,6 @@ if (window['HTMLVideoElement'] == undefined) {
             }
             var texture = gl.createTexture();
             if (!texture) {
-                //先创建texture失败,然后lost事件才发出来..
                 webglrendercontext.contextLost = true;
                 return null;
             }
@@ -9310,19 +6376,14 @@ if (window['HTMLVideoElement'] == undefined) {
             return texture;
         }
         egret.sys.createTexture = createTexture;
-        /**
-        * 覆盖掉系统的createTexture
-        */
         function _createTexture(renderContext, width, height, data) {
             var webglrendercontext = renderContext;
             var gl = webglrendercontext.context;
             var texture = gl.createTexture();
             if (!texture) {
-                //先创建texture失败,然后lost事件才发出来..
                 webglrendercontext.contextLost = true;
                 return null;
             }
-            //
             texture[egret.glContext] = gl;
             gl.bindTexture(gl.TEXTURE_2D, texture);
             gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
@@ -9335,9 +6396,6 @@ if (window['HTMLVideoElement'] == undefined) {
             return texture;
         }
         egret.sys._createTexture = _createTexture;
-        /**
-        * 覆盖掉系统的drawTextureElements
-        **/
         function drawTextureElements(renderContext, data, offset) {
             var webglrendercontext = renderContext;
             var gl = webglrendercontext.context;
@@ -9348,22 +6406,10 @@ if (window['HTMLVideoElement'] == undefined) {
             return size;
         }
         egret.sys.drawTextureElements = drawTextureElements;
-        /**
-         * 测量文本的宽度
-         * @param context
-         * @param text
-         */
         function measureTextWith(context, text) {
             return context.measureText(text).width;
         }
         egret.sys.measureTextWith = measureTextWith;
-        /**
-         * 为CanvasRenderBuffer创建一个HTMLCanvasElement
-         * @param defaultFunc
-         * @param width
-         * @param height
-         * @param root
-         */
         function createCanvasRenderBufferSurface(defaultFunc, width, height, root) {
             if (root) {
                 return document.createElement("canvas");
@@ -9373,13 +6419,6 @@ if (window['HTMLVideoElement'] == undefined) {
             }
         }
         egret.sys.createCanvasRenderBufferSurface = createCanvasRenderBufferSurface;
-        /**
-         * 改变渲染缓冲的大小并清空缓冲区
-         * @param renderContext
-         * @param width
-         * @param height
-         * @param useMaxSize
-         */
         function resizeCanvasRenderBuffer(renderContext, width, height, useMaxSize) {
             var canvasRenderBuffer = renderContext;
             var surface = canvasRenderBuffer.surface;
@@ -9393,7 +6432,6 @@ if (window['HTMLVideoElement'] == undefined) {
                     surface.height = height;
                     change = true;
                 }
-                //尺寸没有变化时,将绘制属性重置
                 if (!change) {
                     canvasRenderBuffer.context.globalCompositeOperation = "source-over";
                     canvasRenderBuffer.context.setTransform(1, 0, 0, 1, 0, 0);
@@ -9415,4 +6453,3 @@ if (window['HTMLVideoElement'] == undefined) {
         egret.Motion = egret.vivogame.WebMotion;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
-// window["sharedCanvas"].isCanvas = true;
