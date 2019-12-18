@@ -1296,7 +1296,7 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        vivogame.version = "0.2.12";
+        vivogame.version = "0.2.13";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
@@ -1954,18 +1954,19 @@ egret.Capabilities["runtimeType" + ""] = "vivogame";
         var WebDeviceOrientation = (function (_super) {
             __extends(WebDeviceOrientation, _super);
             function WebDeviceOrientation() {
-                var _this = _super !== null && _super.apply(this, arguments) || this;
-                _this.onChange = function (e) {
-                    var event = new egret.OrientationEvent(egret.Event.CHANGE);
-                    event.beta = e.y;
-                    event.gamma = e.z;
-                    event.alpha = e.x;
-                    _this.dispatchEvent(event);
-                };
-                return _this;
+                return _super !== null && _super.apply(this, arguments) || this;
             }
             WebDeviceOrientation.prototype.start = function () {
-                qg.subscribeAccelerometer(this.onChange.bind(this));
+                var _this = this;
+                qg.subscribeAccelerometer({
+                    callback: function (data) {
+                        var event = new egret.OrientationEvent(egret.Event.CHANGE);
+                        event.beta = data.y;
+                        event.gamma = data.z;
+                        event.alpha = data.x;
+                        _this.dispatchEvent(event);
+                    }
+                });
             };
             WebDeviceOrientation.prototype.stop = function () {
                 qg.unsubscribeAccelerometer();

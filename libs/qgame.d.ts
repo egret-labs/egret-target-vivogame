@@ -17,7 +17,7 @@ declare class qg {
     /** 设置渲染帧率 */
     static setPreferredFramesPerSecond(fps: number): void;
     /** 罗盘 */
-    static subscribeAccelerometer(callback: Function): void;
+    static subscribeAccelerometer({callback: Function}): void;
     static unsubscribeAccelerometer(): void;
     /** 创建音频*/
     static createInnerAudioContext(): qg.InnerAudioContext;

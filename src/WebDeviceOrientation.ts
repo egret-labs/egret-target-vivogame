@@ -10,7 +10,15 @@ namespace egret.vivogame {
          * 
          */
         start() {
-            qg.subscribeAccelerometer(this.onChange.bind(this))
+            qg.subscribeAccelerometer({
+                callback: (data) => {
+                    let event = new OrientationEvent(Event.CHANGE);
+                    event.beta = data.y;
+                    event.gamma = data.z;
+                    event.alpha = data.x;
+                    this.dispatchEvent(event);
+                }
+            })
         }
 
         /**
@@ -19,17 +27,6 @@ namespace egret.vivogame {
          */
         stop() {
             qg.unsubscribeAccelerometer();
-        }
-
-        /**
-         * @private
-         */
-        protected onChange = (e: any) => {
-            let event = new OrientationEvent(Event.CHANGE);
-            event.beta = e.y;
-            event.gamma = e.z;
-            event.alpha = e.x;
-            this.dispatchEvent(event);
         }
     }
 }
