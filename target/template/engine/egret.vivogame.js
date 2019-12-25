@@ -142,8 +142,7 @@ r.prototype = e.prototype, t.prototype = new r();
             if (WebGLUtils.canUseWebGL == undefined) {
                 try {
                     var canvas = document.createElement("canvas");
-                    WebGLUtils.canUseWebGL = !!window["WebGLRenderingContext"]
-                        && !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
+                    WebGLUtils.canUseWebGL = !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
                 }
                 catch (e) {
                     WebGLUtils.canUseWebGL = false;
@@ -1296,7 +1295,7 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        vivogame.version = "0.2.13";
+        vivogame.version = "0.2.14";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
