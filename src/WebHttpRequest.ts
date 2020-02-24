@@ -124,6 +124,9 @@ namespace egret.vivogame {
                 this._xhr.onreadystatechange = this.onReadyStateChange.bind(this);
                 this._xhr.onprogress = this.updateProgress.bind(this);
                 this._xhr.ontimeout = this.onTimeout.bind(this)
+                this._xhr.onerror = () => {
+                    this.dispatchEventWith(IOErrorEvent.IO_ERROR);
+                }
                 this._xhr.open(this._method, this._url, true);
             }
         }

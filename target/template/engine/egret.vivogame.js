@@ -818,6 +818,7 @@ r.prototype = e.prototype, t.prototype = new r();
                 configurable: true
             });
             WebHttpRequest.prototype.open = function (url, method) {
+                var _this = this;
                 if (method === void 0) { method = "GET"; }
                 this._url = url;
                 this._method = method;
@@ -830,6 +831,9 @@ r.prototype = e.prototype, t.prototype = new r();
                     this._xhr.onreadystatechange = this.onReadyStateChange.bind(this);
                     this._xhr.onprogress = this.updateProgress.bind(this);
                     this._xhr.ontimeout = this.onTimeout.bind(this);
+                    this._xhr.onerror = function () {
+                        _this.dispatchEventWith(egret.IOErrorEvent.IO_ERROR);
+                    };
                     this._xhr.open(this._method, this._url, true);
                 }
             };
@@ -1295,7 +1299,7 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        vivogame.version = "0.2.14";
+        vivogame.version = "0.2.15";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
