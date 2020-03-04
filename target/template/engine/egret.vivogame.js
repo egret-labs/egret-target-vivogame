@@ -6310,6 +6310,9 @@ if (window['HTMLVideoElement'] == undefined) {
             return document.getElementById('canvas');
         }
         egret.sys.mainCanvas = mainCanvas;
+        if (!window['canvas']) {
+            window['canvas'] = document.getElementById('canvas');
+        }
         function createCanvas(width, height) {
             var canvas = document.createElement("canvas");
             if (!isNaN(width) && !isNaN(height)) {

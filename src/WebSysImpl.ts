@@ -76,6 +76,10 @@ namespace egret.vivogame {
     }
     egret.sys.mainCanvas = mainCanvas;
 
+    if (!window['canvas']) {
+        window['canvas'] = document.getElementById('canvas') as HTMLCanvasElement;
+    }
+
     function createCanvas(width?: number, height?: number): HTMLCanvasElement {
         let canvas: HTMLCanvasElement = document.createElement("canvas");
         if (!isNaN(width) && !isNaN(height)) {
