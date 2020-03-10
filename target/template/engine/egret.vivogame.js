@@ -142,7 +142,8 @@ r.prototype = e.prototype, t.prototype = new r();
             if (WebGLUtils.canUseWebGL == undefined) {
                 try {
                     var canvas = document.createElement("canvas");
-                    WebGLUtils.canUseWebGL = !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
+                    WebGLUtils.canUseWebGL = !!window["WebGLRenderingContext"]
+                        && !!(canvas.getContext("webgl") || canvas.getContext("experimental-webgl"));
                 }
                 catch (e) {
                     WebGLUtils.canUseWebGL = false;
@@ -1380,6 +1381,7 @@ r.prototype = e.prototype, t.prototype = new r();
                 egret.sys.canvasHitTestBuffer = egret.sys.customHitTestBuffer;
             }
         }
+        egret.sys.setRenderMode = setRenderMode;
         function startTicker(ticker) {
             var requestAnimationFrame = window["requestAnimationFrame"] ||
                 window["webkitRequestAnimationFrame"] ||
@@ -5188,6 +5190,7 @@ if (window['HTMLVideoElement'] == undefined) {
         vivogame.WebGLRenderContext = WebGLRenderContext;
         __reflect(WebGLRenderContext.prototype, "egret.vivogame.WebGLRenderContext", ["egret.sys.RenderContext"]);
         WebGLRenderContext.initBlendMode();
+        egret.sys.WebGLRenderContext = WebGLRenderContext;
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 

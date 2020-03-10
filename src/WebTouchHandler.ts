@@ -157,7 +157,8 @@ namespace egret.vivogame {
         public $updateMaxTouches(): void {
             if (this.touch.$initMaxTouches) {
                 this.touch.$initMaxTouches();
-            } else {
+            }
+            else {
                 this.touch['$updateMaxTouches']();
             }
         }

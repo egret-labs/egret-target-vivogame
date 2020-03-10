@@ -1304,4 +1304,6 @@ namespace egret.vivogame {
 
     WebGLRenderContext.initBlendMode();
 
+    egret.sys.WebGLRenderContext = WebGLRenderContext;
+
 }
