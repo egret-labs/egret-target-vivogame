@@ -1300,7 +1300,7 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        vivogame.version = "0.2.15";
+        vivogame.version = "1.0.0";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {

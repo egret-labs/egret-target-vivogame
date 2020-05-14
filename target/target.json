@@ -1,6 +1,6 @@
 {
 	"projectType": "vivogame",
-	"version": "0.2.15",
+	"version": "1.0.0",
 	"args": [
 		{
 			"name": "name",
