@@ -159,7 +159,7 @@ namespace egret.vivogame {
                 this.touch.$initMaxTouches();
             }
             else {
-                this.touch['$updateMaxTouches']();
+                this.touch['$updateMaxTouches'](99);
             }
         }
     }
