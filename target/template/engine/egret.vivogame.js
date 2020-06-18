@@ -1300,7 +1300,7 @@ r.prototype = e.prototype, t.prototype = new r();
 (function (egret) {
     var vivogame;
     (function (vivogame) {
-        vivogame.version = "1.0.1";
+        vivogame.version = "1.1.0";
     })(vivogame = egret.vivogame || (egret.vivogame = {}));
 })(egret || (egret = {}));
 (function (egret) {
@@ -1320,6 +1320,20 @@ r.prototype = e.prototype, t.prototype = new r();
             isRunning = true;
             if (!options) {
                 options = {};
+            }
+            if (options.pro) {
+                egret.pro.egret2dDriveMode = true;
+                try {
+                    if (window['startup']) {
+                        window['startup']();
+                    }
+                    else {
+                        console.error("EgretPro.js don't has function:window.startup");
+                    }
+                }
+                catch (e) {
+                    console.error(e);
+                }
             }
             vivogame.Html5Capatibility.$init();
             if (options.renderMode == "webgl") {
@@ -4035,6 +4049,12 @@ if (window['HTMLVideoElement'] == undefined) {
                     buffer.$computeDrawCall = false;
                 }
                 return buffer;
+            };
+            WebGLRenderer.prototype.renderClear = function () {
+                var renderContext = vivogame.WebGLRenderContext.getInstance();
+                var gl = renderContext.context;
+                renderContext.$beforeRender();
+                gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
             };
             return WebGLRenderer;
         }());
